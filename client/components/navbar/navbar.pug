@@ -26,11 +26,8 @@ div.navbar.navbar-default.navbar-static-top
         li(ng-hide='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/login")}')
           a(href='/login') Login
 
-        li(ng-show='$ctrl.isLoggedIn()')
-          p.navbar-text {{ $ctrl.getCurrentUser().name }}
-
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/profile")}')
-          a(href='/profile') Profile
+          a(href='/profile') {{ $ctrl.getCurrentUser().name }}
 
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/settings")}')
           a(href='/settings')
@@ -38,3 +35,14 @@ div.navbar.navbar-default.navbar-static-top
 
         li(ng-show='$ctrl.isLoggedIn()')
           a(href='/logout') Logout
+
+
+
+
+
+
+
+
+
+ 
+
