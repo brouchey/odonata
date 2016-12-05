@@ -1,4 +1,6 @@
-div This is the profile view. Trying to display the current name :
+p This is the profile view
 
 div(ng-show='profileCtrl.isLoggedIn()')
-  p {{ profileCtrl.getCurrentUser().name }}
+  p isLoggedIn : {{ profileCtrl.isLoggedIn() }}
+  p getCUrrentUser.name : {{ profileCtrl.getCurrentUser().name }}
+  p isAdmin : {{ profileCtrl.isAdmin() }}
