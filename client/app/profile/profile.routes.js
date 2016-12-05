@@ -2,9 +2,10 @@
 
 export default function($routeProvider) {
   'ngInject';
+
   $routeProvider
     .when('/profile', {
       template: '<profile></profile>',
-      authenticate: 'user'
+    	authenticate: 'user'
     });
 }

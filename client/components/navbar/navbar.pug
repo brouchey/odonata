@@ -13,6 +13,9 @@ div.navbar.navbar-default.navbar-static-top
         li(ng-repeat='item in $ctrl.menu', ng-class='{active: $ctrl.isActive(item.link)}')
           a(ng-href='{{item.link}}') {{item.title}}
 
+        li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/profile")}')
+          a(href='/profile') Profile
+
         li(ng-show='$ctrl.isAdmin()', ng-class='{active: $ctrl.isActive("/admin")}')
           a(href='/admin') Admin
 

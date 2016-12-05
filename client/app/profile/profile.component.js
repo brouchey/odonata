@@ -6,12 +6,12 @@ const ngRoute = require('angular-route');
 import routes from './profile.routes';
 
 export class ProfileComponent {
-  
   $location;
   isLoggedIn: Function;
   isAdmin: Function;
   getCurrentUser: Function;
 
+  /*@ngInject*/
   constructor($location, Auth) {
     'ngInject';
 
