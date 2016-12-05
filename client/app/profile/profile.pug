@@ -1,6 +1,7 @@
 p This is the profile view
 
-div(ng-show='profileCtrl.isLoggedIn()')
+div
   p isLoggedIn : {{ profileCtrl.isLoggedIn() }}
   p getCUrrentUser.name : {{ profileCtrl.getCurrentUser().name }}
   p isAdmin : {{ profileCtrl.isAdmin() }}
+  
