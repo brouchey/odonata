@@ -35,8 +35,8 @@ export default class LoginController {
         password: this.user.password
       })
         .then(() => {
-          // Logged in, redirect to portal
-          this.$location.path('/portal');
+          // Logged in, redirect to dashboard
+          this.$location.path('/dashboard');
         })
         .catch(err => {
           this.errors.login = err.message;

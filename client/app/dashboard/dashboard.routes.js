@@ -3,8 +3,8 @@
 export default function($routeProvider) {
   'ngInject';
   $routeProvider
-    .when('/portal', {
-      template: '<portal></portal>',
+    .when('/dashboard', {
+      template: '<dashboard></dashboard>',
       authenticate: 'user'
     });
 }

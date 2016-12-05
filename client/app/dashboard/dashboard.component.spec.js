@@ -1,14 +1,14 @@
 'use strict';
 
-describe('Component: PortalComponent', function() {
+describe('Component: DashboardComponent', function() {
   // load the controller's module
-  beforeEach(module('odonataApp.portal'));
+  beforeEach(module('odonataApp.dashboard'));
 
-  var PortalComponent;
+  var DashboardComponent;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($componentController) {
-    PortalComponent = $componentController('portal', {});
+    DashboardComponent = $componentController('dashboard', {});
   }));
 
   it('should ...', function() {
