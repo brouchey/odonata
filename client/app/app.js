@@ -21,6 +21,7 @@ import _Auth from '../components/auth/auth.module';
 import account from './account';
 import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
+import sidebar from '../components/sidebar/sidebar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import dashboard from './dashboard/dashboard.component';
@@ -32,7 +33,7 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 
 angular.module('odonataApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute,
-  uiBootstrap, _Auth, account, admin, navbar, footer, main, profile, dashboard, constants, socket, util
+  uiBootstrap, _Auth, account, admin, navbar, sidebar, footer, main, profile, dashboard, constants, socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
