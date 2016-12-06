@@ -3,9 +3,11 @@ const angular = require('angular');
 
 export class sidebarComponent {
   /*@ngInject*/
+
   constructor() {
-    this.message = 'Sidebar';
+    this.message = 'Hello';
   }
+
 }
 
 export default angular.module('odonataApp.sidebar', [])
