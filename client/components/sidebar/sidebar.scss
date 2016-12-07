@@ -1,7 +1,12 @@
 .horizontal-collapse {
 	height: 70px;
 	width: 222px;
+	float: left;
 }
 .navbar-collapse.in {
     overflow-y: hidden;
+}
+.input-group {
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
