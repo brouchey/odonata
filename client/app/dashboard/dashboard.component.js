@@ -2,13 +2,12 @@
 const angular = require('angular');
 const ngRoute = require('angular-route');
 
-
 import routes from './dashboard.routes';
 
 export class DashboardComponent {
   /*@ngInject*/
   constructor() {
-    this.message = 'Hello';
+    this.message = 'Hello Dashboard Constructor';
   }
 }
 

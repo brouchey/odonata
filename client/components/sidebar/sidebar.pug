@@ -1,14 +1,15 @@
-.container
-  .sidebar(ng-controller='sidebarComponent', sidebar-directive='state')
-    a#navigation-toggle(href='#', ng-click='toggleState()') Navigation
-    ul.navigation
-      li.navigation-items
-        a(href='/') Link 1
-      li.navigation-items
-        a(href='/') Link 2
-      li.navigation-items
-        a(href='/') Link 3
-      li.navigation-items
-        a(href='/') Link 4
-      li.navigation-items
-        a(href='/') Link 5
+div(ng-controller='sidebarCtrl')
+  button.btn.btn-default(type='button', ng-click='isCollapsedHorizontal = !isCollapsedHorizontal')
+    span.glyphicon.glyphicon-align-justify(aria-hidden="true")
+  .horizontal-collapse(uib-collapse='isCollapsedHorizontal', horizontal)
+    ul.list-group
+      li.list-group-item
+        a(href='#') Link 1
+      li.list-group-item
+        a(href='#') Link 2
+      li.list-group-item
+        a(href='#') Link 3
+      li.list-group-item
+        a(href='#') Link 4
+      li.list-group-item
+        a(href='#') Link 5

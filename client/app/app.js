@@ -1,14 +1,14 @@
 'use strict';
 
 import angular from 'angular';
-// import ngAnimate from 'angular-animate';
+import ngAnimate from 'angular-animate';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 import 'angular-socket-io';
 const ngRoute = require('angular-route');
-
 import uiBootstrap from 'angular-ui-bootstrap';
+
 // import ngMessages from 'angular-messages';
 // import ngValidationMatch from 'angular-validation-match';
 
@@ -32,8 +32,8 @@ import socket from '../components/socket/socket.service';
 
 import './app.scss';
 
-angular.module('odonataApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute,
-  uiBootstrap, _Auth, account, admin, navbar, sidebar, footer, main, profile, dashboard, constants, socket, util
+angular.module('odonataApp', [ngAnimate, ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute,
+  uiBootstrap, _Auth, account, admin, navbar, sidebar, footer, main, dashboard, profile, constants, socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
