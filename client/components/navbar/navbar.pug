@@ -16,6 +16,10 @@ div.navbar.navbar-default.navbar-static-top
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/dashboard")}')
           a(href='/dashboard') Dashboard
 
+        li(ng-show='$ctrl.isLoggedIn()')
+          a(href='#', ng-click='isCollapsedHorizontal = !isCollapsedHorizontal')
+            span.glyphicon.glyphicon-align-justify
+
         li(ng-show='$ctrl.isAdmin()', ng-class='{active: $ctrl.isActive("/admin")}')
           a(href='/admin') Admin
 

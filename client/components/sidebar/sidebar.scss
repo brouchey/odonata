@@ -1,12 +1,14 @@
-.horizontal-collapse {
-	height: 70px;
-	width: 222px;
+.sidebar {
 	float: left;
+	background-color: #666;
+	.horizontal-collapse {
+	// height: 70px;
+	width: 222px;
+		.input-group {
+			padding: 20px 10px;
+		}
+	}
 }
-.navbar-collapse.in {
-    overflow-y: hidden;
-}
-.input-group {
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
+
+
+

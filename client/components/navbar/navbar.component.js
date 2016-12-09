@@ -31,6 +31,6 @@ export class NavbarComponent {
 export default angular.module('odonataApp.navbar', [])
   .component('navbar', {
     template: require('./navbar.pug'),
-    controller: NavbarComponent
+    controller: NavbarComponent,
   })
   .name;

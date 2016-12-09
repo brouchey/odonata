@@ -6,6 +6,7 @@ export class sidebarComponent {
   constructor() {
     this.message = 'Hello Dashboard Constructor';
   }
+  // isCollapsedHorizontal = false;
 }
 
 export default angular.module('odonataApp.sidebar', [])
@@ -13,8 +14,5 @@ export default angular.module('odonataApp.sidebar', [])
     template: require('./sidebar.pug'),
     controller: sidebarComponent,
     controllerAs: 'sidebarCtrl',
-  })
-  .controller('sidebarCtrl', function ($scope) {
-    $scope.isCollapsedHorizontal = false;
   })
   .name;
