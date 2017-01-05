@@ -1,7 +1,7 @@
 .sidebar
-  button.btn.btn-default(type='button', ng-init="isCollapsedHorizontal = false", ng-click='isCollapsedHorizontal = !isCollapsedHorizontal')
+  button.btn.btn-default(type='button', ng-click='sidebarToggle.isCollapsedHorizontal = !sidebarToggle.isCollapsedHorizontal')
       span.glyphicon.glyphicon-align-justify
-  .horizontal-collapse(uib-collapse='isCollapsedHorizontal', horizontal)
+  .horizontal-collapse(uib-collapse='sidebarToggle.isCollapsedHorizontal', horizontal)
     .input-group
       input.form-control(type='text', placeholder='Search')
       span.input-group-btn
@@ -9,7 +9,7 @@
           span.glyphicon.glyphicon-search
     ul.list-group
       a.list-group-item(href='#') Link 1
-        span.badge 3
+        span.badge 2
       a.list-group-item(href='#') Link 2
         span.badge 5
       a.list-group-item(href='#') Link 3
@@ -22,4 +22,3 @@
         span.badge 8
       a.list-group-item(href='#') Link 7
         span.badge 12
-

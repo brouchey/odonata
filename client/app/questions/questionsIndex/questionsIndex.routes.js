@@ -2,10 +2,8 @@
 
 export default function($routeProvider) {
   'ngInject';
-
   $routeProvider
-    .when('/profile', {
-      template: '<profile></profile>',
-      authenticate: 'user'
+    .when('/questions', {
+      template: '<questions-index></questions-index>'
     });
 }

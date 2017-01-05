@@ -4,9 +4,9 @@ const angular = require('angular');
 export class sidebarComponent {
   /*@ngInject*/
   constructor() {
-    this.message = 'Hello Dashboard Constructor';
+    this.message = 'Hello Sidebar Constructor';
   }
-  // isCollapsedHorizontal = false;
+
 }
 
 export default angular.module('odonataApp.sidebar', [])
