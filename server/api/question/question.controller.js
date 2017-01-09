@@ -146,7 +146,7 @@ export function upsert(req, res) {
   }
   return Question.findOneAndUpdate({_id: req.params.id}, req.body, {upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
     .then(handleEntityNotFound(res))
-    // .then(handleUnauthorized(req, res))
+    .then(handleUnauthorized(req, res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -158,7 +158,7 @@ export function patch(req, res) {
   }
   return Question.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
-    // .then(handleUnauthorized(req, res))
+    .then(handleUnauthorized(req, res))
     .then(patchUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));

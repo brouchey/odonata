@@ -47,11 +47,10 @@ export class QuestionsShowComponent {
   }
 
   submitComment() {
-    this.$http.post('/api/questions/' + this.$routeParams.id + '/comments', this.$scope.newComment)
+    this.$http.post('/api/questions/' + this.$routeParams.id + '/comments', this.newComment)
     .then(response => {
       this.loadQuestions();
-      this.$scope.newComment = {};
-      this.editNewComment = false;
+      this.newComment = {};
     });
   }
 
