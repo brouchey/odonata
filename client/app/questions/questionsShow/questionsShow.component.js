@@ -31,7 +31,7 @@ export class QuestionsShowComponent {
     this.loadQuestions();
   }
 
- loadQuestions() {
+  loadQuestions() {
     this.$http.get('/api/questions/' + this.$routeParams.id)
       .then(response => {
         this.question = response.data;
@@ -43,6 +43,22 @@ export class QuestionsShowComponent {
     .then(response => {
       this.loadQuestions();
       this.$scope.newAnswer = {};
+    });
+  }
+
+  submitComment() {
+    this.$http.post('/api/questions/' + this.$routeParams.id + '/comments', this.$scope.newComment)
+    .then(response => {
+      this.loadQuestions();
+      this.$scope.newComment = {};
+      this.editNewComment = false;
+    });
+  }
+
+  submitAnswerComment(answer) {
+    this.$http.post('/api/questions/' + this.$routeParams.id + '/answers/' + answer._id + '/comments', answer.newAnswerComment)
+    .then(response => {
+      this.loadQuestions();
     });
   }
 
@@ -69,22 +85,6 @@ export class QuestionsShowComponent {
 
   updateAnswer(answer) {
     this.$http.put('/api/questions/' + this.$routeParams.id + '/answers/' + answer._id, answer)
-    .then(response => {
-      this.loadQuestions();
-    });
-  }
-
-  submitComment() {
-    this.$http.post('/api/questions/' + this.$routeParams.id + '/comments', this.$scope.newComment)
-    .then(response => {
-      this.loadQuestions();
-      this.$scope.newComment = {};
-      this.editNewComment = false;
-    });
-  }
-
-  submitAnswerComment(answer) {
-    this.$http.post('/api/questions/' + this.$routeParams.id + '/answers/' + answer._id + '/comments', answer.newAnswerComment)
     .then(response => {
       this.loadQuestions();
     });

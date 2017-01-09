@@ -33,6 +33,13 @@
  * PUT     /api/questions/:id/answers/:answerId/comments/:commentId/star  -> starAnswerComment
  * DELETE  /api/questions/:id/answers/:answerId/comments/:commentId/star  -> unstarAnswerComment
  * 
+ * User Questions and Starred :
+ * GET     /api/questions/users/:userId             ->  showUserQuestions
+ * GET     /api/questions/users/:userId/favorites   ->  showUserFavoritesQuestions
+ * 
+ * Search Questions :
+ * GET     /api/questions/?keyword   ->  searchQuestions
+ * 
  */
 
 'use strict';
@@ -110,8 +117,8 @@ function handleUnauthorized(req, res) {
 
 // Gets a list of Questions
 export function index(req, res) {
-  return Question.find().exec()
-  // return Question.find().sort({createdAt: -1}).limit(20).exec()
+  // return Question.find().exec()
+  return Question.find().sort({createdAt: -1}).limit(5).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -439,3 +446,40 @@ export function starAnswerComment(req, res) {
 export function unstarAnswerComment(req, res) {
   pushOrPullStarAnswerComment('$pull', req, res);
 }
+
+/**********************************/
+/* User Questions and Starred API */
+/**********************************/
+
+// Gets User Questions
+export function showUserQuestions(req, res) {
+  var userId = req.params.userId;
+  return Question.find({user: userId}).exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+// Gets User Favorites Questions
+export function showUserFavoritesQuestions(req, res) {
+  var userId = req.params.userId;
+  return Question.find({$or: [
+      {'stars': userId},
+      {'answers.stars': userId},
+      {'comments.stars': userId},
+      {'answers.comments.stars': userId}
+    ]}).exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+/*************************/
+/* Search Questions API */
+/*************************/
+
+export function searchQuestions(req, res) {
+  var keyword = req.params.keyword;
+  return Question.find({$text: {$search: keyword}}).exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+

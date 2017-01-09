@@ -35,4 +35,9 @@ router.delete('/:id/comments/:commentId/star', auth.isAuthenticated(), controlle
 router.put('/:id/answers/:answerId/comments/:commentId/star', auth.isAuthenticated(), controller.starAnswerComment);
 router.delete('/:id/answers/:answerId/comments/:commentId/star', auth.isAuthenticated(), controller.unstarAnswerComment);
 
+router.get('/users/:userId', auth.isAuthenticated(), controller.showUserQuestions);
+router.get('/users/:userId/favorites', auth.isAuthenticated(), controller.showUserFavoritesQuestions);
+
+router.get('/search/:keyword', auth.isAuthenticated(), controller.searchQuestions);
+
 module.exports = router;

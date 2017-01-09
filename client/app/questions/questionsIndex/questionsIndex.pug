@@ -6,6 +6,23 @@ header#banner.hero-unit
   br
   div(style='text-align: center')
     a.btn.btn-primary(type='button', href='/questions/create') Ask Question
+  br
+  div(style='text-align: center')
+    form.navbar-form(role='search', ng-submit='vm.search(keyword)')
+      .input-group
+        input.form-control(type='text', placeholder='Search', ng-model='keyword')
+        span.input-group-btn
+          button.btn.btn-default(type='submit')
+            span.glyphicon.glyphicon-search
+  br
+  .btn-group.btn-group-justified(role='group', aria-label="Question Types")
+    .btn-group(role='group')
+      button.btn.btn-default(type='button', ng-click='vm.loadQuestions()') All
+    .btn-group(role='group')
+      button.btn.btn-default(type='button', ng-click='vm.loadMyQuestions()') Mine
+    .btn-group(role='group')
+      button.btn.btn-default(type='button', ng-click='vm.loadFavoritesQuestions()') Favorites
+  br
   table.table.table-striped
     thead
       tr
@@ -33,3 +50,4 @@ header#banner.hero-unit
               span.label.label-info {{tag.text}}
           .clearfix
   br
+

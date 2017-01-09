@@ -82,4 +82,13 @@ QuestionSchema.pre('findOne', function(next) {
   next();
 });
 
+QuestionSchema.index({
+  'title': 'text',
+  'content': 'text',
+  'tags.text': 'text',
+  'answers.content': 'text',
+  'comments.content': 'text',
+  'answers.comments.content': 'text',
+}, {name: 'question_schema_index'});
+
 export default mongoose.model('Question', QuestionSchema);
