@@ -1,20 +1,12 @@
 header#banner.hero-unit
   .container
     h1 Exchange
-    p.lead Something to Ask ?
 .container
   br
+  p.lead(style='text-align: center') Something to Ask ?
   div(style='text-align: center')
-    a.btn.btn-primary(type='button', href='/questions/create') Ask Question
-  br
-  div(style='text-align: center')
-    form.navbar-form(role='search', ng-submit='vm.search(keyword)')
-      .input-group
-        input.form-control(type='text', placeholder='Search', ng-model='keyword')
-        span.input-group-btn
-          button.btn.btn-default(type='submit')
-            span.glyphicon.glyphicon-search
-  br
+    a.btn.btn-success(type='button', href='/questions/create') Ask a Question
+  hr
   //- .btn-group.btn-group-justified(role='group', aria-label="Question Types")
   //-   .btn-group(role='group')
   //-     button.btn.btn-default(type='button', ng-click='vm.loadQuestions()') All
@@ -45,14 +37,14 @@ header#banner.hero-unit
                   span.glyphicon.glyphicon-star-empty(ng-if='!vm.isStar(myQuestion)')
                 a(ng-href='/questions/show/{{myQuestion._id}}', style='font-size: large') {{myQuestion.title}}
                 .clearfix
-                div(style='float: right;')
-                | by 
-                a(ng-href='/users/{{myQuestion.user._id}}') {{myQuestion.user.name}}
-                |  &middot; {{myQuestion.createdAt}}
-                div
-                  span(ng-repeat='tag in myQuestion.tags')
-                    span.label.label-info {{tag.text}}
-                .clearfix
+                //- div(style='float: right;')
+                //- | by 
+                //- a(ng-href='/users/{{myQuestion.user._id}}') {{myQuestion.user.name}}
+                //- |  &middot; {{myQuestion.createdAt}}
+                //- div
+                //-   span(ng-repeat='tag in myQuestion.tags')
+                //-     span.label.label-info {{tag.text}}
+                //- .clearfix
     .col-xs-6
       div.alert
         p.lead Last 5 Favorites
@@ -74,16 +66,25 @@ header#banner.hero-unit
                   span.glyphicon.glyphicon-star-empty(ng-if='!vm.isStar(favQuestion)')
                 a(ng-href='/questions/show/{{favQuestion._id}}', style='font-size: large') {{favQuestion.title}}
                 .clearfix
-                div(style='float: right;')
-                | by 
-                a(ng-href='/users/{{favQuestion.user._id}}') {{favQuestion.user.name}}
-                |  &middot; {{favQuestion.createdAt}}
-                div
-                  span(ng-repeat='tag in favQuestion.tags')
-                    span.label.label-info {{tag.text}}
-                .clearfix
+                //- div(style='float: right;')
+                //- | by 
+                //- a(ng-href='/users/{{favQuestion.user._id}}') {{favQuestion.user.name}}
+                //- |  &middot; {{favQuestion.createdAt}}
+                //- div
+                //-   span(ng-repeat='tag in favQuestion.tags')
+                //-     span.label.label-info {{tag.text}}
+                //- .clearfix
+  hr
 .container
-  p.lead All Questions
+  p.lead(style='text-align: center') All Questions
+  div(style='text-align: center')
+    form.navbar-form(role='search', ng-submit='vm.search(keyword)')
+      .input-group
+        input.form-control(type='text', placeholder='Search', ng-model='keyword')
+        span.input-group-btn
+          button.btn.btn-default(type='submit')
+            span.glyphicon.glyphicon-search
+  br
   table.table.table-striped
     thead
       tr
