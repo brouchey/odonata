@@ -24,6 +24,6 @@ export default angular.module('odonataApp.profile', [ngRoute])
   .component('profile', {
     template: require('./profile.pug'),
     controller: ProfileComponent,
-    controllerAs: 'profileCtrl'
+    controllerAs: 'vm'
   })
   .name;

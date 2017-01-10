@@ -16,6 +16,6 @@ export default angular.module('odonataApp.dashboard', [ngRoute])
   .component('dashboard', {
     template: require('./dashboard.pug'),
     controller: DashboardComponent,
-    controllerAs: 'dashboardCtrl'
+    controllerAs: 'vm'
   })
   .name;

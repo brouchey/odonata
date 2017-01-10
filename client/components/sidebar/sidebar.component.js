@@ -13,6 +13,6 @@ export default angular.module('odonataApp.sidebar', [])
   .component('sidebar', {
     template: require('./sidebar.pug'),
     controller: sidebarComponent,
-    controllerAs: 'sidebarCtrl',
+    controllerAs: 'vm',
   })
   .name;

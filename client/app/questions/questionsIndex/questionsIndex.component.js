@@ -11,6 +11,10 @@ export class QuestionsIndexComponent {
   isLoggedIn: Function;
   getCurrentUser: Function;
   questions = [];
+  myQuestions = [];
+  favQuestions = [];
+  busy = true;
+  noMoreData = false;
 
   /*@ngInject*/
   constructor($scope, $http, $routeParams, Auth) {
@@ -23,31 +27,37 @@ export class QuestionsIndexComponent {
 
   $onInit() {
     this.loadQuestions();
-  }
-
-  isStar(obj) {
-    return this.isLoggedIn() && obj && obj.stars && obj.stars.indexOf(this.getCurrentUser()._id)!==-1;
+    this.loadMyQuestions();
+    this.loadFavoritesQuestions();
   }
 
   loadQuestions() {
     this.$http.get('/api/questions/')
       .then(response => {
         this.questions = response.data;
+        if(this.questions.length < 5) {
+          this.noMoreData = true;
+        }
+        this.busy = false;
       });
   }
 
   loadMyQuestions() {
     this.$http.get('/api/questions/users/' + this.getCurrentUser()._id)
       .then(response => {
-        this.questions = response.data;
+        this.myQuestions = response.data;
       });
   }
 
   loadFavoritesQuestions() {
     this.$http.get('/api/questions/users/' + this.getCurrentUser()._id + '/favorites')
       .then(response => {
-        this.questions = response.data;
+        this.favQuestions = response.data;
       });
+  }
+
+  isStar(obj) {
+    return this.isLoggedIn() && obj && obj.stars && obj.stars.indexOf(this.getCurrentUser()._id)!==-1;
   }
 
   search(keyword) {
@@ -55,7 +65,23 @@ export class QuestionsIndexComponent {
       .then(response => {
         this.questions = response.data;
       });
-    };
+  };
+
+  nextPage() {
+    if(this.busy) { 
+      return;
+    }
+    this.busy = true;
+    var lastId = this.questions[this.questions.length-1]._id;
+    this.$http.get('/api/questions/next/' + lastId)
+    .then(response => {
+      this.questions = this.questions.concat(response.data);
+      this.busy = false;
+      if(this.questions.length === 0) {
+        this.noMoreData = true;
+      }
+    });
+  };
 
 }
 

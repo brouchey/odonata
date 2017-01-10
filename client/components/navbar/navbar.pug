@@ -23,12 +23,12 @@ div.navbar.navbar-default.navbar-static-top
         li(ng-class='{active: $ctrl.isActive("/questions")}')
           a(href='/questions') Q&amp;A
 
-        form.navbar-form.navbar-left(role='search', ng-submit='$ctrl.search(keyword)')
-          .input-group
-            input.form-control(type='text', placeholder='Search', ng-model='keyword') 
-            span.input-group-btn
-              button.btn.btn-default(type='submit')
-                span.glyphicon.glyphicon-search
+        //- form.navbar-form.navbar-left(role='search', ng-submit='$ctrl.search(keyword)')
+        //-   .input-group
+        //-     input.form-control(type='text', placeholder='Search', ng-model='keyword') 
+        //-     span.input-group-btn
+        //-       button.btn.btn-default(type='submit')
+        //-         span.glyphicon.glyphicon-search
 
         li(ng-show='$ctrl.isAdmin()', ng-class='{active: $ctrl.isActive("/admin")}')
           a(href='/admin') Admin

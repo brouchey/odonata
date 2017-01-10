@@ -39,5 +39,6 @@ router.get('/users/:userId', auth.isAuthenticated(), controller.showUserQuestion
 router.get('/users/:userId/favorites', auth.isAuthenticated(), controller.showUserFavoritesQuestions);
 
 router.get('/search/:keyword', auth.isAuthenticated(), controller.searchQuestions);
+router.get('/next/:lastId', controller.scrollNextQuestions);
 
 module.exports = router;

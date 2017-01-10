@@ -10,6 +10,7 @@ import 'angular-socket-io';
 const ngRoute = require('angular-route');
 import uiBootstrap from 'angular-ui-bootstrap';
 import 'ng-tags-input';
+import 'ng-infinite-scroll';
 
 // import ngValidationMatch from 'angular-validation-match';
 
@@ -38,7 +39,7 @@ import './app.scss';
 
 angular.module('odonataApp', [ngAnimate, ngCookies, ngResource, ngSanitize, ngMessages, 'btford.socket-io', ngRoute,
   uiBootstrap, _Auth, account, admin, navbar, sidebar, footer, main, dashboard, profile, questionsIndex, questionsCreate, questionsShow,
-  'ngTagsInput', constants, socket, util
+  'ngTagsInput', 'infinite-scroll', constants, socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

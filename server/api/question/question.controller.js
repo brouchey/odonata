@@ -38,8 +38,10 @@
  * GET     /api/questions/users/:userId/favorites   ->  showUserFavoritesQuestions
  * 
  * Search Questions :
- * GET     /api/questions/?keyword   ->  searchQuestions
+ * GET     /api/questions/:keyword   ->  searchQuestions
  * 
+ * Scroll Questions :
+ * GET     /api/questions/scroll   ->  scrollNextQuestions
  */
 
 'use strict';
@@ -118,7 +120,7 @@ function handleUnauthorized(req, res) {
 // Gets a list of Questions
 export function index(req, res) {
   // return Question.find().exec()
-  return Question.find().sort({createdAt: -1}).limit(5).exec()
+  return Question.find().sort({createdAt: -1}).limit(10).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -454,7 +456,7 @@ export function unstarAnswerComment(req, res) {
 // Gets User Questions
 export function showUserQuestions(req, res) {
   var userId = req.params.userId;
-  return Question.find({user: userId}).exec()
+  return Question.find({user: userId}).sort({createdAt: -1}).limit(5).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -467,7 +469,7 @@ export function showUserFavoritesQuestions(req, res) {
       {'answers.stars': userId},
       {'comments.stars': userId},
       {'answers.comments.stars': userId}
-    ]}).exec()
+    ]}).sort({createdAt: -1}).limit(5).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -479,6 +481,17 @@ export function showUserFavoritesQuestions(req, res) {
 export function searchQuestions(req, res) {
   var keyword = req.params.keyword;
   return Question.find({$text: {$search: keyword}}).exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+/*************************/
+/* Scroll Next Questions API */
+/*************************/
+
+export function scrollNextQuestions(req, res) {
+  var lastId = req.params.lastId;
+  return Question.find({_id: {$lt: lastId}}).sort({createdAt: -1}).limit(5).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
