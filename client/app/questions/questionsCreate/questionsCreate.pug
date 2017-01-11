@@ -4,20 +4,24 @@ header#banner.hero-unit
 br
 .container
   form(name='form', ng-submit='vm.submitQuestion()')
-    h2 Title
+    h2.lead Title
     span.text-danger(ng-messages='form.question_title.$error')
       span(ng-message='required') (Required)
     span.text-success(ng-show='form.question_title.$valid') OK
     input.form-control(type='text', ng-model='question.title', name='question_title', required)
     br
-    h2 Question
+    h2.lead Question
     span.text-danger(ng-messages='form.question_content.$error')
       span(ng-message='required') (Required)
     span.text-success(ng-show='form.question_content.$valid') OK
     br
     textarea(rows='10', cols='80', ng-model='question.content', name='question_content', required)
     br
-    h2 Tags
-    tags-input(ng-model='question.tags')
+    h2.lead Tags
+    span.text-danger(ng-messages='form.question_tags.$error')
+      span(ng-message='required') (Required)
+    span.text-success(ng-show='form.question_tags.$valid') OK
+    tags-input(ng-model='question.tags', name='question_tags', required)
     br
     input.btn.btn-primary(type='submit', ng-disabled='form.$invalid', value='Post your Question')
+    hr
