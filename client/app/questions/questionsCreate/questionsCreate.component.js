@@ -2,13 +2,12 @@
 const angular = require('angular');
 const ngRoute = require('angular-route');
 
-
 import routes from './questionsCreate.routes';
 
 export class QuestionsCreateComponent {
   $http;
   $location;
-  isLoggedIn: Function;
+  // isLoggedIn: Function;
 
   /*@ngInject*/
   constructor($scope, $http, $location, Auth) {

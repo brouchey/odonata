@@ -480,7 +480,7 @@ export function showUserFavoritesQuestions(req, res) {
 
 export function searchQuestions(req, res) {
   var keyword = req.params.keyword;
-  return Question.find({$text: {$search: keyword}}).exec()
+  return Question.find({$text: {$search: keyword}}).sort({createdAt: -1}).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

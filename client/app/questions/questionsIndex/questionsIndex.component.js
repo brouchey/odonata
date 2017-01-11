@@ -61,10 +61,14 @@ export class QuestionsIndexComponent {
   }
 
   search(keyword) {
-    this.$http.get('/api/questions/search/' + keyword)
+    if (keyword.length === 0) {
+      this.loadQuestions();
+    } else {
+      this.$http.get('/api/questions/search/' + keyword)
       .then(response => {
         this.questions = response.data;
       });
+    };
   };
 
   nextPage() {

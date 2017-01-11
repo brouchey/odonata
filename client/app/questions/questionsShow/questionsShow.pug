@@ -1,3 +1,7 @@
+header#banner.hero-unit
+  .container
+    h1.lead {{vm.question.title}}
+br
 #question-show-container.container
   div
     button.close(ng-if="vm.isOwner(vm.question)", type='button', ng-click='vm.deleteQuestion()') &times;
