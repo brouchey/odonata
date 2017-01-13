@@ -95,6 +95,9 @@ export default function(app) {
       logFileChanges: false,
       proxy: `localhost:${config.port}`,
       ws: true,
+      ui: {
+        port: 8080
+      },
       middleware: [
         webpackDevMiddleware(compiler, {
           noInfo: false,

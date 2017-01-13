@@ -27,8 +27,8 @@ export class QuestionsIndexComponent {
 
   $onInit() {
     this.loadQuestions();
-    this.loadMyQuestions();
-    this.loadFavoritesQuestions();
+    // this.loadMyQuestions();
+    // this.loadFavoritesQuestions();
   }
 
   loadQuestions() {
@@ -61,15 +61,13 @@ export class QuestionsIndexComponent {
   }
 
   search(keyword) {
-    if (keyword.length === 0) {
-      this.loadQuestions();
-    } else {
+    if(keyword) {
       this.$http.get('/api/questions/search/' + keyword)
       .then(response => {
         this.questions = response.data;
       });
-    };
-  };
+    }
+  }
 
   nextPage() {
     if(this.busy) { 

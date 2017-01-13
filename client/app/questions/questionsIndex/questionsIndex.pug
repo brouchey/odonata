@@ -15,66 +15,67 @@ header#banner.hero-unit
   //-   .btn-group(role='group')
   //-     button.btn.btn-default(type='button', ng-click='vm.loadFavoritesQuestions()') Favorites
   //- br
-  .row
-    .col-xs-6
-      div.alert
-        p.lead My Last 5 Questions
-        table.table.table-striped
-          thead
-            tr
-              th(width='20') Stars
-              th(width='20') Answers
-              th Question
-          tbody
-            tr(ng-repeat='myQuestion in vm.myQuestions')
-              td(style='text-align: center; vertical-align:middle')
-                div(style='font-size: large;') {{myQuestion.stars.length}}
-              td(style='text-align: center; vertical-align:middle')
-                div(style='font-size: large;') {{myQuestion.answers.length}}
-              td
-                div(style='float: right;')
-                  span.glyphicon.glyphicon-star(ng-if='vm.isStar(myQuestion)', style='color: #CF7C00;')
-                  span.glyphicon.glyphicon-star-empty(ng-if='!vm.isStar(myQuestion)')
-                a(ng-href='/questions/show/{{myQuestion._id}}', style='font-size: large') {{myQuestion.title}}
-                .clearfix
-                //- div(style='float: right;')
-                //- | by 
-                //- a(ng-href='/users/{{myQuestion.user._id}}') {{myQuestion.user.name}}
-                //- |  &middot; {{myQuestion.createdAt}}
-                div
-                  span(ng-repeat='tag in myQuestion.tags')
-                    span.label.label-info {{tag.text}}
-                .clearfix
-    .col-xs-6
-      div.alert
-        p.lead Last 5 Favorites
-        table.table.table-striped
-          thead
-            tr
-              th(width='20') Stars
-              th(width='20') Answers
-              th Question
-          tbody
-            tr(ng-repeat='favQuestion in vm.favQuestions')
-              td(style='text-align: center; vertical-align:middle')
-                div(style='font-size: large;') {{favQuestion.stars.length}}
-              td(style='text-align: center; vertical-align:middle')
-                div(style='font-size: large;') {{favQuestion.answers.length}}
-              td
-                div(style='float: right;')
-                  span.glyphicon.glyphicon-star(ng-if='vm.isStar(favQuestion)', style='color: #CF7C00;')
-                  span.glyphicon.glyphicon-star-empty(ng-if='!vm.isStar(favQuestion)')
-                a(ng-href='/questions/show/{{favQuestion._id}}', style='font-size: large') {{favQuestion.title}}
-                .clearfix
-                //- div(style='float: right;')
-                //- | by 
-                //- a(ng-href='/users/{{favQuestion.user._id}}') {{favQuestion.user.name}}
-                //- |  &middot; {{favQuestion.createdAt}}
-                div
-                  span(ng-repeat='tag in favQuestion.tags')
-                    span.label.label-info {{tag.text}}
-                .clearfix
-  hr
+//- .container
+//-   .row
+//-     .col-xs-12.col-lg-6
+//-       div.alert
+//-         p.lead My Last 5 Questions
+//-         table.table.table-striped
+//-           thead
+//-             tr
+//-               th(width='20') Stars
+//-               th(width='20') Answers
+//-               th Question
+//-           tbody
+//-             tr(ng-repeat='myQuestion in vm.myQuestions')
+//-               td(style='text-align: center; vertical-align:middle')
+//-                 div(style='font-size: large;') {{myQuestion.stars.length}}
+//-               td(style='text-align: center; vertical-align:middle')
+//-                 div(style='font-size: large;') {{myQuestion.answers.length}}
+//-               td
+//-                 div(style='float: right;')
+//-                   span.glyphicon.glyphicon-star(ng-if='vm.isStar(myQuestion)', style='color: #CF7C00;')
+//-                   span.glyphicon.glyphicon-star-empty(ng-if='!vm.isStar(myQuestion)')
+//-                 a(ng-href='/questions/show/{{myQuestion._id}}', style='font-size: large') {{myQuestion.title}}
+//-                 .clearfix
+//-                 div(style='float: right;')
+//-                   | by 
+//-                   a(ng-href='/users/{{myQuestion.user._id}}') {{myQuestion.user.name}}
+//-                   |  &middot; {{myQuestion.createdAt|date:'mediumDate'}}
+//-                 div
+//-                   span(ng-repeat='tag in myQuestion.tags')
+//-                     span.label.label-info {{tag.text}}
+//-                 .clearfix
+//-     .col-xs-12.col-lg-6
+//-       div.alert
+//-         p.lead Last 5 Favorites
+//-         table.table.table-striped
+//-           thead
+//-             tr
+//-               th(width='20') Stars
+//-               th(width='20') Answers
+//-               th Question
+//-           tbody
+//-             tr(ng-repeat='favQuestion in vm.favQuestions')
+//-               td(style='text-align: center; vertical-align:middle')
+//-                 div(style='font-size: large;') {{favQuestion.stars.length}}
+//-               td(style='text-align: center; vertical-align:middle')
+//-                 div(style='font-size: large;') {{favQuestion.answers.length}}
+//-               td
+//-                 div(style='float: right;')
+//-                   span.glyphicon.glyphicon-star(ng-if='vm.isStar(favQuestion)', style='color: #CF7C00;')
+//-                   span.glyphicon.glyphicon-star-empty(ng-if='!vm.isStar(favQuestion)')
+//-                 a(ng-href='/questions/show/{{favQuestion._id}}', style='font-size: large') {{favQuestion.title}}
+//-                 .clearfix
+//-                 div(style='float: right;')
+//-                   | by 
+//-                   a(ng-href='/users/{{favQuestion.user._id}}') {{favQuestion.user.name}}
+//-                   |  &middot; {{favQuestion.createdAt|date:'mediumDate'}}
+//-                 div
+//-                   span(ng-repeat='tag in favQuestion.tags')
+//-                     span.label.label-info {{tag.text}}
+//-                 .clearfix
+//-   hr
 .container
   p.lead(style='text-align: center') All Questions
   div(style='text-align: center')
@@ -84,8 +85,11 @@ header#banner.hero-unit
         span.input-group-btn
           button.btn.btn-default(type='submit')
             span.glyphicon.glyphicon-search
+          button.btn.btn-info(type='reset', ng-click='vm.loadQuestions()') Reset
   br
-  table.table.table-striped
+
+  div.alert.alert-warning(ng-if='vm.questions.length==0', style='text-align: center', role="alert") No Result Found !
+  table.table.table-striped(ng-if='vm.questions.length!=0')
     thead
       tr
         th(width='20') Stars
@@ -104,9 +108,9 @@ header#banner.hero-unit
           a(ng-href='/questions/show/{{question._id}}', style='font-size: large') {{question.title}}
           .clearfix
           div(style='float: right;')
-          | by 
-          a(ng-href='/users/{{question.user._id}}') {{question.user.name}}
-          |  &middot; {{question.createdAt}}
+            | by 
+            a(ng-href='/users/{{question.user._id}}') {{question.user.name}}
+            |  &middot; {{question.createdAt|date:'medium'}}
           div
             span(ng-repeat='tag in question.tags')
               span.label.label-info {{tag.text}}
