@@ -1,0 +1,22 @@
+header#banner.hero-unit
+  .container
+    h1.lead QuizBox
+.container
+  br
+  p.lead(style='text-align: center') Create a Quiz ?
+  div(style='text-align: center')
+    a.btn.btn-success(type='button', href='/quiz/create') New Quiz
+  hr
+.container
+  p.lead(style='text-align: center') All Quizzes
+  hr
+  div.alert.alert-warning(ng-if='vm.quizzes.length==0', style='text-align: center', role="alert") No Quizzes Found !
+  div.alert.alert-info(ng-if='vm.quizzes.length!==0', ng-repeat='quiz in vm.quizzes')
+    a(ng-href='/quiz/show/{{quiz._id}}', style='font-size: large') {{quiz.title}}
+    p Description: {{quiz.description}}
+    p Created by: {{quiz.user.name}}
+    p Date: {{quiz.createdAt|date:'mediumDate'}}
+    p
+      a.btn.btn-primary(role='button', ng-href='/quiz/show/{{quiz._id}}') Show
+hr
+

@@ -1,0 +1,38 @@
+header#banner.hero-unit
+  .container
+    h1.lead {{vm.quiz.title}}
+br
+.container
+  div
+    div
+      h1.lead {{vm.quiz.title}}
+  hr
+  |  {{vm.quiz.description}}
+hr
+.container
+  .intro(ng-show='!vm.inProgress')
+    p Welcome to the QuizApp
+    |  
+    button#startQuiz(ng-click='vm.startQuiz()') Start !
+  .quiz-area(ng-show='vm.inProgress')
+    div(ng-show='!vm.quizOver')
+      h2#question {{vm.quiz.question}}
+      ul#options
+        li(ng-repeat='option in vm.options')
+          label
+            input(type='radio', name='answer', value='{{option}}')
+            |  {{option}}
+      |  
+      button(ng-click='vm.checkAnswer()', ng-show='vm.answerMode') Submit
+      div(ng-show='!vm.answerMode')
+        button.next-question(ng-click='vm.nextQuestion()') Next
+        |  
+        span(ng-show='vm.correctAns') That is correct!
+        |  
+        span(ng-show='!vm.correctAns') Sorry, that is an incorrect answer.
+    div(ng-show='vm.quizOver')
+      h2 Quiz is over !
+      |  
+      button(ng-click='vm.resetQuiz()') Play again
+    //- #score  Score: {{vm.score}}
+

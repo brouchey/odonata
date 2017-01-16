@@ -37,8 +37,8 @@ br
     |  &middot; {{vm.question.createdAt|date:'medium'}}
 
   .comment
-    div(ng-repeat='comment in vm.question.comments')
-      hr 
+    div.well.well-sm(ng-repeat='comment in vm.question.comments')
+
       button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteComment(comment)')
         span.glyphicon.glyphicon-trash(style='color: red;')
 
@@ -62,19 +62,19 @@ br
         a(ng-href='/users/{{comment.user._id}}') {{comment.user.name}}
         |  &middot; {{comment.createdAt|date:'medium'}}
       .clearfix
-    hr
 
     a(ng-click='editNewComment=!editNewComment;') Add a comment
     form(ng-if='editNewComment', name='commentForm', ng-submit='vm.submitComment()')
-      textarea.comment-wmd-input(rows='5', cols='80', ng-model='vm.newComment.content', name='commentEditor', required)
+      textarea.form-control(rows='3', ng-model='vm.newComment.content', name='commentEditor', required)
       br
       input.btn.btn-primary(type='submit', ng-disabled='commentForm.$invalid', value='Submit Comment')
 
   hr
   h3 {{vm.question.answers.length}} Answers
+  hr
 
   div(ng-repeat='answer in vm.question.answers')
-    hr
+
     button.close(ng-if="vm.isOwner(answer)", type='button', ng-click='vm.deleteAnswer(answer)')
       span.glyphicon.glyphicon-trash(style='color: red;')
 
@@ -100,8 +100,8 @@ br
       .clearfix
 
       .comment
-        div(ng-repeat='comment in answer.comments')
-          hr
+        div.well.well-sm(ng-repeat='comment in answer.comments')
+
           button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteAnswerComment(answer, comment)')
             span.glyphicon.glyphicon-trash(style='color: red;')
 
@@ -125,7 +125,6 @@ br
             a(ng-href='/users/{{comment.user._id}}') {{comment.user.name}}
             |  &middot; {{comment.createdAt|date:'medium'}}
           .clearfix
-        hr
   
         a(ng-click='editNewAnswerComment=!editNewAnswerComment; answer.newAnswerComment={}') Add a comment
 
@@ -133,11 +132,11 @@ br
           hr
           input.comment-wmd-input(type='text', ng-model='answer.newAnswerComment.content', required) 
           button.btn.btn-primary(type='submit', ng-click='vm.submitAnswerComment(answer)', ng-disabled='answer_{{answer.id}}_comment.$invalid') Add Comment
+    hr
 
-  hr
   h3 Your Answer
   form(name='answerForm', ng-submit='vm.submitAnswer()')
-    textarea(rows='5', cols='80', ng-model='newAnswer.content', name='answerEditor', required)
+    textarea.form-control(rows='3', ng-model='newAnswer.content', name='answerEditor', required)
     br
     input.btn.btn-primary(type='submit', ng-disabled='answerForm.$invalid', value='Submit Answer')
   hr

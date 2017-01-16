@@ -23,6 +23,9 @@ div.navbar.navbar-default.navbar-static-top
         li(ng-class='{active: $ctrl.isActive("/questions")}')
           a(href='/questions') Q&amp;A
 
+        li(ng-class='{active: $ctrl.isActive("/quiz")}')
+          a(href='/quiz') QuizBox
+
         //- form.navbar-form.navbar-left(role='search', ng-submit='$ctrl.search(keyword)')
         //-   .input-group
         //-     input.form-control(type='text', placeholder='Search', ng-model='keyword') 

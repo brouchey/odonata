@@ -15,7 +15,7 @@ br
       span(ng-message='required') (Required)
     span.text-success(ng-show='form.question_content.$valid') OK
     br
-    textarea(rows='10', cols='80', ng-model='question.content', name='question_content', required)
+    textarea.form-control(rows='4', ng-model='question.content', name='question_content', required)
     br
     h2.lead Tags
     span.text-danger(ng-messages='form.question_tags.$error')

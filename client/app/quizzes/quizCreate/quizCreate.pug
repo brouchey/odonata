@@ -1,0 +1,52 @@
+header#banner.hero-unit
+  .container
+    h1.lead New Quizz !
+br
+.container
+  form(name='form', ng-submit='vm.submitQuiz()')
+
+    h2.lead Quiz Title
+    input.form-control(type='text', ng-model='quiz.title', name='quiz_title', required)
+    br
+
+    .well
+      h2.lead Quiz Description
+      input.form-control(type='text', ng-model='quiz.description', name='quiz_description', required)
+
+    .well
+      h2.lead Setup Question
+      input.form-control(type='text', ng-model='quiz.questions[0].question', name='quiz_question', required)
+      br
+      .row
+        .col-md-6
+          .panel.panel-info
+            .panel-heading
+              h4 Available Answers
+            .panel-body
+              fieldset.form-inline(data-ng-repeat='option in vm.options')
+                input.form-control(type='text', ng-model='option.text', name='optionForm', placeholder='New Answer', required)
+                button.btn.btn-danger(type='button', ng-show='$last', ng-click='vm.removeOption()')
+                  span.glyphicon.glyphicon-minus
+              button.btn.btn-success.btn-sm(type='button', ng-click='vm.addNewOption()')
+                span.glyphicon.glyphicon-plus
+        .col-md-6
+          .panel.panel-success
+            .panel-heading
+              h4 Choose Correct Answers
+            .panel-body
+              ul.list-group
+                li.list-group-item(ng-repeat='option in vm.options') {{option.text}}
+
+    //- h2.lead Setup Question 2
+    //- input.form-control(type='text', ng-model='quiz.questions.question[1]', name='quiz_question', required)
+
+    //- hr
+
+    //- h2.lead Setup Question 3
+    //- input.form-control(type='text', ng-model='quiz.questions.question[2]', name='quiz_question', required)
+
+    //- hr
+
+    hr
+    input.btn.btn-primary(type='submit', ng-disabled='form.$invalid', value='Create !')
+    hr

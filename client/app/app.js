@@ -29,6 +29,9 @@ import profile from './profile/profile.component';
 import questionsIndex from './questions/questionsIndex/questionsIndex.component';
 import questionsCreate from './questions/questionsCreate/questionsCreate.component';
 import questionsShow from './questions/questionsShow/questionsShow.component';
+import quizIndex from './quizzes/quizIndex/quizIndex.component';
+import quizCreate from './quizzes/quizCreate/quizCreate.component';
+import quizShow from './quizzes/quizShow/quizShow.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
@@ -59,6 +62,9 @@ angular.module('odonataApp', [
   questionsIndex,
   questionsCreate,
   questionsShow,
+  quizIndex,
+  quizCreate,
+  quizShow,
   constants,
   socket,
   util
