@@ -8,7 +8,17 @@ import routes from './quizCreate.routes';
 export class QuizCreateComponent {
   $http;
   $location;
-  options = [];
+  quiz = {
+    title: '',
+    description: '',
+    questions: [{
+      content: '',
+      options: [{
+        text: ''
+      }],
+      answer: 0,
+    }],
+  };
 
   /*@ngInject*/
   constructor($scope, $http, $location) {
@@ -17,22 +27,30 @@ export class QuizCreateComponent {
     this.$location = $location;
   }
 
-  addNewOption() {
-    var id = this.options.length+1;
-    this.options.push({id});
-    console.log('New option added');
-    console.log(this.options);
+  addQuestion() {
+    this.quiz.questions.push({
+      content: '',
+      options: [{
+        text: '',
+      }],
+      answer: 0,
+    });
+  }
+
+  removeQuestion(index) {
+    this.quiz.questions.splice(index, 1);
   };
+
+  addOption(question) {
+    question.options.push({});
+  }
     
-  removeOption() {
-    var lastItem = this.options.length-1;
-    this.options.splice(lastItem);
-    console.log('Option removed');
-    console.log(this.options);
+  removeOption(question, index) {
+    question.options.splice(index, 1);
   };
 
   submitQuiz() {
-    this.$http.post('/api/quiz', this.$scope.quiz)
+    this.$http.post('/api/quiz', this.quiz)
       .then(response => {
         this.$location.path('/quiz');
       });

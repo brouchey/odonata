@@ -4,7 +4,7 @@ header#banner.hero-unit
 br
 #question-show-container.container
   div
-    button.close(ng-if="vm.isOwner(vm.question)", type='button', ng-click='vm.deleteQuestion()')
+    button.close(ng-if="vm.isOwner(vm.question)", type='button', ng-click='vm.deleteQuestion()', uib-tooltip='Delete')
       span.glyphicon.glyphicon-trash(style='color: red;')
     
     div(style='float: left;font-size: x-large; padding: 0; width: 2em; text-align: center;')
@@ -28,7 +28,7 @@ br
   input(type='text', ng-model='vm.question.content', ng-if='editingQ')
 
   button.btn.btn-success(type='submit', ng-click='editingQ=false; vm.updateQuestion()', ng-show='editingQ') Save
-  a(ng-click='editingQ=!editingQ;', ng-show='vm.isOwner(vm.question) && !editingQ')
+  a(ng-click='editingQ=!editingQ;', ng-show='vm.isOwner(vm.question) && !editingQ', uib-tooltip='Edit', tooltip-placement='right')
     span.glyphicon.glyphicon-edit
 
   .text-right
@@ -39,7 +39,7 @@ br
   .comment
     div.well.well-sm(ng-repeat='comment in vm.question.comments')
 
-      button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteComment(comment)')
+      button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteComment(comment)', uib-tooltip='Delete')
         span.glyphicon.glyphicon-trash(style='color: red;')
 
       div(style='float: left;font-size: normal; padding: 0; width: 2em; text-align: center;')
@@ -54,7 +54,7 @@ br
       input(type='text', ng-model='comment.content', ng-if='editingC') 
       button.btn.btn-success(type='submit', ng-click='editingC=false; vm.updateComment(comment)', ng-show='editingC') Save 
 
-      a(ng-click='editingC=!editingC;', ng-show='vm.isOwner(comment) && !editingC')
+      a(ng-click='editingC=!editingC;', ng-show='vm.isOwner(comment) && !editingC', uib-tooltip='Edit', tooltip-placement='right')
         span.glyphicon.glyphicon-edit
 
       .text-right
@@ -75,7 +75,7 @@ br
 
   div(ng-repeat='answer in vm.question.answers')
 
-    button.close(ng-if="vm.isOwner(answer)", type='button', ng-click='vm.deleteAnswer(answer)')
+    button.close(ng-if="vm.isOwner(answer)", type='button', ng-click='vm.deleteAnswer(answer)', uib-tooltip='Delete')
       span.glyphicon.glyphicon-trash(style='color: red;')
 
     div(style='float: left;font-size: large; padding: 0; width: 2em; text-align: center;')
@@ -88,7 +88,7 @@ br
 
     .answer
       div(ng-if='!editingA') {{answer.content}}
-      a(ng-click='editingA=!editingA;', ng-show='vm.isOwner(answer) && !editingA')
+      a(ng-click='editingA=!editingA;', ng-show='vm.isOwner(answer) && !editingA', uib-tooltip='Edit', tooltip-placement='right')
         span.glyphicon.glyphicon-edit 
       input(type='text', ng-model='answer.content', ng-if='editingA')
       button.btn.btn-success(type='submit', ng-click='editingA=false; vm.updateAnswer(answer)', ng-show='editingA') Save
@@ -102,7 +102,7 @@ br
       .comment
         div.well.well-sm(ng-repeat='comment in answer.comments')
 
-          button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteAnswerComment(answer, comment)')
+          button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteAnswerComment(answer, comment)', uib-tooltip='Delete')
             span.glyphicon.glyphicon-trash(style='color: red;')
 
           div(style='float: left;font-size: normal; padding: 0; width: 2em; text-align: center;')
@@ -118,7 +118,7 @@ br
  
           button.btn.btn-success(type='submit', ng-click='editingAC=false; vm.updateAnswerComment(answer, comment)', ng-show='editingAC') Save
  
-          a(ng-click='editingAC=!editingAC;', ng-show='vm.isOwner(comment) && !editingAC')
+          a(ng-click='editingAC=!editingAC;', ng-show='vm.isOwner(comment) && !editingAC', uib-tooltip='Edit', tooltip-placement='right')
             span.glyphicon.glyphicon-edit
           .text-right
             | by 

@@ -3,50 +3,51 @@ header#banner.hero-unit
     h1.lead New Quizz !
 br
 .container
-  form(name='form', ng-submit='vm.submitQuiz()')
+  form(name='quizForm', ng-submit='vm.submitQuiz()')
 
-    h2.lead Quiz Title
-    input.form-control(type='text', ng-model='quiz.title', name='quiz_title', required)
-    br
+    .well
+      h2.lead Quiz Title
+      input.form-control(type='text', ng-model='vm.quiz.title', placeholder='Title', required)
 
     .well
       h2.lead Quiz Description
-      input.form-control(type='text', ng-model='quiz.description', name='quiz_description', required)
+      input.form-control(type='text', ng-model='vm.quiz.description', placeholder='Description', required)
 
-    .well
-      h2.lead Setup Question
-      input.form-control(type='text', ng-model='quiz.questions[0].question', name='quiz_question', required)
+    .well(ng-repeat='question in vm.quiz.questions track by $index')
+      h2.lead Setup Question {{$index+1}}
+      input.form-control(type='text', ng-model='question.content', placeholder='New Question', required)
       br
+      button.btn.btn-danger(type='button', ng-click='vm.removeQuestion($index)') Remove Question
+      hr
+
       .row
         .col-md-6
           .panel.panel-info
             .panel-heading
-              h4 Available Answers
+              h4 Question {{$index+1}} Answers
             .panel-body
-              fieldset.form-inline(data-ng-repeat='option in vm.options')
-                input.form-control(type='text', ng-model='option.text', name='optionForm', placeholder='New Answer', required)
-                button.btn.btn-danger(type='button', ng-show='$last', ng-click='vm.removeOption()')
+              .form-inline(ng-repeat='option in question.options track by $index')
+                input.form-control(type='text', ng-model='option.text', placeholder='New Answer', required)
+                button.btn.btn-danger(type='button', ng-click='vm.removeOption(question, $index)')
                   span.glyphicon.glyphicon-minus
-              button.btn.btn-success.btn-sm(type='button', ng-click='vm.addNewOption()')
-                span.glyphicon.glyphicon-plus
-        .col-md-6
-          .panel.panel-success
-            .panel-heading
-              h4 Choose Correct Answers
-            .panel-body
-              ul.list-group
-                li.list-group-item(ng-repeat='option in vm.options') {{option.text}}
+              br
+              button.btn.btn-success(type='button', ng-click='vm.addOption(question)') Add Answer
+      
+    button.btn.btn-success(type='button', ng-click='vm.addQuestion()') Add New Question
+    hr
 
-    //- h2.lead Setup Question 2
-    //- input.form-control(type='text', ng-model='quiz.questions.question[1]', name='quiz_question', required)
+    .well
+      p FINAL Quiz Object :
+      pre {{vm.quiz|json}}
 
-    //- hr
-
-    //- h2.lead Setup Question 3
-    //- input.form-control(type='text', ng-model='quiz.questions.question[2]', name='quiz_question', required)
-
-    //- hr
+        //- .col-md-6
+        //-   .panel.panel-success
+        //-     .panel-heading
+        //-       h4 Choose Correct Answers
+        //-     .panel-body
+        //-       ul.list-group
+        //-         li.list-group-item(ng-repeat='option in vm.options') {{option.text}}
 
     hr
-    input.btn.btn-primary(type='submit', ng-disabled='form.$invalid', value='Create !')
+    input.btn.btn-primary(type='submit', ng-disabled='quizForm.$invalid', value='Create')
     hr
