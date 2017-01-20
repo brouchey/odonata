@@ -9,6 +9,7 @@ export class QuizShowComponent {
   $http;
   $routeParams;
   quiz = {};
+  id = 0;
 
   /*@ngInject*/
   constructor($scope, $http, $routeParams) {
@@ -26,13 +27,11 @@ export class QuizShowComponent {
     this.$http.get('/api/quiz/' + this.$routeParams.id)
       .then(response => {
         this.quiz = response.data;
-        console.log('loadQuiz');
-        console.log(this.quiz);
       });
   }
 
   startQuiz() {
-    this.id = 0; // ID of current question
+    this.id = 0; // current question ID
     this.quizOver = false;
     this.inProgress = true;
     this.getQuestion();
@@ -44,48 +43,36 @@ export class QuizShowComponent {
   }
 
   getQuestion() {
-    var q = this.getQuestion(id);
-    if(this.quiz) {
-      question = this.quiz.question;
-      options = this.quiz.options;
-      answer = this.quiz.answer;
-      // answerMode display the options or the result of current question accordingly
-      this.answerMode = true;
+    var q = this.quiz.questions[this.id]
+    if(q) {
+      this.question = q.content;
+      this.options = q.options;
+      this.answer = q.answer;
+      this.answerMode = true; // display options and result in HTML
     } else {
       this.quizOver = true;
     }
   };
-  
-  // compare the selected option with the correct answer
-  checkAnswer() {
-    if(!$('input[name=answer]:checked').length) return;
 
-    var ans = $('input[name=answer]:checked').val();
-
-    if(ans == options[answer]) {
-      // score++;
-      correctAns = true;
-    } else {
-      correctAns = false;
-    }
-
-    // answerMode display the options or the result of current question accordingly
-    answerMode = false;
-  };
-
-  // get next question when user clicks next
   nextQuestion() {
-    id++;
+    this.id++;
     this.getQuestion();
   }
-
-  getQuestion(id) {
-      if(id < questions.length) {
-        return questions[id];
-      } else {
-        return false;
-      }
+  
+  // compare user selected option with correct answer
+  checkAnswer() {
+    // if(!$('input[name=answer]:checked').length) return; // jQuery
+    if(!this.selectedOption) return;
+    // var ans = $('input[name=answer]:checked').val(); // jQuery
+    var ans = this.selectedOption;
+    if(ans == this.options[this.answer].text) {
+      // score++;
+      this.correctAns = true;
+    } else {
+      this.correctAns = false;
     }
+    this.answerMode = false;  // display options and result in HTML
+  };
 
 }
 

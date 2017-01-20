@@ -4,6 +4,7 @@ export default function($routeProvider) {
   'ngInject';
   $routeProvider
     .when('/quiz', {
-      template: '<quiz-index></quiz-index>'
+      template: '<quiz-index></quiz-index>',
+      authenticate: 'user'
     });
 }

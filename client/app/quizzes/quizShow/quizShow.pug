@@ -2,9 +2,9 @@ header#banner.hero-unit
   .container
     h1.lead {{vm.quiz.title}}
 br
-.container
-  pre {{vm.quiz|json}}
-br
+//- .container
+//-   pre {{vm.quiz|json}}
+//- br
 .container
   div
     div
@@ -13,18 +13,16 @@ br
   |  {{vm.quiz.description}}
 hr
 .container
-  .intro(ng-show='!vm.inProgress')
-    p Welcome to the QuizApp
-    |  
-    button#startQuiz(ng-click='vm.startQuiz()') Start !
+  .intro(ng-show='!vm.inProgress')  
+    button.btn.btn-success(type='button', ng-click='vm.startQuiz()') Start the Quiz !
   .quiz-area(ng-show='vm.inProgress')
     div(ng-show='!vm.quizOver')
-      h2#question {{vm.quiz.question}}
-      ul#options
+      h2 Question {{vm.question}}
+      ul
         li(ng-repeat='option in vm.options')
           label
-            input(type='radio', name='answer', value='{{option}}')
-            |  {{option}}
+            input(type='radio', ng-model='vm.selectedOption', name='answer', value='{{option.text}}')
+            | {{option.text}}
       |  
       button(ng-click='vm.checkAnswer()', ng-show='vm.answerMode') Submit
       div(ng-show='!vm.answerMode')
