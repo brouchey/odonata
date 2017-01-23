@@ -32,21 +32,22 @@ br
                   span.glyphicon.glyphicon-minus
               br
               button.btn.btn-success(type='button', ng-click='vm.addOption(question)') Add Answer
-      
+        .col-md-6
+          .panel.panel-info
+            .panel-heading
+              h4 Choose the Good Answer
+            .panel-body
+              .radio(ng-repeat='option in question.options track by $index')
+                label
+                  input(type='radio', ng-model='question.answer', value='{{$index}}', required)
+                  | {{$index+1}}
+
     button.btn.btn-success(type='button', ng-click='vm.addQuestion()') Add New Question
     hr
 
     .well
       p FINAL Quiz Object :
       pre {{vm.quiz|json}}
-
-        //- .col-md-6
-        //-   .panel.panel-success
-        //-     .panel-heading
-        //-       h4 Choose Correct Answers
-        //-     .panel-body
-        //-       ul.list-group
-        //-         li.list-group-item(ng-repeat='option in vm.options') {{option.text}}
 
     hr
     input.btn.btn-primary(type='submit', ng-disabled='quizForm.$invalid', value='Create')

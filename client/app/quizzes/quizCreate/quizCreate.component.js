@@ -16,7 +16,7 @@ export class QuizCreateComponent {
       options: [{
         text: ''
       }],
-      answer: 0,
+      answer: '',
     }],
   };
 
@@ -33,7 +33,7 @@ export class QuizCreateComponent {
       options: [{
         text: '',
       }],
-      answer: 0,
+      answer: '',
     });
   }
 

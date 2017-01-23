@@ -1,39 +1,31 @@
 header#banner.hero-unit
   .container
     h1.lead {{vm.quiz.title}}
+    p.lead {{vm.quiz.description}}
 br
 //- .container
 //-   pre {{vm.quiz|json}}
 //- br
 .container
-  div
-    div
-      h1.lead {{vm.quiz.title}}
-  hr
-  |  {{vm.quiz.description}}
-hr
-.container
   .intro(ng-show='!vm.inProgress')  
-    button.btn.btn-success(type='button', ng-click='vm.startQuiz()') Start the Quiz !
+    button.btn.btn-success(type='button', ng-click='vm.startQuiz()') Start {{vm.quiz.title}}
+    hr
   .quiz-area(ng-show='vm.inProgress')
     div(ng-show='!vm.quizOver')
-      h2 Question {{vm.question}}
-      ul
-        li(ng-repeat='option in vm.options')
+      h2.lead Question {{vm.question}}
+      ul.list-group
+        li.list-group-item(ng-repeat='option in vm.options')
           label
             input(type='radio', ng-model='vm.selectedOption', name='answer', value='{{option.text}}')
-            | {{option.text}}
-      |  
-      button(ng-click='vm.checkAnswer()', ng-show='vm.answerMode') Submit
+            | {{option.text}}  
+      button.btn.btn-success(ng-click='vm.checkAnswer()', ng-show='vm.answerMode') Submit
       div(ng-show='!vm.answerMode')
-        button.next-question(ng-click='vm.nextQuestion()') Next
-        |  
-        span(ng-show='vm.correctAns') That is correct!
-        |  
-        span(ng-show='!vm.correctAns') Sorry, that is an incorrect answer.
-    div(ng-show='vm.quizOver')
-      h2 Quiz is over !
-      |  
-      button(ng-click='vm.resetQuiz()') Play again
+        button.btn.btn-info.next-question(ng-click='vm.nextQuestion()') Next Question
+        span(ng-show='vm.correctAns') Correct !  
+        span(ng-show='!vm.correctAns') Sorry, Incorrect Answer.
+    div.quiz-result(ng-show='vm.quizOver')
+      h2.lead Quiz is over ! 
+      button.btn.btn-success(ng-click='vm.resetQuiz()') Play again
+      hr
     //- #score  Score: {{vm.score}}
 
