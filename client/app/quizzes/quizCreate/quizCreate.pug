@@ -21,25 +21,27 @@ br
       hr
 
       .row
-        .col-md-6
+        .col-md-8
           .panel.panel-info
             .panel-heading
               h4 Question {{$index+1}} Answers
             .panel-body
               .form-inline(ng-repeat='option in question.options track by $index')
-                input.form-control(type='text', ng-model='option.text', placeholder='New Answer', required)
+                .input-group
+                  span.input-group-addon {{$index+1}}
+                  input.form-control(type='text', ng-model='option.text', placeholder='New Answer', required)
                 button.btn.btn-danger(type='button', ng-click='vm.removeOption(question, $index)')
-                  span.glyphicon.glyphicon-minus
+                    span.glyphicon.glyphicon-minus
               br
               button.btn.btn-success(type='button', ng-click='vm.addOption(question)') Add Answer
-        .col-md-6
-          .panel.panel-info
+        .col-md-4
+          .panel.panel-success
             .panel-heading
-              h4 Choose the Good Answer
+              h4 Good Answer
             .panel-body
               .radio(ng-repeat='option in question.options track by $index')
                 label
-                  input(type='radio', ng-model='question.answer', value='{{$index}}', required)
+                  input(type='checkbox', ng-model='question.answer', required)
                   | {{$index+1}}
 
     button.btn.btn-success(type='button', ng-click='vm.addQuestion()') Add New Question
