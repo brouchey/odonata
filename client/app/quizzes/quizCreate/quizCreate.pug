@@ -7,15 +7,15 @@ br
 
     .well
       h2.lead Quiz Title
-      input.form-control(type='text', ng-model='vm.quiz.title', placeholder='Title', required)
+      input.form-control(type='text', ng-model='vm.quiz.title', placeholder='Title', ng-required='true')
 
     .well
       h2.lead Quiz Description
-      input.form-control(type='text', ng-model='vm.quiz.description', placeholder='Description', required)
+      input.form-control(type='text', ng-model='vm.quiz.description', placeholder='Description', ng-required='true')
 
     .well(ng-repeat='question in vm.quiz.questions track by $index')
       h2.lead Setup Question {{$index+1}}
-      input.form-control(type='text', ng-model='question.content', placeholder='New Question', required)
+      input.form-control(type='text', ng-model='question.content', placeholder='New Question', ng-required='true')
       br
       button.btn.btn-danger(type='button', ng-click='vm.removeQuestion($index)') Remove Question
       hr
@@ -41,16 +41,15 @@ br
             .panel-body
               .radio(ng-repeat='option in question.options track by $index')
                 label
-                  input(type='checkbox', ng-model='question.answer', required)
+                  input(type='radio', name='option', ng-model='question.answer', value='{{$index}}', ng-required='true')
                   | {{$index+1}}
 
     button.btn.btn-success(type='button', ng-click='vm.addQuestion()') Add New Question
     hr
 
-    .well
-      p FINAL Quiz Object :
-      pre {{vm.quiz|json}}
+    //- .well
+    //-   p FINAL Quiz Object :
+    //-   pre {{vm.quiz|json}}
 
-    hr
     input.btn.btn-primary(type='submit', ng-disabled='quizForm.$invalid', value='Create')
     hr

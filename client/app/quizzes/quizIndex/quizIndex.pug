@@ -10,13 +10,23 @@ header#banner.hero-unit
 .container
   p.lead(style='text-align: center') All Quizzes
   hr
-  div.alert.alert-warning(ng-if='vm.quizzes.length==0', style='text-align: center', role="alert") No Quizzes Found !
-  div.alert.alert-info(ng-if='vm.quizzes.length!==0', ng-repeat='quiz in vm.quizzes')
-    a(ng-href='/quiz/show/{{quiz._id}}', style='font-size: large') {{quiz.title}}
-    p Description: {{quiz.description}}
-    p Created by: {{quiz.user.name}}
-    p Date: {{quiz.createdAt|date:'mediumDate'}}
-    p
-      a.btn.btn-primary(role='button', ng-href='/quiz/show/{{quiz._id}}') Show
+
+  .row
+    .col-md-12(ng-if='vm.quizzes.length==0')
+      .alert.alert-warning(style='text-align: center', role="alert") No Quizzes Found !
+
+    .col-md-12(ng-if='vm.quizzes.length!==0')
+      .row
+        .col-md-3(ng-repeat='quiz in vm.quizzes')
+          .panel.panel-info
+            .panel-heading
+              a(ng-href='/quiz/show/{{quiz._id}}', style='font-size: large') {{quiz.title}}
+            .panel-body
+              p Description: {{quiz.description}}
+              p Created by: {{quiz.user.name}}
+              p Date: {{quiz.createdAt|date:'mediumDate'}}
+            .panel-footer
+              a.btn.btn-primary(role='button', ng-href='/quiz/show/{{quiz._id}}') Show
+
 hr
 
