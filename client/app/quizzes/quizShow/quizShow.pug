@@ -3,12 +3,10 @@ header#banner.hero-unit
     h1.lead {{vm.quiz.title}}
     p.lead {{vm.quiz.description}}
 br
-//- .container
-//-   pre {{vm.quiz|json}}
-//- br
 .container
-  br
-  .intro(ng-show='!vm.inProgress') 
+
+  .intro(ng-show='!vm.inProgress')
+    p.lead {{vm.quiz.questions.length}} Questions
     button.btn.btn-success(type='button', ng-click='vm.startQuiz()') Start {{vm.quiz.title}}
     hr
 
@@ -16,8 +14,9 @@ br
 
     div(ng-show='!vm.quizOver')
 
+      p.lead(style='text-align: center') Question {{vm.id+1}} / {{vm.quiz.questions.length}}
       .panel.panel-info
-        .panel-heading {{vm.question}}
+        .panel-heading Q: {{vm.question}}
         ul.list-group
           li.list-group-item(ng-repeat='option in vm.options')
             label
@@ -37,12 +36,17 @@ br
           span Sorry, Incorrect Answer.
 
         button.btn.btn-info(ng-click='vm.nextQuestion()')
-          span Next Question
+          span Next
 
     div.quiz-result(ng-show='vm.quizOver')
 
-      h2.lead Quiz is over ! 
-      button.btn.btn-success(ng-click='vm.resetQuiz()') Play again
+      h2.lead Thank you for playing !
       hr
-    //- #score  Score: {{vm.score}}
+      p.lead Your Score : {{vm.score}} / {{vm.quiz.questions.length}}
+      p.lead
+        strong {{vm.scorePercent}}
+        | %
+      hr
+      button.btn.btn-success(ng-click='vm.resetQuiz()') Play Again
+      hr
 

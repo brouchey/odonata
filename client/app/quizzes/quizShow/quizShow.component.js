@@ -10,6 +10,7 @@ export class QuizShowComponent {
   $routeParams;
   quiz = {};
   id = 0;
+  score = 0;
 
   /*@ngInject*/
   constructor($scope, $http, $routeParams) {
@@ -39,7 +40,7 @@ export class QuizShowComponent {
 
   resetQuiz() {
     this.inProgress = false;
-    // score = 0;
+    this.score = 0;
   }
 
   getQuestion() {
@@ -51,6 +52,7 @@ export class QuizShowComponent {
       this.answerMode = true; // display options and result in HTML
     } else {
       this.quizOver = true;
+      this.scorePercent = ((this.score/this.quiz.questions.length)*100).toFixed(0);
     }
   };
 
@@ -66,7 +68,7 @@ export class QuizShowComponent {
     // var ans = $('input[name=answer]:checked').val(); // jQuery
     var ans = this.selectedOption;
     if(ans == this.options[this.answer].text) {
-      // score++;
+      this.score++;
       this.correctAns = true;
     } else {
       this.correctAns = false;
