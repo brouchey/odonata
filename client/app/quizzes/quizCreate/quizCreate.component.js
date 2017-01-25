@@ -19,6 +19,7 @@ export class QuizCreateComponent {
       answer: '',
     }],
   };
+  splitedQuestion = [];
 
   /*@ngInject*/
   constructor($scope, $http, $location) {
@@ -48,6 +49,10 @@ export class QuizCreateComponent {
   removeOption(question, index) {
     question.options.splice(index, 1);
   };
+
+  splitQuestion(question) {
+    this.splitedQuestion = question.content.split(' ');
+  }
 
   submitQuiz() {
     this.$http.post('/api/quiz', this.quiz)

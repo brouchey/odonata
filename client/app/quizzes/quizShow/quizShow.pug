@@ -1,7 +1,8 @@
 header#banner.hero-unit
   .container
-    h1.lead {{vm.quiz.title}}
-    p.lead {{vm.quiz.description}}
+    h1 {{vm.quiz.title}}
+    p Created by {{vm.quiz.user.name}}
+    h2.lead {{vm.quiz.description}}
 br
 .container
 
@@ -15,7 +16,7 @@ br
     div(ng-show='!vm.quizOver')
 
       p.lead(style='text-align: center') Question {{vm.id+1}} / {{vm.quiz.questions.length}}
-      .panel.panel-info
+      .panel.panel-info.quizCard
         .panel-heading Q: {{vm.question}}
         ul.list-group
           li.list-group-item(ng-repeat='option in vm.options')
@@ -38,15 +39,15 @@ br
         button.btn.btn-info(ng-click='vm.nextQuestion()')
           span Next
 
-    div.quiz-result(ng-show='vm.quizOver')
+    .quiz-result(ng-show='vm.quizOver')
 
       h2.lead Thank you for playing !
-      hr
-      p.lead Your Score : {{vm.score}} / {{vm.quiz.questions.length}}
-      p.lead
-        strong {{vm.scorePercent}}
-        | %
-      hr
+      .well
+        p.lead {{vm.score}} Correct Answer(s)
+        p.lead
+          span Score : 
+          strong {{vm.scorePercent}} %
+
       button.btn.btn-success(ng-click='vm.resetQuiz()') Play Again
       hr
 

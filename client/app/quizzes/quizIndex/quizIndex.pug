@@ -17,15 +17,15 @@ header#banner.hero-unit
 
     .col-md-12(ng-if='vm.quizzes.length!==0')
       .row
-        .col-md-3(ng-repeat='quiz in vm.quizzes')
-          .panel.panel-info
+        .col-md-4(ng-repeat='quiz in vm.quizzes')
+          .panel.panel-info.quizCard
             .panel-heading
               a(ng-href='/quiz/show/{{quiz._id}}', style='font-size: large') {{quiz.title}}
             .panel-body
               p Description: {{quiz.description}}
               p Created by: {{quiz.user.name}}
               p Date: {{quiz.createdAt|date:'mediumDate'}}
-            .panel-footer
+            .panel-footer(style='text-align: center')
               a.btn.btn-primary(role='button', ng-href='/quiz/show/{{quiz._id}}') Show
 
 hr

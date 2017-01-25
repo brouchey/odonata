@@ -1,6 +1,7 @@
 header#banner.hero-unit
   .container
-    h1.lead New Quizz !
+    h1.lead New Quizz
+    h2.lead {{vm.quiz.title}}
 br
 .container
   form(name='quizForm', ng-submit='vm.submitQuiz()')
@@ -17,14 +18,25 @@ br
       h2.lead Setup Question {{$index+1}}
       input.form-control(type='text', ng-model='question.content', placeholder='New Question', ng-required='true')
       br
+
+      .well {{question.content}}
+      br
+      button.btn.btn-success(type='button', ng-click='vm.splitQuestion(question)') Split
+      br
+      .well {{vm.splitedQuestion|json}}
+      br
+      .well
+        select
+          option(ng-repeat='words in vm.splitedQuestion track by $index') {{vm.splitedQuestion[$index]}}
+      br
+
       button.btn.btn-danger(type='button', ng-click='vm.removeQuestion($index)') Remove Question
       hr
 
       .row
         .col-md-8
           .panel.panel-info
-            .panel-heading
-              h4 Question {{$index+1}} Answers
+            .panel-heading Question {{$index+1}} Answers
             .panel-body
               .form-inline(ng-repeat='option in question.options track by $index')
                 .input-group
@@ -36,20 +48,19 @@ br
               button.btn.btn-success(type='button', ng-click='vm.addOption(question)') Add Answer
         .col-md-4
           .panel.panel-success
-            .panel-heading
-              h4 Good Answer
+            .panel-heading Good Answer
             .panel-body
               .radio(ng-repeat='option in question.options track by $index')
                 label
-                  input(type='radio', name='option', ng-model='question.answer', value='{{$index}}', ng-required='true')
-                  | {{$index+1}}
+                  input(type='radio', name='option', ng-model='question.answer', value='{{option.text}}', ng-required='true')
+                  | {{option.text}}
 
     button.btn.btn-success(type='button', ng-click='vm.addQuestion()') Add New Question
     hr
 
-    //- .well
-    //-   p FINAL Quiz Object :
-    //-   pre {{vm.quiz|json}}
+    .well
+      p FINAL Quiz Object :
+      pre {{vm.quiz|json}}
 
     input.btn.btn-primary(type='submit', ng-disabled='quizForm.$invalid', value='Create')
     hr

@@ -64,16 +64,18 @@ export class QuizShowComponent {
   // compare user selected option with correct answer
   checkAnswer() {
     // if(!$('input[name=answer]:checked').length) return; // jQuery
-    if(!this.selectedOption) return;
     // var ans = $('input[name=answer]:checked').val(); // jQuery
-    var ans = this.selectedOption;
-    if(ans == this.options[this.answer].text) {
-      this.score++;
-      this.correctAns = true;
+    if(!this.selectedOption) {
+      return;
     } else {
-      this.correctAns = false;
+      if(this.selectedOption == this.answer) {
+        this.score++;
+        this.correctAns = true;
+    } else {
+        this.correctAns = false;
     }
     this.answerMode = false;  // display options and result in HTML
+    }
   };
 
 }
