@@ -41,7 +41,7 @@ br
               .form-inline(ng-repeat='option in question.options track by $index')
                 .input-group
                   span.input-group-addon {{$index+1}}
-                  input.form-control(type='text', ng-model='option.text', placeholder='New Answer', required)
+                  input.form-control(type='text', ng-model='option.text', ng-init="option.text='New Answer'", required)
                 button.btn.btn-danger(type='button', ng-click='vm.removeOption(question, $index)')
                     span.glyphicon.glyphicon-minus
               br
