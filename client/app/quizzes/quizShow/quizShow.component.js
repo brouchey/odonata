@@ -47,6 +47,7 @@ export class QuizShowComponent {
     var q = this.quiz.questions[this.id]
     if(q) {
       this.question = q.content;
+      this.ofType = q.ofType;
       this.options = q.options;
       this.answer = q.answer;
       this.answerMode = true; // display options and result in HTML
@@ -61,7 +62,7 @@ export class QuizShowComponent {
     this.getQuestion();
   }
   
-  // compare user selected option with correct answer
+  // compare user answer with correct answer
   checkAnswer() {
     // if(!$('input[name=answer]:checked').length) return; // jQuery
     // var ans = $('input[name=answer]:checked').val(); // jQuery
@@ -75,6 +76,7 @@ export class QuizShowComponent {
         this.correctAns = false;
     }
     this.answerMode = false;  // display options and result in HTML
+    delete this.selectedOption; // delete user answer to avoid automatic checkAnswer for next question
     }
   };
 

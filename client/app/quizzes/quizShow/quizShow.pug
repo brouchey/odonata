@@ -18,11 +18,19 @@ br
       p.lead(style='text-align: center') Question {{vm.id+1}} / {{vm.quiz.questions.length}}
       .panel.panel-info.quizCard
         .panel-heading Q: {{vm.question}}
-        ul.list-group
+
+        ul.list-group(ng-if="vm.ofType=='QCM'")
           li.list-group-item(ng-repeat='option in vm.options')
             label
-              input(type='radio', ng-model='vm.selectedOption', name='user_answer', value='{{option}}')
+              input(type='radio', ng-model='vm.selectedOption', name='user_answer', value='{{option}}', required)
               | {{option}}
+
+        .panel-body(ng-if="vm.ofType=='FTB'")
+          .row
+            .col-md-6.col-md-offset-3
+              .input-group
+                span.input-group-addon A: 
+                input.form-control(type='text', ng-model='vm.selectedOption', name='user_answer', placeholder='Your Answer', required)
 
       button.btn.btn-success(ng-click='vm.checkAnswer()', ng-show='vm.answerMode') Submit
 
