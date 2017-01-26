@@ -17,7 +17,7 @@ header#banner.hero-unit
 
     .col-md-12(ng-if='vm.quizzes.length!==0')
       .row
-        .col-md-4(ng-repeat='quiz in vm.quizzes')
+        .col-md-3(ng-repeat='quiz in vm.quizzes')
           .panel.panel-info.quizCard
             .panel-heading
               a(ng-href='/quiz/show/{{quiz._id}}', style='font-size: large') {{quiz.title}}

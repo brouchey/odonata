@@ -6,10 +6,9 @@ var QuizSchema = new mongoose.Schema({
   title: String,
   description: String,
   questions: [{
+    ofType: String,
     content: String,
-    options: [{
-      text: String,
-    }],
+    options: [String],
     answer: String,
   }],
   user: {

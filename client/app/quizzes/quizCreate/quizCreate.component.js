@@ -12,14 +12,12 @@ export class QuizCreateComponent {
     title: '',
     description: '',
     questions: [{
+      ofType: '',
       content: '',
-      options: [{
-        text: ''
-      }],
+      options: [''],
       answer: '',
     }],
   };
-  splitedQuestion = [];
 
   /*@ngInject*/
   constructor($scope, $http, $location) {
@@ -30,11 +28,10 @@ export class QuizCreateComponent {
 
   addQuestion() {
     this.quiz.questions.push({
+      ofType: '',
       content: '',
-      options: [{
-        text: '',
-      }],
-      answer: '',
+      options: [''],
+      answer: 'Answer',
     });
   }
 
@@ -43,15 +40,20 @@ export class QuizCreateComponent {
   };
 
   addOption(question) {
-    question.options.push({});
+    question.options.push('');
   }
     
   removeOption(question, index) {
     question.options.splice(index, 1);
   };
 
+  clearOptionsAnswer(question) {
+    question.options = [''];
+    question.answer = 'Answer';
+  }
+
   splitQuestion(question) {
-    this.splitedQuestion = question.content.split(' ');
+    question.options = question.content.split(' ');
   }
 
   submitQuiz() {

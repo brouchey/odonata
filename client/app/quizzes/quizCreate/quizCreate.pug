@@ -8,32 +8,29 @@ br
 
     .well
       h2.lead Quiz Title
-      input.form-control(type='text', ng-model='vm.quiz.title', placeholder='Title', ng-required='true')
+      input.form-control(type='text', name='question_title', ng-model='vm.quiz.title', placeholder='Title', required)
 
     .well
       h2.lead Quiz Description
-      input.form-control(type='text', ng-model='vm.quiz.description', placeholder='Description', ng-required='true')
+      input.form-control(type='text', name='question_description', ng-model='vm.quiz.description', placeholder='Description', required)
 
     .well(ng-repeat='question in vm.quiz.questions track by $index')
       h2.lead Setup Question {{$index+1}}
-      input.form-control(type='text', ng-model='question.content', placeholder='New Question', ng-required='true')
+      input.form-control(type='text', name='question_content', ng-model='question.content', placeholder='New Question', required)
       br
-
-      .well {{question.content}}
-      br
-      button.btn.btn-success(type='button', ng-click='vm.splitQuestion(question)') Split
-      br
-      .well {{vm.splitedQuestion|json}}
-      br
-      .well
-        select
-          option(ng-repeat='words in vm.splitedQuestion track by $index') {{vm.splitedQuestion[$index]}}
-      br
-
       button.btn.btn-danger(type='button', ng-click='vm.removeQuestion($index)') Remove Question
       hr
 
-      .row
+      p.lead Choose Type :
+      label.radio-inline
+        input(type='radio', name='question_{{$index}}_type', ng-model='question.ofType', value='QCM', ng-click='vm.clearOptionsAnswer(question)', required)
+        |  QCM
+      label.radio-inline
+        input(type='radio', name='question_{{$index}}_type', ng-model='question.ofType', value='FTB', ng-click='vm.clearOptionsAnswer(question)', required)
+        |  Fill The Blank
+
+      .row(ng-show="question.ofType=='QCM'")
+        hr
         .col-md-8
           .panel.panel-info
             .panel-heading Question {{$index+1}} Answers
@@ -41,26 +38,35 @@ br
               .form-inline(ng-repeat='option in question.options track by $index')
                 .input-group
                   span.input-group-addon {{$index+1}}
-                  input.form-control(type='text', ng-model='option.text', ng-init="option.text='New Answer'", required)
+                  input.form-control(type='text', name='question_{{$parent.$index}}_option', ng-model='question.options[$index]', placeholder='New Answer', required)
                 button.btn.btn-danger(type='button', ng-click='vm.removeOption(question, $index)')
                     span.glyphicon.glyphicon-minus
               br
               button.btn.btn-success(type='button', ng-click='vm.addOption(question)') Add Answer
         .col-md-4
           .panel.panel-success
-            .panel-heading Good Answer
+            .panel-heading Select the Good Answer Number :
             .panel-body
               .radio(ng-repeat='option in question.options track by $index')
                 label
-                  input(type='radio', name='option', ng-model='question.answer', value='{{option.text}}', ng-required='true')
-                  | {{option.text}}
+                  input(type='radio', name='question_{{$parent.$index}}_answer', ng-model='question.answer', value='{{option}}', required)
+                  | {{$index+1}}
+
+      .row(ng-show="question.ofType=='FTB'")
+        hr
+        .col-md-12      
+          button.btn.btn-success(type='button', ng-click='vm.splitQuestion(question)') Split Question
+          hr
+          p.lead Select the Word to find :
+          select(ng-model='question.answer', name='question_{{$parent.$index}}_answer', ng-options='option for option in question.options')
+        br
 
     button.btn.btn-success(type='button', ng-click='vm.addQuestion()') Add New Question
     hr
 
     .well
-      p FINAL Quiz Object :
+      p Final Quiz :
       pre {{vm.quiz|json}}
 
-    input.btn.btn-primary(type='submit', ng-disabled='quizForm.$invalid', value='Create')
+    button.btn.btn-primary(type='submit', ng-disabled='quizForm.$invalid') Create
     hr

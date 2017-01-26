@@ -21,8 +21,8 @@ br
         ul.list-group
           li.list-group-item(ng-repeat='option in vm.options')
             label
-              input(type='radio', ng-model='vm.selectedOption', name='answer', value='{{option.text}}')
-              | {{option.text}}
+              input(type='radio', ng-model='vm.selectedOption', name='user_answer', value='{{option}}')
+              | {{option}}
 
       button.btn.btn-success(ng-click='vm.checkAnswer()', ng-show='vm.answerMode') Submit
 
