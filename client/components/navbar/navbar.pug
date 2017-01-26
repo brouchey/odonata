@@ -14,7 +14,7 @@ div.navbar.navbar-default.navbar-static-top
           a(ng-href='{{item.link}}') {{item.title}}
 
         li(ng-show='$ctrl.isLoggedIn()')
-          a(href='#', ng-click='sidebarToggle.isCollapsedHorizontal = !sidebarToggle.isCollapsedHorizontal')
+          a(href='#', ng-click='isCollapsedHorizontal = !isCollapsedHorizontal')
             span.glyphicon.glyphicon-align-justify
 
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/dashboard")}')

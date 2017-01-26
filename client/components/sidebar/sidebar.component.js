@@ -1,10 +1,20 @@
 'use strict';
-const angular = require('angular');
+
+import angular from 'angular';
 
 export class sidebarComponent {
-  /*@ngInject*/
-  constructor() {
-    this.message = 'Hello Sidebar Constructor';
+  $location;
+  isLoggedIn: Function;
+  isAdmin: Function;
+  getCurrentUser: Function;
+
+  constructor($location, Auth) {
+    'ngInject';
+
+    this.$location = $location;
+    this.isLoggedIn = Auth.isLoggedInSync;
+    this.isAdmin = Auth.isAdminSync;
+    this.getCurrentUser = Auth.getCurrentUserSync;
   }
 
 }
@@ -12,7 +22,6 @@ export class sidebarComponent {
 export default angular.module('odonataApp.sidebar', [])
   .component('sidebar', {
     template: require('./sidebar.pug'),
-    controller: sidebarComponent,
-    controllerAs: 'vm',
+    controller: sidebarComponent
   })
   .name;
