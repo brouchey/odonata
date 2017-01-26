@@ -46,8 +46,12 @@ export class QuizShowComponent {
   getQuestion() {
     var q = this.quiz.questions[this.id]
     if(q) {
-      this.question = q.content;
       this.ofType = q.ofType;
+      if(this.ofType === 'FTB') {
+        this.question = q.content.replace(q.answer, '_____'); // replace word to find
+      } else {
+        this.question = q.content;
+      }
       this.options = q.options;
       this.answer = q.answer;
       this.answerMode = true; // display options and result in HTML
@@ -59,24 +63,24 @@ export class QuizShowComponent {
 
   nextQuestion() {
     this.id++;
+    if(this.selectedOption) {
+      delete this.selectedOption; // delete user answer to avoid automatic checkAnswer on next question
+    };
     this.getQuestion();
   }
   
   // compare user answer with correct answer
   checkAnswer() {
-    // if(!$('input[name=answer]:checked').length) return; // jQuery
-    // var ans = $('input[name=answer]:checked').val(); // jQuery
     if(!this.selectedOption) {
       return;
     } else {
-      if(this.selectedOption == this.answer) {
+      if(this.selectedOption.toLowerCase() == this.answer.toLowerCase()) {
         this.score++;
         this.correctAns = true;
     } else {
         this.correctAns = false;
     }
     this.answerMode = false;  // display options and result in HTML
-    delete this.selectedOption; // delete user answer to avoid automatic checkAnswer for next question
     }
   };
 
