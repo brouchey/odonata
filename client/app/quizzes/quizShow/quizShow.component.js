@@ -44,7 +44,8 @@ export class QuizShowComponent {
   }
 
   getQuestion() {
-    var q = this.quiz.questions[this.id]
+    this.quizProgress = (((this.id+1)/this.quiz.questions.length)*100).toFixed(0);
+    var q = this.quiz.questions[this.id];
     if(q) {
       this.ofType = q.ofType;
       if(this.ofType === 'FTB') {
