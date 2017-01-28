@@ -1,0 +1,11 @@
+header#banner.hero-unit
+	.container
+		h1.lead Profile
+br
+.container
+	.row
+		.col-md-12
+			.alert.alert-info(role="alert")
+				p getCurrentUser.name : {{vm.getCurrentUser().name}}
+				p isAdmin : {{vm.isAdmin()}}
+				p isLoggedIn : {{vm.isLoggedIn()}}

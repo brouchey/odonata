@@ -18,13 +18,16 @@ div.navbar.navbar-default.navbar-static-top
         //-     span.glyphicon.glyphicon-align-justify
 
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/dashboard")}')
-          a(href='/dashboard') Home
+          a(href='/dashboard')
+            i.fa.fa-home.fa-lg
 
         li(ng-class='{active: $ctrl.isActive("/questions")}')
-          a(href='/questions') Q&amp;A
+          a(href='/questions')
+            i.fa.fa-exchange.fa-lg
 
         li(ng-class='{active: $ctrl.isActive("/quiz")}')
-          a(href='/quiz') QuizBox
+          a(href='/quiz')
+            i.fa.fa-question-circle.fa-lg
 
         //- form.navbar-form.navbar-left(role='search', ng-submit='$ctrl.search(keyword)')
         //-   .input-group
@@ -44,11 +47,15 @@ div.navbar.navbar-default.navbar-static-top
           a(href='/login') Login
 
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/profile")}')
-          a(href='/profile') {{ $ctrl.getCurrentUser().name }}
+          a(href='/profile')
+            span {{$ctrl.getCurrentUser().name}} &nbsp;
+            i.fa.fa-user-circle.fa-lg
 
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/settings")}')
-          a(href='/settings') Settings
+          a(href='/settings')
+            i.fa.fa-cog.fa-lg
 
         li(ng-show='$ctrl.isLoggedIn()')
-          a(href='/logout') Logout
+          a(href='/logout')
+            i.fa.fa-sign-out.fa-lg
 

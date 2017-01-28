@@ -23,6 +23,12 @@ export default function routes($routeProvider) {
       controller: 'SignupController',
       controllerAs: 'vm'
     })
+    .when('/profile', {
+      template: require('./profile/profile.pug'),
+      controller: 'ProfileController',
+      controllerAs: 'vm',
+      authenticate: true
+    })
     .when('/settings', {
       template: require('./settings/settings.pug'),
       controller: 'SettingsController',

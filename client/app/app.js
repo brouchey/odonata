@@ -25,7 +25,6 @@ import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import dashboard from './dashboard/dashboard.component';
-import profile from './profile/profile.component';
 import questionsIndex from './questions/questionsIndex/questionsIndex.component';
 import questionsCreate from './questions/questionsCreate/questionsCreate.component';
 import questionsShow from './questions/questionsShow/questionsShow.component';
@@ -58,7 +57,6 @@ angular.module('odonataApp', [
   footer,
   main,
   dashboard,
-  profile,
   questionsIndex,
   questionsCreate,
   questionsShow,
