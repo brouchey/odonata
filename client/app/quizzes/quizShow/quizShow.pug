@@ -27,17 +27,17 @@ br
 
         ul.list-group(ng-if="vm.ofType=='QCM'")
           li.list-group-item(ng-repeat='option in vm.options')
-            label
-              input(type='radio', ng-model='vm.selectedOption', name='user_answer', value='{{option}}', required)
-              | {{option}}
-
+              label
+                input(type='radio', ng-model='vm.selectedOption', name='user_answer', value='{{option}}', required)
+                span
+                | {{option}}
 
         .panel-body(ng-if="vm.ofType=='FTB'")
           .row
             .col-md-6.col-md-offset-3
-              .input-group
+              form.input-group(name='form_FTB', ng-submit='vm.checkAnswer()')
                 span.input-group-addon A: 
-                input.form-control(type='text', ng-model='vm.selectedOption', name='user_answer', placeholder='Your Answer', required)
+                input.form-control(type='text', ng-model='vm.selectedOption', name='form_FTB_answer', placeholder='Your Answer', required)
 
 
       button.btn.btn-success(ng-click='vm.checkAnswer()', ng-show='vm.answerMode') Submit

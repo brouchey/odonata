@@ -21,7 +21,7 @@ import _Auth from '../components/auth/auth.module';
 import account from './account';
 import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
-import sidebar from '../components/sidebar/sidebar.component';
+// import sidebar from '../components/sidebar/sidebar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import dashboard from './dashboard/dashboard.component';
@@ -54,7 +54,7 @@ angular.module('odonataApp', [
   account,
   admin,
   navbar,
-  sidebar,
+  // sidebar,
   footer,
   main,
   dashboard,

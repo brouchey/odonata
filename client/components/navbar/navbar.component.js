@@ -8,6 +8,7 @@ export class NavbarComponent {
     title: 'Home',
     link: '/'
   }];
+  
   $location;
   isLoggedIn: Function;
   isAdmin: Function;
