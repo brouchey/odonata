@@ -18,16 +18,13 @@ div.navbar.navbar-default.navbar-static-top
         //-     span.glyphicon.glyphicon-align-justify
 
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/dashboard")}')
-          a(href='/dashboard')
-            i.fa.fa-home.fa-lg
+          a(href='/dashboard') Home
 
         li(ng-class='{active: $ctrl.isActive("/questions")}')
-          a(href='/questions')
-            i.fa.fa-exchange.fa-lg
+          a(href='/questions') Questions
 
         li(ng-class='{active: $ctrl.isActive("/quiz")}')
-          a(href='/quiz')
-            i.fa.fa-question-circle.fa-lg
+          a(href='/quiz') Quiz
 
         //- form.navbar-form.navbar-left(role='search', ng-submit='$ctrl.search(keyword)')
         //-   .input-group
