@@ -17,6 +17,10 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   padding: 0.2em 0;
 }
 
+.main-wrapper {
+  margin-top: 70px;
+}
+
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'main/main';
