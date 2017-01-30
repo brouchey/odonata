@@ -78,43 +78,70 @@ header#banner.hero-unit
 //-                 .clearfix
 //-   hr
 .container
-  p.lead(style='text-align: center') All Questions
-  div(style='text-align: center')
-    form.navbar-form(role='search', ng-submit='vm.search(keyword)')
-      .input-group
-        input.form-control(type='text', placeholder='Search', ng-model='keyword')
-        span.input-group-btn
-          button.btn.btn-default(type='submit')
-            span.glyphicon.glyphicon-search
-          button.btn.btn-info(type='reset', ng-click='vm.loadQuestions()') Reset
-  br
+  .row
+    .col-md-9
+      p.lead(style='text-align: center') All Questions
+      div(style='text-align: center')
+        form.navbar-form(role='search', ng-submit='vm.search(keyword)')
+          .input-group
+            input.form-control(type='text', placeholder='Search', ng-model='keyword')
+            span.input-group-btn
+              button.btn.btn-default(type='submit')
+                span.glyphicon.glyphicon-search
+              button.btn.btn-info(type='reset', ng-click='vm.loadQuestions()') Reset
+      br
 
-  div.alert.alert-warning(ng-if='vm.questions.length==0', style='text-align: center', role="alert") No Result Found !
-  table.table.table-striped(ng-if='vm.questions.length!=0')
-    thead
-      tr
-        th(width='20') Stars
-        th(width='20') Answers
-        th Question
-    tbody(infinite-scroll='vm.nextPage()', infinite-scroll-disabled='busy || noMoreData')
-      tr(ng-repeat='question in vm.questions track by $index')
-        td(style='text-align: center; vertical-align:middle')
-          div(style='font-size: xx-large;') {{question.stars.length}}
-        td(style='text-align: center; vertical-align:middle')
-          div(style='font-size: xx-large;') {{question.answers.length}}
-        td
-          div(style='float: right;')
-            span.glyphicon.glyphicon-star(ng-if='vm.isStar(question)', style='color: #CF7C00;')
-            span.glyphicon.glyphicon-star-empty(ng-if='!vm.isStar(question)')
-          a(ng-href='/questions/show/{{question._id}}', style='font-size: large') {{question.title}}
-          .clearfix
-          div(style='float: right;')
-            | by 
-            a(ng-href='/users/{{question.user._id}}') {{question.user.name}}
-            |  &middot; {{question.createdAt|date:'medium'}}
-          div
-            span(ng-repeat='tag in question.tags')
-              span.label.label-info {{tag.text}}
-          .clearfix
-    div(ng-show='busy') Loading Questions...
-  br
+      div.alert.alert-warning(ng-if='vm.questions.length==0', style='text-align: center', role="alert") No Result Found !
+      table.table.table-striped(ng-if='vm.questions.length!=0')
+        thead
+          tr
+            //- th(width='20') Stars
+            //- th(width='20') Answers
+            th(width='20') Votes
+            th(width='20') Answers
+            th(width='20') Views
+            th Question
+        tbody(infinite-scroll='vm.nextPage()', infinite-scroll-disabled='busy || noMoreData')
+          tr(ng-repeat='question in vm.questions track by $index')
+            td(style='text-align: center; vertical-align: middle')
+              div(style='font-size: x-large;') X
+            //- td(style='text-align: center; vertical-align: middle')
+            //-   div(style='font-size: x-large;') {{question.stars.length}}
+            td(style='text-align: center; vertical-align: middle')
+              div(style='font-size: x-large;') {{question.answers.length}}
+            td(style='text-align: center; vertical-align: middle')
+              div(style='font-size: x-large;') X
+            td
+              div(style='float: right;')
+                span.glyphicon.glyphicon-star(ng-if='vm.isStar(question)', style='color: #CF7C00;')
+                span.glyphicon.glyphicon-star-empty(ng-if='!vm.isStar(question)')
+              a(ng-href='/questions/show/{{question._id}}', style='font-size: large') {{question.title}}
+              .clearfix
+              div(style='float: right;')
+                | by 
+                a(ng-href='/users/{{question.user._id}}') {{question.user.name}}
+                |  &middot; {{question.createdAt|date:'medium'}}
+              div
+                span(ng-repeat='tag in question.tags')
+                  span.label.label-info {{tag.text}}
+                  span &nbsp;
+              .clearfix
+        div(ng-show='busy') Loading Questions...
+
+    .col-md-3
+      .panel.panel-danger
+        .panel-heading
+          h3.panel-title Hot Trends
+        .panel-body  Some Content
+      .panel.panel-warning
+        .panel-heading
+          h3.panel-title Featured
+        .panel-body  Some Content
+      .panel.panel-success
+        .panel-heading
+          h3.panel-title All Tags
+        .panel-body
+          ul.tags-list
+            li(ng-repeat='tag in vm.allTags')
+              span.label.label-info {{tag}}
+br

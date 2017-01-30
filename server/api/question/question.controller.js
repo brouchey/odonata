@@ -42,6 +42,9 @@
  * 
  * Scroll Questions :
  * GET     /api/questions/scroll   ->  scrollNextQuestions
+ *
+ * Tags :
+ * GET     /api/questions/tags/all   ->  showAllTags
  */
 
 'use strict';
@@ -343,6 +346,7 @@ export function star(req, res) {
     exports.show(req, res);
   });
 }
+
 export function unstar(req, res) {
   Question.update({_id: req.params.id}, {$pull: {stars: req.user.id}}, function(err, num) {
     if(err) {
@@ -367,6 +371,7 @@ export function starAnswer(req, res) {
     exports.show(req, res);
   });
 }
+
 export function unstarAnswer(req, res) {
   Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$pull: {'answers.$.stars': req.user.id}}, function(err, num) {
     if(err) {
@@ -391,6 +396,7 @@ export function starComment(req, res) {
     exports.show(req, res);
   });
 }
+
 export function unstarComment(req, res) {
   Question.update({_id: req.params.id, 'comments._id': req.params.commentId}, {$pull: {'comments.$.stars': req.user.id}}, function(err, num) {
     if(err) {
@@ -441,10 +447,12 @@ export function pushOrPullStarAnswerComment(op, req, res) {
       return res.send(404).end();
     }
   });
-};
+}
+
 export function starAnswerComment(req, res) {
   pushOrPullStarAnswerComment('$push', req, res);
 }
+
 export function unstarAnswerComment(req, res) {
   pushOrPullStarAnswerComment('$pull', req, res);
 }
@@ -496,3 +504,13 @@ export function scrollNextQuestions(req, res) {
     .catch(handleError(res));
 }
 
+/*************************/
+/* Tags API */
+/*************************/
+
+// Gets all Questions Tags
+export function showAllTags(req, res) {
+  return Question.distinct('tags.text').exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}

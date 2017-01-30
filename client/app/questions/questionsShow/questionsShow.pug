@@ -3,143 +3,185 @@ header#banner.hero-unit
     h1.lead {{vm.question.title}}
 br
 #question-show-container.container
-  div
-    button.close(ng-if="vm.isOwner(vm.question)", type='button', ng-click='vm.deleteQuestion()', uib-tooltip='Delete')
-      span.glyphicon.glyphicon-trash(style='color: red;')
-    
-    div(style='float: left;font-size: x-large; padding: 0; width: 2em; text-align: center;')
-      button(ng-if='vm.isStar(vm.question)', type='button', style='background: transparent; border: 0;', ng-click="vm.unstar('')")
-        span.glyphicon.glyphicon-star(style='color: #CF7C00;') 
-      button(ng-if='!vm.isStar(vm.question)', type='button', style='background: transparent; border: 0;', ng-click="vm.star('')")
-        span.glyphicon.glyphicon-star-empty
-      br
-      div {{vm.question.stars.length}}
+  .row
+    .col-md-12
+      button.close(ng-if="vm.isOwner(vm.question)", type='button', ng-click='vm.deleteQuestion()', uib-tooltip='Delete')
+        i.fa.fa-trash-o.fa-lg(style='color: red;')
 
-    div
-      h1
-        div(ng-if='!editingQ') {{vm.question.title}}
-        input(type='text', ng-model='vm.question.title', ng-if='editingQ')
+      div
+        h1
+          div(ng-if='!editingQ') {{vm.question.title}}
+          input(type='text', ng-model='vm.question.title', ng-if='editingQ')
 
-      span(ng-repeat='tag in vm.question.tags')
-        span.label.label-info {{tag.text}}
+        span(ng-repeat='tag in vm.question.tags', style='font-size: large;')
+          span.label.label-info {{tag.text}}
+          span &nbsp;
+      hr
 
-  hr
-  div(ng-if='!editingQ') {{vm.question.content}}
-  input(type='text', ng-model='vm.question.content', ng-if='editingQ')
+  .row
+    .col-md-9
 
-  button.btn.btn-success(type='submit', ng-click='editingQ=false; vm.updateQuestion()', ng-show='editingQ') Save
-  a(ng-click='editingQ=!editingQ;', ng-show='vm.isOwner(vm.question) && !editingQ', uib-tooltip='Edit', tooltip-placement='right')
-    span.glyphicon.glyphicon-edit
+      .row
+        .col-md-1
+          .well(style='font-size: large; padding: 0; text-align: center;')
+            button(style='background: transparent; border: 0;')
+              i.fa.fa-chevron-circle-up
+            div X
+            button(style='background: transparent; border: 0;')
+              i.fa.fa-chevron-circle-down
+            button(ng-if='vm.isStar(vm.question)', type='button', style='background: transparent; border: 0;', ng-click="vm.unstar('')")
+              i.fa.fa-star(style='color: #CF7C00;') 
+            button(ng-if='!vm.isStar(vm.question)', type='button', style='background: transparent; border: 0;', ng-click="vm.star('')")
+              i.fa.fa-star-o
+            //- br
+            //- div {{vm.question.stars.length}}
 
-  .text-right
-    | by 
-    a(ng-href='/users/{{vm.question.user._id}}') {{vm.question.user.name}}
-    |  &middot; {{vm.question.createdAt|date:'medium'}}
+        .col-md-11
+          .well
+            div(ng-if='!editingQ', style='font-size: large;') {{vm.question.content}}
+            input(type='text', ng-model='vm.question.content', ng-if='editingQ')
 
-  .comment
-    div.well.well-sm(ng-repeat='comment in vm.question.comments')
+            button.btn.btn-success(type='submit', ng-click='editingQ=false; vm.updateQuestion()', ng-show='editingQ') Save
+            a(ng-click='editingQ=!editingQ;', ng-show='vm.isOwner(vm.question) && !editingQ', uib-tooltip='Edit', tooltip-placement='right')
+              span.glyphicon.glyphicon-edit
 
-      button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteComment(comment)', uib-tooltip='Delete')
-        span.glyphicon.glyphicon-trash(style='color: red;')
+            .text-right
+              | by 
+              a(ng-href='/users/{{vm.question.user._id}}') {{vm.question.user.name}}
+              |  &middot; {{vm.question.createdAt|date:'medium'}}
 
-      div(style='float: left;font-size: normal; padding: 0; width: 2em; text-align: center;')
-        button(ng-if='vm.isStar(comment)', type='button', style='background: transparent; border: 0;', ng-click="vm.unstar('/comments/' + comment._id)")
-          span.glyphicon.glyphicon-star(style='color: #CF7C00;') 
-        button(ng-if='!vm.isStar(comment)', type='button', style='background: transparent; border: 0;', ng-click="vm.star('/comments/' + comment._id)")
-          span.glyphicon.glyphicon-star-empty
-        br
-        div {{comment.stars.length}}
+          .comment
+            .well.well-sm(ng-repeat='comment in vm.question.comments')
 
-      div(ng-if='!editingC') {{comment.content}}
-      input(type='text', ng-model='comment.content', ng-if='editingC') 
-      button.btn.btn-success(type='submit', ng-click='editingC=false; vm.updateComment(comment)', ng-show='editingC') Save 
+              button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteComment(comment)', uib-tooltip='Delete')
+                span.glyphicon.glyphicon-trash(style='color: red;')
 
-      a(ng-click='editingC=!editingC;', ng-show='vm.isOwner(comment) && !editingC', uib-tooltip='Edit', tooltip-placement='right')
-        span.glyphicon.glyphicon-edit
+              div(style='float: left; font-size: small; padding: 0; text-align: center;')
+                button(ng-if='vm.isStar(comment)', type='button', style='background: transparent; border: 0;', ng-click="vm.unstar('/comments/' + comment._id)")
+                  i.fa.fa-star(style='color: #CF7C00;') 
+                button(ng-if='!vm.isStar(comment)', type='button', style='background: transparent; border: 0;', ng-click="vm.star('/comments/' + comment._id)")
+                  i.fa.fa-star-o
+                br
+                div {{comment.stars.length}}
 
-      .text-right
-        | by 
-        a(ng-href='/users/{{comment.user._id}}') {{comment.user.name}}
-        |  &middot; {{comment.createdAt|date:'medium'}}
-      .clearfix
+              div(ng-if='!editingC', style='font-size: small;') {{comment.content}}
+              input(type='text', ng-model='comment.content', ng-if='editingC') 
+              button.btn.btn-success(type='submit', ng-click='editingC=false; vm.updateComment(comment)', ng-show='editingC') Save 
 
-    a(ng-click='editNewComment=!editNewComment;') Add a comment
-    form(ng-if='editNewComment', name='commentForm', ng-submit='vm.submitComment()')
-      textarea.form-control(rows='3', ng-model='vm.newComment.content', name='commentEditor', required)
-      br
-      input.btn.btn-primary(type='submit', ng-disabled='commentForm.$invalid', value='Submit Comment')
+              a(ng-click='editingC=!editingC;', ng-show='vm.isOwner(comment) && !editingC', uib-tooltip='Edit', tooltip-placement='right')
+                span.glyphicon.glyphicon-edit
 
-  hr
-  h3 {{vm.question.answers.length}} Answers
-  hr
+              .text-right
+                | by 
+                a(ng-href='/users/{{comment.user._id}}') {{comment.user.name}}
+                |  &middot; {{comment.createdAt|date:'medium'}}
+              .clearfix
 
-  div(ng-repeat='answer in vm.question.answers')
+            a(ng-click='editNewComment=!editNewComment;') Add a comment
+            form(ng-if='editNewComment', name='commentForm', ng-submit='vm.submitComment()')
+              textarea.form-control(rows='3', ng-model='vm.newComment.content', name='commentEditor', required)
+              br
+              input.btn.btn-primary(type='submit', ng-disabled='commentForm.$invalid', value='Submit Comment')
 
-    button.close(ng-if="vm.isOwner(answer)", type='button', ng-click='vm.deleteAnswer(answer)', uib-tooltip='Delete')
-      span.glyphicon.glyphicon-trash(style='color: red;')
-
-    div(style='float: left;font-size: large; padding: 0; width: 2em; text-align: center;')
-      button(ng-if='vm.isStar(answer)', type='button', style='background: transparent; border: 0;', ng-click="vm.unstar('/answers/' + answer._id)")
-        span.glyphicon.glyphicon-star(style='color: #CF7C00;')
-      button(ng-if='!vm.isStar(answer)', type='button', style='background: transparent; border: 0;', ng-click="vm.star('/answers/' + answer._id)")
-        span.glyphicon.glyphicon-star-empty
-      br
-      div {{answer.stars.length}}
-
-    .answer
-      div(ng-if='!editingA') {{answer.content}}
-      a(ng-click='editingA=!editingA;', ng-show='vm.isOwner(answer) && !editingA', uib-tooltip='Edit', tooltip-placement='right')
-        span.glyphicon.glyphicon-edit 
-      input(type='text', ng-model='answer.content', ng-if='editingA')
-      button.btn.btn-success(type='submit', ng-click='editingA=false; vm.updateAnswer(answer)', ng-show='editingA') Save
-
-      .text-right
-        | by 
-        a(ng-href='/users/{{comment.user._id}}') {{answer.user.name}}
-        |  &middot; {{answer.createdAt|date:'medium'}}
-      .clearfix
-
-      .comment
-        div.well.well-sm(ng-repeat='comment in answer.comments')
-
-          button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteAnswerComment(answer, comment)', uib-tooltip='Delete')
-            span.glyphicon.glyphicon-trash(style='color: red;')
-
-          div(style='float: left;font-size: normal; padding: 0; width: 2em; text-align: center;')
-            button(ng-if='vm.isStar(comment)', type='button', style='background: transparent; border: 0;', ng-click="vm.unstar('/answers/' + answer._id + '/comments/' + comment._id)")
-              span.glyphicon.glyphicon-star(style='color: #CF7C00;') 
-            button(ng-if='!vm.isStar(comment)', type='button', style='background: transparent; border: 0;', ng-click="vm.star('/answers/' + answer._id + '/comments/' + comment._id)")
-              span.glyphicon.glyphicon-star-empty
-            br
-            div {{comment.stars.length}}
-
-          div(ng-if='!editingAC') {{comment.content}}
-          input(type='text', ng-model='comment.content', ng-if='editingAC') 
- 
-          button.btn.btn-success(type='submit', ng-click='editingAC=false; vm.updateAnswerComment(answer, comment)', ng-show='editingAC') Save
- 
-          a(ng-click='editingAC=!editingAC;', ng-show='vm.isOwner(comment) && !editingAC', uib-tooltip='Edit', tooltip-placement='right')
-            span.glyphicon.glyphicon-edit
-          .text-right
-            | by 
-            a(ng-href='/users/{{comment.user._id}}') {{comment.user.name}}
-            |  &middot; {{comment.createdAt|date:'medium'}}
-          .clearfix
-  
-        a(ng-click='editNewAnswerComment=!editNewAnswerComment; answer.newAnswerComment={}') Add a comment
-
-        form(ng-if='editNewAnswerComment', name='answer_{{answer.id}}_comment')
+      .row
+        .col-md-12
           hr
-          input.comment-wmd-input(type='text', ng-model='answer.newAnswerComment.content', required) 
-          button.btn.btn-primary(type='submit', ng-click='vm.submitAnswerComment(answer)', ng-disabled='answer_{{answer.id}}_comment.$invalid') Add Comment
-    hr
+          h3 {{vm.question.answers.length}} Answers
+          hr
 
-  h3 Your Answer
-  form(name='answerForm', ng-submit='vm.submitAnswer()')
-    textarea.form-control(rows='3', ng-model='newAnswer.content', name='answerEditor', required)
-    br
-    input.btn.btn-primary(type='submit', ng-disabled='answerForm.$invalid', value='Submit Answer')
-  hr
+      .row(ng-repeat='answer in vm.question.answers')
+
+        .col-md-1
+          .well(style='font-size: medium; padding: 0; text-align: center;')
+
+            button(style='background: transparent; border: 0;')
+              i.fa.fa-chevron-circle-up
+            div X
+            button(style='background: transparent; border: 0;')
+              i.fa.fa-chevron-circle-down
+            
+            button(ng-if='vm.isStar(answer)', type='button', style='background: transparent; border: 0;', ng-click="vm.unstar('/answers/' + answer._id)")
+              i.fa.fa-star(style='color: #CF7C00;')
+            button(ng-if='!vm.isStar(answer)', type='button', style='background: transparent; border: 0;', ng-click="vm.star('/answers/' + answer._id)")
+              i.fa.fa-star-o
+            //- br
+            //- div {{answer.stars.length}}
+
+        .col-md-11
+          .well        
+            .answer
+              button.close(ng-if="vm.isOwner(answer)", type='button', ng-click='vm.deleteAnswer(answer)', uib-tooltip='Delete')
+                span.glyphicon.glyphicon-trash(style='color: red;')
+
+              div(ng-if='!editingA', style='font-size: medium;') {{answer.content}}
+              a(ng-click='editingA=!editingA;', ng-show='vm.isOwner(answer) && !editingA', uib-tooltip='Edit', tooltip-placement='right')
+                span.glyphicon.glyphicon-edit 
+              input(type='text', ng-model='answer.content', ng-if='editingA')
+              button.btn.btn-success(type='submit', ng-click='editingA=false; vm.updateAnswer(answer)', ng-show='editingA') Save
+
+              .text-right
+                | by 
+                a(ng-href='/users/{{comment.user._id}}') {{answer.user.name}}
+                |  &middot; {{answer.createdAt|date:'medium'}}
+              .clearfix
+
+          .comment
+            .well.well-sm(ng-repeat='comment in answer.comments')
+
+              button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteAnswerComment(answer, comment)', uib-tooltip='Delete')
+                span.glyphicon.glyphicon-trash(style='color: red;')
+
+              div(style='float: left; font-size: small; padding: 0; text-align: center;')
+                button(ng-if='vm.isStar(comment)', type='button', style='background: transparent; border: 0;', ng-click="vm.unstar('/answers/' + answer._id + '/comments/' + comment._id)")
+                  i.fa.fa-star(style='color: #CF7C00;') 
+                button(ng-if='!vm.isStar(comment)', type='button', style='background: transparent; border: 0;', ng-click="vm.star('/answers/' + answer._id + '/comments/' + comment._id)")
+                  i.fa.fa-star-o
+                br
+                div {{comment.stars.length}}
+
+              div(ng-if='!editingAC', style='font-size: small;') {{comment.content}}
+              input(type='text', ng-model='comment.content', ng-if='editingAC') 
+     
+              button.btn.btn-success(type='submit', ng-click='editingAC=false; vm.updateAnswerComment(answer, comment)', ng-show='editingAC') Save
+     
+              a(ng-click='editingAC=!editingAC;', ng-show='vm.isOwner(comment) && !editingAC', uib-tooltip='Edit', tooltip-placement='right')
+                span.glyphicon.glyphicon-edit
+              .text-right
+                | by 
+                a(ng-href='/users/{{comment.user._id}}') {{comment.user.name}}
+                |  &middot; {{comment.createdAt|date:'medium'}}
+              .clearfix
+      
+            a(ng-click='editNewAnswerComment=!editNewAnswerComment; answer.newAnswerComment={}') Add a comment
+
+            form(ng-if='editNewAnswerComment', name='answer_{{answer.id}}_comment')
+              hr
+              input.comment-wmd-input(type='text', ng-model='answer.newAnswerComment.content', required) 
+              button.btn.btn-primary(type='submit', ng-click='vm.submitAnswerComment(answer)', ng-disabled='answer_{{answer.id}}_comment.$invalid') Add Comment
+          hr
+
+      .row
+        .col-md-12
+          h3 Your Answer
+          form(name='answerForm', ng-submit='vm.submitAnswer()')
+            textarea.form-control(rows='3', ng-model='newAnswer.content', name='answerEditor', required)
+            br
+            input.btn.btn-primary(type='submit', ng-disabled='answerForm.$invalid', value='Submit Answer')
+
+    .col-md-3
+      .panel.panel-default
+        .panel-body
+          p Asked &nbsp; {{vm.question.createdAt|date:'mediumDate'}}
+          p Viewed &nbsp; X times
+      .panel.panel-warning
+        .panel-heading
+          h3.panel-title Featured
+        .panel-body  Some Content
+      .panel.panel-success
+        .panel-heading
+          h3.panel-title Related
+        .panel-body  Some Content
+
 
 
 

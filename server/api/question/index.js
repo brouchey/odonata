@@ -41,4 +41,6 @@ router.get('/users/:userId/favorites', auth.isAuthenticated(), controller.showUs
 router.get('/search/:keyword', auth.isAuthenticated(), controller.searchQuestions);
 router.get('/next/:lastId', controller.scrollNextQuestions);
 
+router.get('/tags/all', controller.showAllTags);
+
 module.exports = router;

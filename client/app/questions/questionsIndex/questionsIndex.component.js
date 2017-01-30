@@ -11,6 +11,7 @@ export class QuestionsIndexComponent {
   isLoggedIn: Function;
   getCurrentUser: Function;
   questions = [];
+  allTags = [];
   myQuestions = [];
   favQuestions = [];
   busy = true;
@@ -27,6 +28,7 @@ export class QuestionsIndexComponent {
 
   $onInit() {
     this.loadQuestions();
+    this.loadTags();
     // this.loadMyQuestions();
     // this.loadFavoritesQuestions();
   }
@@ -39,6 +41,13 @@ export class QuestionsIndexComponent {
           this.noMoreData = true;
         }
         this.busy = false;
+      });
+  }
+
+  loadTags() {
+    this.$http.get('/api/questions/tags/all')
+      .then(response => {
+        this.allTags = response.data;
       });
   }
 
