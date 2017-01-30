@@ -9,7 +9,6 @@ br
   .intro(ng-show='!vm.inProgress')
     p.lead {{vm.quiz.questions.length}} Questions
     button.btn.btn-success(type='button', ng-click='vm.startQuiz()') Start {{vm.quiz.title}}
-    hr
 
   .quiz-area(ng-show='vm.inProgress')
 
@@ -30,7 +29,7 @@ br
               label
                 input(type='radio', ng-model='vm.selectedOption', name='user_answer', value='{{option}}', required)
                 span
-                | {{option}}
+                | &nbsp; {{option}}
 
         .panel-body(ng-if="vm.ofType=='FTB'")
           .row
@@ -65,5 +64,4 @@ br
           strong {{vm.scorePercent}} %
 
       button.btn.btn-success(ng-click='vm.resetQuiz()') Play Again
-      hr
 

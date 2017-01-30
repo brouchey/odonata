@@ -48,6 +48,10 @@
             span {{$ctrl.getCurrentUser().name}} &nbsp;
             i.fa.fa-user-circle.fa-lg
 
+        li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/#")}')
+          a(href='#')
+            i.fa.fa-bell-o.fa-lg
+
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/settings")}')
           a(href='/settings')
             i.fa.fa-cog.fa-lg
@@ -55,4 +59,3 @@
         li(ng-show='$ctrl.isLoggedIn()')
           a(href='/logout')
             i.fa.fa-sign-out.fa-lg
-
