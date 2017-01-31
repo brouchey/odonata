@@ -41,7 +41,7 @@ export class QuestionsShowComponent {
   submitAnswer() {
     this.$http.post('/api/questions/' + this.question._id + '/answers', this.$scope.newAnswer)
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
       this.$scope.newAnswer = {};
     });
   }
@@ -49,7 +49,7 @@ export class QuestionsShowComponent {
   submitComment() {
     this.$http.post('/api/questions/' + this.question._id + '/comments', this.newComment)
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
       this.newComment = {};
     });
   }
@@ -57,7 +57,7 @@ export class QuestionsShowComponent {
   submitAnswerComment(answer) {
     this.$http.post('/api/questions/' + this.question._id + '/answers/' + answer._id + '/comments', answer.newAnswerComment)
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
 
@@ -71,49 +71,49 @@ export class QuestionsShowComponent {
   deleteAnswer(answer) {
     this.$http.delete('/api/questions/' + this.question._id + '/answers/' + answer._id)
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
 
   updateQuestion() {
     this.$http.put('/api/questions/' + this.question._id, this.question)
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
 
   updateAnswer(answer) {
     this.$http.put('/api/questions/' + this.question._id + '/answers/' + answer._id, answer)
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
 
   deleteComment(comment) {
     this.$http.delete('/api/questions/' + this.question._id + '/comments/' + comment._id)
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
 
   deleteAnswerComment(answer, answerComment) {
     this.$http.delete('/api/questions/' + this.question._id + '/answers/' + answer._id + '/comments/' + answerComment._id)
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
 
   updateComment(comment) {
     this.$http.put('/api/questions/' + this.question._id + '/comments/' + comment._id, comment)
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
 
   updateAnswerComment(answer, answerComment) {
     this.$http.put('/api/questions/' + this.question._id + '/answers/' + answer._id + '/comments/' + answerComment._id, answerComment)
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
 
@@ -128,37 +128,38 @@ export class QuestionsShowComponent {
   star(subpath) {
     this.$http.put('/api/questions/' + this.question._id + subpath + '/star')
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
 
   unstar(subpath) {
     this.$http.put('/api/questions/' + this.question._id + subpath + '/star')
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
 
   voteUp(subpath) {
     this.$http.put('/api/questions/' + this.question._id + subpath + '/voteUp')
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
 
   voteDown(subpath) {
     this.$http.put('/api/questions/' + this.question._id + subpath + '/voteDown')
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
 
   bestAnswer(answer) {
     this.$http.put('/api/questions/' + this.question._id + '/answers/' + answer._id + '/bestAnswer')
     .then(response => {
-      this.loadQuestions();
+      this.question = response.data;
     });
   }
+
 }
 
 export default angular.module('odonataApp.questionsShow', [ngRoute])

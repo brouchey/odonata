@@ -144,8 +144,12 @@ br
             div {{answer.stars.length}}
 
             //- Answer Best
-            button(ng-if='vm.isOwner(vm.question)', type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click='vm.bestAnswer(answer)')
-              i.fa.fa-check.fa-lg
+            //- if Question Owner and Answer is not best
+            button(ng-if='vm.isOwner(vm.question) && !answer.correct', type='button', style='background: transparent; border: 0;', ng-click='vm.bestAnswer(answer)')
+              i.fa.fa-check.fa-lg(style='opacity: 0.5;')
+            
+            //- if Answer is best
+            i.fa.fa-check.fa-lg(ng-if='answer.correct', style='color: #00BB00; opacity: 0.5;')
 
         .col-md-11
           .well        
