@@ -51,6 +51,9 @@
  * PUT     /api/questions/:id/voteDown                    -> voteDown
  * PUT     /api/questions/:id/answers/:answerId/voteUp    -> voteUpAnswer
  * PUT     /api/questions/:id/answers/:answerId/voteDown  -> voteDownAnswer
+ *
+ * Best Answer :
+ * PUT     /api/questions/:id/answers/:answerId/bestAnswer   -> bestAnswer
  */
 
 'use strict';
@@ -565,6 +568,22 @@ export function voteUpAnswer(req, res) {
 
 export function voteDownAnswer(req, res) {
   Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$inc: {'answers.$.votes': -1}}, function(err, num) {
+    if(err) {
+      return handleError(res)(err);
+    }
+    if(num === 0) {
+      return res.send(404).end();
+    }
+    exports.show(req, res);
+  });
+}
+
+/*************************/
+/* Best Answer API */
+/*************************/
+
+export function bestAnswer(req, res) {
+  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$set: {'answers.$.correct': true}}, function(err, num) {
     if(err) {
       return handleError(res)(err);
     }

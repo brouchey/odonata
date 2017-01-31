@@ -39,7 +39,7 @@ export class QuestionsShowComponent {
   }
 
   submitAnswer() {
-    this.$http.post('/api/questions/' + this.$routeParams.id + '/answers', this.$scope.newAnswer)
+    this.$http.post('/api/questions/' + this.question._id + '/answers', this.$scope.newAnswer)
     .then(response => {
       this.loadQuestions();
       this.$scope.newAnswer = {};
@@ -47,7 +47,7 @@ export class QuestionsShowComponent {
   }
 
   submitComment() {
-    this.$http.post('/api/questions/' + this.$routeParams.id + '/comments', this.newComment)
+    this.$http.post('/api/questions/' + this.question._id + '/comments', this.newComment)
     .then(response => {
       this.loadQuestions();
       this.newComment = {};
@@ -55,63 +55,63 @@ export class QuestionsShowComponent {
   }
 
   submitAnswerComment(answer) {
-    this.$http.post('/api/questions/' + this.$routeParams.id + '/answers/' + answer._id + '/comments', answer.newAnswerComment)
+    this.$http.post('/api/questions/' + this.question._id + '/answers/' + answer._id + '/comments', answer.newAnswerComment)
     .then(response => {
       this.loadQuestions();
     });
   }
 
   deleteQuestion() {
-    this.$http.delete('/api/questions/' + this.$routeParams.id)
+    this.$http.delete('/api/questions/' + this.question._id)
     .then(response => {
       this.$location.path('/questions');
     });
   }
 
   deleteAnswer(answer) {
-    this.$http.delete('/api/questions/' + this.$routeParams.id + '/answers/' + answer._id)
+    this.$http.delete('/api/questions/' + this.question._id + '/answers/' + answer._id)
     .then(response => {
       this.loadQuestions();
     });
   }
 
   updateQuestion() {
-    this.$http.put('/api/questions/' + this.$routeParams.id, this.question)
+    this.$http.put('/api/questions/' + this.question._id, this.question)
     .then(response => {
       this.loadQuestions();
     });
   }
 
   updateAnswer(answer) {
-    this.$http.put('/api/questions/' + this.$routeParams.id + '/answers/' + answer._id, answer)
+    this.$http.put('/api/questions/' + this.question._id + '/answers/' + answer._id, answer)
     .then(response => {
       this.loadQuestions();
     });
   }
 
   deleteComment(comment) {
-    this.$http.delete('/api/questions/' + this.$routeParams.id + '/comments/' + comment._id)
+    this.$http.delete('/api/questions/' + this.question._id + '/comments/' + comment._id)
     .then(response => {
       this.loadQuestions();
     });
   }
 
   deleteAnswerComment(answer, answerComment) {
-    this.$http.delete('/api/questions/' + this.$routeParams.id + '/answers/' + answer._id + '/comments/' + answerComment._id)
+    this.$http.delete('/api/questions/' + this.question._id + '/answers/' + answer._id + '/comments/' + answerComment._id)
     .then(response => {
       this.loadQuestions();
     });
   }
 
   updateComment(comment) {
-    this.$http.put('/api/questions/' + this.$routeParams.id + '/comments/' + comment._id, comment)
+    this.$http.put('/api/questions/' + this.question._id + '/comments/' + comment._id, comment)
     .then(response => {
       this.loadQuestions();
     });
   }
 
   updateAnswerComment(answer, answerComment) {
-    this.$http.put('/api/questions/' + this.$routeParams.id + '/answers/' + answer._id + '/comments/' + answerComment._id, answerComment)
+    this.$http.put('/api/questions/' + this.question._id + '/answers/' + answer._id + '/comments/' + answerComment._id, answerComment)
     .then(response => {
       this.loadQuestions();
     });
@@ -148,6 +148,13 @@ export class QuestionsShowComponent {
 
   voteDown(subpath) {
     this.$http.put('/api/questions/' + this.question._id + subpath + '/voteDown')
+    .then(response => {
+      this.loadQuestions();
+    });
+  }
+
+  bestAnswer(answer) {
+    this.$http.put('/api/questions/' + this.question._id + '/answers/' + answer._id + '/bestAnswer')
     .then(response => {
       this.loadQuestions();
     });

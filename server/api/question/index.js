@@ -48,4 +48,6 @@ router.put('/:id/voteDown', auth.isAuthenticated(), controller.voteDown);
 router.put('/:id/answers/:answerId/voteUp', auth.isAuthenticated(), controller.voteUpAnswer);
 router.put('/:id/answers/:answerId/voteDown', auth.isAuthenticated(), controller.voteDownAnswer);
 
+router.put('/:id/answers/:answerId/bestAnswer', auth.isAuthenticated(), controller.bestAnswer);
+
 module.exports = router;

@@ -26,26 +26,26 @@ br
           .well(style='font-size: large; padding: 0; text-align: center;')
 
             //- Question VoteUp
-            button(ng-if="vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0;')
+            button(ng-if="vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.5;')
               i.fa.fa-chevron-circle-up
-            button(ng-if="!vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0;', ng-click="vm.voteUp('')")
+            button(ng-if="!vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.voteUp('')")
               i.fa.fa-chevron-circle-up
 
             //- Question Votes Count
             div {{vm.question.votes}}
 
             //- Question Down
-            button(ng-if="vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0;')
+            button(ng-if="vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.5;')
               i.fa.fa-chevron-circle-down
-            button(ng-if="!vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0;', ng-click="vm.voteDown('')")
+            button(ng-if="!vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.voteDown('')")
               i.fa.fa-chevron-circle-down
 
             //- Question Unstar
-            button(ng-if='vm.isStar(vm.question)', type='button', style='background: transparent; border: 0;', ng-click="vm.unstar('')")
+            button(ng-if='vm.isStar(vm.question)', type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.unstar('')")
               i.fa.fa-star(style='color: #CF7C00;')
 
             //- Question Star
-            button(ng-if='!vm.isStar(vm.question)', type='button', style='background: transparent; border: 0;', ng-click="vm.star('')")
+            button(ng-if='!vm.isStar(vm.question)', type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.star('')")
               i.fa.fa-star-o
 
             //- Question Stars Count
@@ -115,33 +115,37 @@ br
       .row(ng-repeat='answer in vm.question.answers')
 
         .col-md-1
-          .well(style='font-size: medium; padding: 0; text-align: center;')
+          .well(style='font-size: large; padding: 0; text-align: center;')
 
             //- Answer VoteUp
-            button(ng-if="vm.isOwner(answer)", type='button', style='background: transparent; border: 0;')
+            button(ng-if="vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.5;')
               i.fa.fa-chevron-circle-up
-            button(ng-if="!vm.isOwner(answer)", type='button', style='background: transparent; border: 0;', ng-click="vm.voteUp('/answers/' + answer._id)")
+            button(ng-if="!vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.voteUp('/answers/' + answer._id)")
               i.fa.fa-chevron-circle-up
 
             //- Answer Votes Count
             div {{answer.votes}}
 
             //- Answer VoteDown
-            button(ng-if="vm.isOwner(answer)", type='button', style='background: transparent; border: 0;')
+            button(ng-if="vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.5;')
               i.fa.fa-chevron-circle-down
-            button(ng-if="!vm.isOwner(answer)", type='button', style='background: transparent; border: 0;', ng-click="vm.voteDown('/answers/' + answer._id)")
+            button(ng-if="!vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.voteDown('/answers/' + answer._id)")
               i.fa.fa-chevron-circle-down
-                
+
             //- Answer Unstar
-            button(ng-if='vm.isStar(answer)', type='button', style='background: transparent; border: 0;', ng-click="vm.unstar('/answers/' + answer._id)")
+            button(ng-if='vm.isStar(answer)', type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.unstar('/answers/' + answer._id)")
               i.fa.fa-star(style='color: #CF7C00;')
 
             //- Answer Star
-            button(ng-if='!vm.isStar(answer)', type='button', style='background: transparent; border: 0;', ng-click="vm.star('/answers/' + answer._id)")
+            button(ng-if='!vm.isStar(answer)', type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.star('/answers/' + answer._id)")
               i.fa.fa-star-o
 
             //- Answer Stars Count
             div {{answer.stars.length}}
+
+            //- Answer Best
+            button(ng-if='vm.isOwner(vm.question)', type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click='vm.bestAnswer(answer)')
+              i.fa.fa-check.fa-lg
 
         .col-md-11
           .well        
