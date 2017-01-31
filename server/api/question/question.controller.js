@@ -45,6 +45,12 @@
  *
  * Tags :
  * GET     /api/questions/tags/all   ->  showAllTags
+ *
+ * Vote Up/Down :
+ * PUT     /api/questions/:id/voteUp                      -> voteUp
+ * PUT     /api/questions/:id/voteDown                    -> voteDown
+ * PUT     /api/questions/:id/answers/:answerId/voteUp    -> voteUpAnswer
+ * PUT     /api/questions/:id/answers/:answerId/voteDown  -> voteDownAnswer
  */
 
 'use strict';
@@ -513,4 +519,58 @@ export function showAllTags(req, res) {
   return Question.distinct('tags.text').exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
+}
+
+/*************************/
+/* Votes API */
+/*************************/
+
+/* Vote Up/Down Question */
+export function voteUp(req, res) {
+  Question.update({_id: req.params.id}, {$inc: {'votes': 1}}, function(err, num) {
+    if(err) {
+      return handleError(res)(err);
+    }
+    if(num === 0) {
+      return res.send(404).end();
+    }
+    exports.show(req, res);
+  });
+}
+
+export function voteDown(req, res) {
+  Question.update({_id: req.params.id}, {$inc: {'votes': -1}}, function(err, num) {
+    if(err) {
+      return handleError(res, err);
+    }
+    if(num === 0) {
+      return res.send(404).end();
+    }
+    exports.show(req, res);
+  });
+}
+
+/* Vote Up/Down Answer */
+export function voteUpAnswer(req, res) {
+  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$inc: {'answers.$.votes': 1}}, function(err, num) {
+    if(err) {
+      return handleError(res)(err);
+    }
+    if(num === 0) {
+      return res.send(404).end();
+    }
+    exports.show(req, res);
+  });
+}
+
+export function voteDownAnswer(req, res) {
+  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$inc: {'answers.$.votes': -1}}, function(err, num) {
+    if(err) {
+      return handleError(res)(err);
+    }
+    if(num === 0) {
+      return res.send(404).end();
+    }
+    exports.show(req, res);
+  });
 }

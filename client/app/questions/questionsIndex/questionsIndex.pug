@@ -1,13 +1,14 @@
 header#banner.hero-unit
   .container
     h1.lead Exchange
+br
 .container
-  br
-  .well
-    p.lead(style='text-align: center') Something to Ask ?
-    div(style='text-align: center')
-      a.btn.btn-success(type='button', href='/questions/create') Ask a Question
-
+  .row
+    .col-md-12(style='text-align: center')
+      p.lead Something to Ask ?
+      p
+        a.btn.btn-success(type='button', href='/questions/create') Ask a Question
+      hr
   //- .btn-group.btn-group-justified(role='group', aria-label="Question Types")
   //-   .btn-group(role='group')
   //-     button.btn.btn-default(type='button', ng-click='vm.loadQuestions()') All
@@ -104,17 +105,17 @@ header#banner.hero-unit
         tbody(infinite-scroll='vm.nextPage()', infinite-scroll-disabled='busy || noMoreData')
           tr(ng-repeat='question in vm.questions track by $index')
             td(style='text-align: center; vertical-align: middle')
-              div(style='font-size: x-large;') X
+              div(style='font-size: x-large;') {{question.votes}}
             //- td(style='text-align: center; vertical-align: middle')
             //-   div(style='font-size: x-large;') {{question.stars.length}}
             td(style='text-align: center; vertical-align: middle')
               div(style='font-size: x-large;') {{question.answers.length}}
             td(style='text-align: center; vertical-align: middle')
-              div(style='font-size: x-large;') X
+              div(style='font-size: x-large;') {{question.views}}
             td
               div(style='float: right;')
                 span.glyphicon.glyphicon-star(ng-if='vm.isStar(question)', style='color: #CF7C00;')
-                span.glyphicon.glyphicon-star-empty(ng-if='!vm.isStar(question)')
+                //- span.glyphicon.glyphicon-star-empty(ng-if='!vm.isStar(question)')
               a(ng-href='/questions/show/{{question._id}}', style='font-size: large') {{question.title}}
               .clearfix
               div(style='float: right;')

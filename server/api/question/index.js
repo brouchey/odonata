@@ -43,4 +43,9 @@ router.get('/next/:lastId', controller.scrollNextQuestions);
 
 router.get('/tags/all', controller.showAllTags);
 
+router.put('/:id/voteUp', auth.isAuthenticated(), controller.voteUp);
+router.put('/:id/voteDown', auth.isAuthenticated(), controller.voteDown);
+router.put('/:id/answers/:answerId/voteUp', auth.isAuthenticated(), controller.voteUpAnswer);
+router.put('/:id/answers/:answerId/voteDown', auth.isAuthenticated(), controller.voteDownAnswer);
+
 module.exports = router;

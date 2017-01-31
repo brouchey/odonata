@@ -130,14 +130,28 @@ export class QuestionsShowComponent {
     .then(response => {
       this.loadQuestions();
     });
-  };
+  }
 
   unstar(subpath) {
-    this.$http.delete('/api/questions/' + this.question._id + subpath + '/star')
+    this.$http.put('/api/questions/' + this.question._id + subpath + '/star')
     .then(response => {
       this.loadQuestions();
     });
-  };
+  }
+
+  voteUp(subpath) {
+    this.$http.put('/api/questions/' + this.question._id + subpath + '/voteUp')
+    .then(response => {
+      this.loadQuestions();
+    });
+  }
+
+  voteDown(subpath) {
+    this.$http.put('/api/questions/' + this.question._id + subpath + '/voteDown')
+    .then(response => {
+      this.loadQuestions();
+    });
+  }
 }
 
 export default angular.module('odonataApp.questionsShow', [ngRoute])

@@ -7,6 +7,14 @@ var QuestionSchema = new mongoose.Schema({
   content: String,
   answers: [{
     content: String,
+    votes: {
+      type: Number,
+      default: 0,
+    },
+    correct: {
+      type: Boolean,
+      default: false,
+    },
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User'
@@ -38,6 +46,14 @@ var QuestionSchema = new mongoose.Schema({
   tags: [{
     text: String,
   }],
+  views: {
+    type: Number,
+    default: 0,
+  },
+  votes: {
+    type: Number,
+    default: 0,
+  },
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User'

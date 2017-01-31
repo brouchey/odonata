@@ -28,7 +28,7 @@ export class QuestionsIndexComponent {
 
   $onInit() {
     this.loadQuestions();
-    this.loadTags();
+    this.loadAllTags();
     // this.loadMyQuestions();
     // this.loadFavoritesQuestions();
   }
@@ -44,7 +44,7 @@ export class QuestionsIndexComponent {
       });
   }
 
-  loadTags() {
+  loadAllTags() {
     this.$http.get('/api/questions/tags/all')
       .then(response => {
         this.allTags = response.data;
