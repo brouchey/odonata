@@ -112,7 +112,8 @@ br
           h3 {{vm.question.answers.length}} Answers
           hr
 
-      .row(ng-repeat='answer in vm.question.answers')
+      //- Display Answers by Best first, Votes second
+      .row(ng-repeat='answer in vm.question.answers|orderBy:["-correct", "-votes"]')
 
         .col-md-1
           .well(style='font-size: large; padding: 0; text-align: center;')
