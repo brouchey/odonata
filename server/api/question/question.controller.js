@@ -26,12 +26,6 @@
  * Star/Unstar :
  * PUT     /api/questions/:id/star                                        -> star
  * DELETE  /api/questions/:id/star                                        -> unstar
- * PUT     /api/questions/:id/answers/:answerId/star                      -> starAnswer
- * DELETE  /api/questions/:id/answers/:answerId/star                      -> unstarAnswer
- * PUT     /api/questions/:id/comments/:commentId/star                    -> starComment
- * DELETE  /api/questions/:id/comments/:commentId/star                    -> unstarComment
- * PUT     /api/questions/:id/answers/:answerId/comments/:commentId/star  -> starAnswerComment
- * DELETE  /api/questions/:id/answers/:answerId/comments/:commentId/star  -> unstarAnswerComment
  * 
  * User Questions and Starred :
  * GET     /api/questions/users/:userId             ->  showUserQuestions
@@ -368,104 +362,6 @@ export function unstar(req, res) {
   });
 }
 
-/* Star/Unstar Answer */
-export function starAnswer(req, res) {
-  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$push: {'answers.$.stars': req.user.id}}, function(err, num) {
-    if(err) {
-      return handleError(res)(err);
-    }
-    if(num === 0) {
-      return res.send(404).end();
-    }
-    exports.show(req, res);
-  });
-}
-
-export function unstarAnswer(req, res) {
-  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$pull: {'answers.$.stars': req.user.id}}, function(err, num) {
-    if(err) {
-      return handleError(res)(err);
-    }
-    if(num === 0) {
-      return res.send(404).end();
-    }
-    exports.show(req, res);
-  });
-}
-
-/* Star/Unstar Question Comment */
-export function starComment(req, res) {
-  Question.update({_id: req.params.id, 'comments._id': req.params.commentId}, {$push: {'comments.$.stars': req.user.id}}, function(err, num) {
-    if(err) {
-      return handleError(res)(err);
-    }
-    if(num === 0) {
-      return res.send(404).end();
-    }
-    exports.show(req, res);
-  });
-}
-
-export function unstarComment(req, res) {
-  Question.update({_id: req.params.id, 'comments._id': req.params.commentId}, {$pull: {'comments.$.stars': req.user.id}}, function(err, num) {
-    if(err) {
-      return handleError(res)(err);
-    }
-    if(num === 0) {
-      return res.send(404).end();
-    }
-    exports.show(req, res);
-  });
-}
-
-/* Star/Unstar Question Answer Comment */
-export function pushOrPullStarAnswerComment(op, req, res) {
-  Question.find({_id: req.params.id}).exec(function(err, questions) {
-    if(err) {
-      return handleError(res)(err);
-    }
-    if(questions.length === 0) {
-      return res.send(404).end();
-    }
-    var question = questions[0];
-    var found = false;
-    for(var i = 0; i < question.answers.length; i++){
-      if(question.answers[i]._id.toString() === req.params.answerId) {
-        found = true;
-        var conditions = {};
-        conditions._id = req.params.id;
-        conditions['answers.' + i + '.comments._id'] = req.params.commentId;
-        var doc = {};
-        doc[op] = {};
-        doc[op]['answers.' + i + '.comments.$.stars'] = req.user.id;
-        // Question.update({_id: req.params.id, 'answers.' + i + '.comments._id': req.params.commentId}, {op: {('answers.' + i + '.comments.$.stars'): req.user.id}}, function(err, num) {
-        /*jshint -W083 */
-        Question.update(conditions, doc, function(err, num) {
-          if(err) {
-            return handleError(res)(err);
-          }
-          if(num === 0) {
-            return res.send(404).end();
-          }
-          exports.show(req, res);
-          return;
-        });
-      }
-    }
-    if(!found) {
-      return res.send(404).end();
-    }
-  });
-}
-
-export function starAnswerComment(req, res) {
-  pushOrPullStarAnswerComment('$push', req, res);
-}
-
-export function unstarAnswerComment(req, res) {
-  pushOrPullStarAnswerComment('$pull', req, res);
-}
-
 /**********************************/
 /* User Questions and Starred API */
 /**********************************/
@@ -481,12 +377,7 @@ export function showUserQuestions(req, res) {
 // Gets User Favorites Questions
 export function showUserFavoritesQuestions(req, res) {
   var userId = req.params.userId;
-  return Question.find({$or: [
-      {'stars': userId},
-      {'answers.stars': userId},
-      {'comments.stars': userId},
-      {'answers.comments.stars': userId}
-    ]}).sort({createdAt: -1}).limit(5).exec()
+  return Question.find({'stars': userId}).sort({createdAt: -1}).limit(5).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -583,7 +474,7 @@ export function voteDownAnswer(req, res) {
 /*************************/
 
 export function bestAnswer(req, res) {
-  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$set: {'answers.$.correct': true}}, function(err, num) {
+  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$set: {'hasBest': true, 'answers.$.best': true}}, function(err, num) {
     if(err) {
       return handleError(res)(err);
     }

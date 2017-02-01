@@ -28,12 +28,6 @@ router.delete('/:id/answers/:answerId/comments/:commentId', auth.isAuthenticated
 
 router.put('/:id/star', auth.isAuthenticated(), controller.star);
 router.delete('/:id/star', auth.isAuthenticated(), controller.unstar);
-router.put('/:id/answers/:answerId/star', auth.isAuthenticated(), controller.starAnswer);
-router.delete('/:id/answers/:answerId/star', auth.isAuthenticated(), controller.unstarAnswer);
-router.put('/:id/comments/:commentId/star', auth.isAuthenticated(), controller.starComment);
-router.delete('/:id/comments/:commentId/star', auth.isAuthenticated(), controller.unstarComment);
-router.put('/:id/answers/:answerId/comments/:commentId/star', auth.isAuthenticated(), controller.starAnswerComment);
-router.delete('/:id/answers/:answerId/comments/:commentId/star', auth.isAuthenticated(), controller.unstarAnswerComment);
 
 router.get('/users/:userId', auth.isAuthenticated(), controller.showUserQuestions);
 router.get('/users/:userId/favorites', auth.isAuthenticated(), controller.showUserFavoritesQuestions);

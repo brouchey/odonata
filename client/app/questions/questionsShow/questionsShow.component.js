@@ -125,15 +125,15 @@ export class QuestionsShowComponent {
     return this.isLoggedIn() && obj && obj.stars && obj.stars.indexOf(this.getCurrentUser()._id)!==-1;
   }
 
-  star(subpath) {
-    this.$http.put('/api/questions/' + this.question._id + subpath + '/star')
+  star() {
+    this.$http.put('/api/questions/' + this.question._id + '/star')
     .then(response => {
       this.question = response.data;
     });
   }
 
-  unstar(subpath) {
-    this.$http.put('/api/questions/' + this.question._id + subpath + '/star')
+  unstar() {
+    this.$http.delete('/api/questions/' + this.question._id + '/star')
     .then(response => {
       this.question = response.data;
     });

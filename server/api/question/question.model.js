@@ -5,13 +5,17 @@ import mongoose from 'mongoose';
 var QuestionSchema = new mongoose.Schema({
   title: String,
   content: String,
+  hasBest: {
+    type: Boolean,
+    default: false,
+  },
   answers: [{
     content: String,
     votes: {
       type: Number,
       default: 0,
     },
-    correct: {
+    best: {
       type: Boolean,
       default: false,
     },
@@ -25,10 +29,6 @@ var QuestionSchema = new mongoose.Schema({
     },
     comments: [{
       content: String,
-      stars: [{
-        type: mongoose.Schema.ObjectId,
-        ref: 'User'
-      }],
       user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User'
@@ -37,10 +37,6 @@ var QuestionSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
       }
-    }],
-    stars: [{
-      type: mongoose.Schema.ObjectId,
-      ref: 'User'
     }],
   }],
   tags: [{
@@ -64,10 +60,6 @@ var QuestionSchema = new mongoose.Schema({
   },
   comments: [{
     content: String,
-    stars: [{
-      type: mongoose.Schema.ObjectId,
-      ref: 'User'
-    }],
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User'
