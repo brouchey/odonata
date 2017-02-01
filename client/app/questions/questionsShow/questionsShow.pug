@@ -26,7 +26,7 @@ br
           .well(style='font-size: large; padding: 0; text-align: center;')
 
             //- Question VoteUp
-            button(ng-if="vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.2;', uib-tooltip='You cannot vote for your own question !', tooltip-placement='left')
+            button(ng-if="vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.1;', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
             button(ng-if="!vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.voteUp('')")
               i.fa.fa-chevron-circle-up
@@ -35,7 +35,7 @@ br
             div {{vm.question.votes}}
 
             //- Question Down
-            button(ng-if="vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.2;', uib-tooltip='You cannot vote for your own question !', tooltip-placement='left')
+            button(ng-if="vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.1;', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
             button(ng-if="!vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.voteDown('')")
               i.fa.fa-chevron-circle-down
@@ -45,7 +45,7 @@ br
               i.fa.fa-star.fa-lg(style='color: #CF7C00;')
 
             //- Question Star
-            button(ng-if='!vm.isStar(vm.question)', type='button', style='background: transparent; border: 0; opacity: 0.5;', uib-tooltip='Add to your Favorites', tooltip-placement='left', ng-click="vm.star()")
+            button(ng-if='!vm.isStar(vm.question)', type='button', style='background: transparent; border: 0; opacity: 0.8;', uib-tooltip='Add to your Favorites', tooltip-placement='left', ng-click="vm.star()")
               i.fa.fa-star-o.fa-lg
 
             //- Question Stars Count
@@ -111,7 +111,7 @@ br
           .well(style='font-size: large; padding: 0; text-align: center;')
 
             //- Answer VoteUp
-            button(ng-if="vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.2;', uib-tooltip='You cannot vote for your own answer !', tooltip-placement='left')
+            button(ng-if="vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.1;', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
             button(ng-if="!vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.voteUp('/answers/' + answer._id)")
               i.fa.fa-chevron-circle-up
@@ -120,20 +120,18 @@ br
             div {{answer.votes}}
 
             //- Answer VoteDown
-            button(ng-if="vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.2;', uib-tooltip='You cannot vote for your own answer !', tooltip-placement='left')
+            button(ng-if="vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.1;', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
             button(ng-if="!vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.voteDown('/answers/' + answer._id)")
               i.fa.fa-chevron-circle-down
 
             //- Answer Best
-            //- if Answer is best, show best tick
-            button(ng-if='answer.best', type='button', style='background: transparent; border: 0;', uib-tooltip='This Answer has been selected as Best by the Author', tooltip-placement='bottom')
+            button(ng-if='answer.best', type='button', style='background: transparent; border: 0;', uib-tooltip='This Answer has been selected as Best', tooltip-placement='bottom')
               i.fa.fa-check.fa-lg(style='color: #00BB00;')
 
-            //- if Question has no best Answer and Question.Owner, show ticks selection
-            button(ng-if='!vm.question.hasBest && vm.isOwner(vm.question)', type='button', style='background: transparent; border: 0; opacity: 0.5;', uib-tooltip='Choose this Answer as Best ?', tooltip-placement='bottom', ng-click='vm.bestAnswer(answer)')
-              //- but not for his own Answers
-              i.fa.fa-check.fa-lg(ng-show='!vm.isOwner(answer)')
+            //- Answer Best Selection
+            button(ng-if='!vm.question.hasBest && vm.isOwner(vm.question) && !vm.isOwner(answer)', type='button', style='background: transparent; border: 0; opacity: 0.5;', uib-tooltip='Choose this Answer as Best', tooltip-placement='bottom', ng-click='vm.bestAnswer(answer)')
+              i.fa.fa-check.fa-lg
 
         .col-md-11
           .well        
