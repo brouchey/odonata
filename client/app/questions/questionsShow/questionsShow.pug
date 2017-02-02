@@ -6,14 +6,14 @@ br
   .row
     .col-md-12
       button.close(ng-if="vm.isOwner(vm.question)", type='button', ng-click='vm.deleteQuestion()', uib-tooltip='Delete')
-        i.fa.fa-trash-o.fa-lg(style='color: red;')
+        i.fa.fa-trash-o.fa-lg
 
       div
         h1
           div(ng-if='!editingQ') {{vm.question.title}}
           input(type='text', ng-model='vm.question.title', ng-if='editingQ')
 
-        span(ng-repeat='tag in vm.question.tags', style='font-size: large;')
+        span(ng-repeat='tag in vm.question.tags')
           span.label.label-info {{tag.text}}
           span &nbsp;
       hr
@@ -23,42 +23,42 @@ br
 
       .row
         .col-md-1
-          .well(style='font-size: large; padding: 0; text-align: center;')
+          .well.question-content-triggers
 
             //- Question VoteUp
-            button(ng-if="vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.1;', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
+            button.voteup-author(ng-if="vm.isOwner(vm.question)", type='button', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
-            button(ng-if="!vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.voteUp('')")
+            button.voteup(ng-if="!vm.isOwner(vm.question)", type='button', ng-click="vm.voteUp('')")
               i.fa.fa-chevron-circle-up
 
             //- Question Votes Count
             div {{vm.question.votes}}
 
             //- Question Down
-            button(ng-if="vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.1;', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
+            button.votedown-author(ng-if="vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.1;', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
-            button(ng-if="!vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.voteDown('')")
+            button.votedown(ng-if="!vm.isOwner(vm.question)", type='button', ng-click="vm.voteDown('')")
               i.fa.fa-chevron-circle-down
 
             //- Question Unstar
-            button(ng-if='vm.isStar(vm.question)', type='button', style='background: transparent; border: 0; opacity: 0.8;', uib-tooltip='Remove from your Favorites', tooltip-placement='left', ng-click="vm.unstar()")
-              i.fa.fa-star.fa-lg(style='color: #CF7C00;')
+            button.remove-star(ng-if='vm.isStar(vm.question)', type='button', uib-tooltip='Remove from your Favorites', tooltip-placement='left', ng-click="vm.unstar()")
+              i.fa.fa-star.fa-lg
 
             //- Question Star
-            button(ng-if='!vm.isStar(vm.question)', type='button', style='background: transparent; border: 0; opacity: 0.8;', uib-tooltip='Add to your Favorites', tooltip-placement='left', ng-click="vm.star()")
+            button.add-star(ng-if='!vm.isStar(vm.question)', type='button', uib-tooltip='Add to your Favorites', tooltip-placement='left', ng-click="vm.star()")
               i.fa.fa-star-o.fa-lg
 
             //- Question Stars Count
-            div {{vm.question.stars.length}}
+            div.star-count {{vm.question.stars.length}}
 
         .col-md-11
-          .well
-            div(ng-if='!editingQ', style='font-size: large;') {{vm.question.content}}
+          .well.question-content
+            div.question-content-title(ng-if='!editingQ') {{vm.question.content}}
             input(type='text', ng-model='vm.question.content', ng-if='editingQ')
 
             button.btn.btn-success(type='submit', ng-click='editingQ=false; vm.updateQuestion()', ng-show='editingQ') Save
             a(ng-click='editingQ=!editingQ;', ng-show='vm.isOwner(vm.question) && !editingQ', uib-tooltip='Edit', tooltip-placement='right')
-              span.glyphicon.glyphicon-edit
+              i.fa.fa-pencil-square-o.fa-lg
 
             //- Question Author
             .text-right
@@ -70,19 +70,19 @@ br
             .well.well-sm(ng-repeat='comment in vm.question.comments')
 
               button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteComment(comment)', uib-tooltip='Delete')
-                span.glyphicon.glyphicon-trash(style='color: red;')
+                i.fa.fa-trash-o
 
-              div(style='float: left; font-size: small; padding: 0; text-align: center;')
-
+              .question-comment-count
                 //- Previously Question.Comment stars count
                 span 0 &nbsp;
 
-              div(ng-if='!editingC', style='font-size: small;') {{comment.content}}
-              input(type='text', ng-model='comment.content', ng-if='editingC') 
-              button.btn.btn-success(type='submit', ng-click='editingC=false; vm.updateComment(comment)', ng-show='editingC') Save 
+              .question-comment-content(ng-if='!editingC') {{comment.content}}
 
-              a(ng-click='editingC=!editingC;', ng-show='vm.isOwner(comment) && !editingC', uib-tooltip='Edit', tooltip-placement='right')
-                span.glyphicon.glyphicon-edit
+              input(ng-if='editingC', type='text', ng-model='comment.content') 
+              button.btn.btn-success(ng-show='editingC', type='submit', ng-click='editingC=false; vm.updateComment(comment)') Save 
+
+              a(ng-show='vm.isOwner(comment) && !editingC', ng-click='editingC=!editingC;', uib-tooltip='Edit', tooltip-placement='right')
+                i.fa.fa-pencil-square-o
 
               //- Question.Comment Author
               .text-right
@@ -108,42 +108,44 @@ br
       .row(ng-repeat='answer in vm.question.answers|orderBy:["-best", "-votes"]')
 
         .col-md-1
-          .well(style='font-size: large; padding: 0; text-align: center;')
+          .well.answer-content-triggers
 
             //- Answer VoteUp
-            button(ng-if="vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.1;', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
+            button.voteup-author(ng-if="vm.isOwner(answer)", type='button', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
-            button(ng-if="!vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.voteUp('/answers/' + answer._id)")
+            button.voteup(ng-if="!vm.isOwner(answer)", type='button', ng-click="vm.voteUp('/answers/' + answer._id)")
               i.fa.fa-chevron-circle-up
 
             //- Answer Votes Count
             div {{answer.votes}}
 
             //- Answer VoteDown
-            button(ng-if="vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.1;', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
+            button.votedown-author(ng-if="vm.isOwner(answer)", type='button', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
-            button(ng-if="!vm.isOwner(answer)", type='button', style='background: transparent; border: 0; opacity: 0.5;', ng-click="vm.voteDown('/answers/' + answer._id)")
+            button.votedown(ng-if="!vm.isOwner(answer)", type='button', ng-click="vm.voteDown('/answers/' + answer._id)")
               i.fa.fa-chevron-circle-down
 
             //- Answer Best
-            button(ng-if='answer.best', type='button', style='background: transparent; border: 0;', uib-tooltip='This Answer has been selected as Best', tooltip-placement='bottom')
-              i.fa.fa-check.fa-lg(style='color: #00BB00;')
+            button.answer-best(ng-if='answer.best', type='button', uib-tooltip='This Answer has been selected as Best', tooltip-placement='bottom')
+              i.fa.fa-check.fa-lg
 
             //- Answer Best Selection
-            button(ng-if='!vm.question.hasBest && vm.isOwner(vm.question) && !vm.isOwner(answer)', type='button', style='background: transparent; border: 0; opacity: 0.5;', uib-tooltip='Choose this Answer as Best', tooltip-placement='bottom', ng-click='vm.bestAnswer(answer)')
+            button.answer-select(ng-if='!vm.question.hasBest && vm.isOwner(vm.question) && !vm.isOwner(answer)', type='button', uib-tooltip='Choose this Answer as Best', tooltip-placement='bottom', ng-click='vm.bestAnswer(answer)')
               i.fa.fa-check.fa-lg
 
         .col-md-11
           .well        
-            .answer
+            .answer-content
               button.close(ng-if="vm.isOwner(answer)", type='button', ng-click='vm.deleteAnswer(answer)', uib-tooltip='Delete')
-                span.glyphicon.glyphicon-trash(style='color: red;')
+                i.fa.fa-trash-o
 
-              div(ng-if='!editingA', style='font-size: medium;') {{answer.content}}
-              a(ng-click='editingA=!editingA;', ng-show='vm.isOwner(answer) && !editingA', uib-tooltip='Edit', tooltip-placement='right')
-                span.glyphicon.glyphicon-edit 
-              input(type='text', ng-model='answer.content', ng-if='editingA')
-              button.btn.btn-success(type='submit', ng-click='editingA=false; vm.updateAnswer(answer)', ng-show='editingA') Save
+              .answer-content-title(ng-if='!editingA') {{answer.content}}
+
+              a(ng-show='vm.isOwner(answer) && !editingA', ng-click='editingA=!editingA;', uib-tooltip='Edit', tooltip-placement='right')
+                i.fa.fa-pencil-square-o
+
+              input(ng-if='editingA', type='text', ng-model='answer.content')
+              button.btn.btn-success(ng-show='editingA', type='submit', ng-click='editingA=false; vm.updateAnswer(answer)') Save
 
               //- Answer Author
               .text-right
@@ -156,20 +158,20 @@ br
             .well.well-sm(ng-repeat='comment in answer.comments')
 
               button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteAnswerComment(answer, comment)', uib-tooltip='Delete')
-                span.glyphicon.glyphicon-trash(style='color: red;')
+                i.fa.fa-trash-o
 
-              div(style='float: left; font-size: small; padding: 0; text-align: center;')
-
+              .answer-comment-count
                 //- Previously Answer.Comment stars count
                 span 0 &nbsp;
 
-              div(ng-if='!editingAC', style='font-size: small;') {{comment.content}}
-              input(type='text', ng-model='comment.content', ng-if='editingAC') 
+              .answer-comment-content(ng-if='!editingAC') {{comment.content}}
+
+              input(ng-if='editingAC', type='text', ng-model='comment.content') 
      
-              button.btn.btn-success(type='submit', ng-click='editingAC=false; vm.updateAnswerComment(answer, comment)', ng-show='editingAC') Save
+              button.btn.btn-success(ng-show='editingAC', type='submit', ng-click='editingAC=false; vm.updateAnswerComment(answer, comment)') Save
      
-              a(ng-click='editingAC=!editingAC;', ng-show='vm.isOwner(comment) && !editingAC', uib-tooltip='Edit', tooltip-placement='right')
-                span.glyphicon.glyphicon-edit
+              a(ng-show='vm.isOwner(comment) && !editingAC', ng-click='editingAC=!editingAC;',  uib-tooltip='Edit', tooltip-placement='right')
+                i.fa.fa-pencil-square-o
 
               //- Answer.Comment Author
               .text-right
@@ -180,9 +182,9 @@ br
       
             //- Submit New Answer.Comment
             a(ng-click='editNewAnswerComment=!editNewAnswerComment; answer.newAnswerComment={}') Add a comment
+
             form(ng-if='editNewAnswerComment', name='answer_{{answer.id}}_comment')
-              hr
-              input.comment-wmd-input(type='text', ng-model='answer.newAnswerComment.content', required) 
+              input(type='text', ng-model='answer.newAnswerComment.content', required)
               button.btn.btn-primary(type='submit', ng-click='vm.submitAnswerComment(answer)', ng-disabled='answer_{{answer.id}}_comment.$invalid') Add Comment
           hr
 

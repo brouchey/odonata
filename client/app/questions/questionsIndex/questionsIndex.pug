@@ -131,6 +131,11 @@ br
         div(ng-show='busy') Loading Questions...
 
     .col-md-3
+      .panel.panel-default
+        .panel-body(style='text-align: center;')
+          p.lead 
+            strong {{vm.questions.length}}
+          p.lead Questions
       .panel.panel-danger
         .panel-heading
           h3.panel-title Hot Trends
@@ -141,7 +146,7 @@ br
         .panel-body  Some Content
       .panel.panel-success
         .panel-heading
-          h3.panel-title All Tags
+          h3.panel-title All Tags ({{vm.allTags.length}})
         .panel-body
           ul.tags-list
             li(ng-repeat='tag in vm.allTags')

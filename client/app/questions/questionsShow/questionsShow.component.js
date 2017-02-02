@@ -28,10 +28,10 @@ export class QuestionsShowComponent {
   }
 
   $onInit() {
-    this.loadQuestions();
+    this.loadQuestion();
   }
 
-  loadQuestions() {
+  loadQuestion() {
     this.$http.get('/api/questions/' + this.$routeParams.id)
       .then(response => {
         this.question = response.data;
