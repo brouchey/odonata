@@ -26,12 +26,20 @@ br
           .well.question-content-triggers.text-center
 
             //- Question VoteUp
-            button.voteup-author(ng-if="vm.isOwner(vm.question)", type='button', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
+
+            //- Owner cannot vote for his own Question => Non-Clickable Lightgrey Arrow
+            button.voteup-cannot(ng-if="vm.isOwner(vm.question)", type='button', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
+            //- Not Owner, already Upvoted for this Question => Non-Clickable Green Arrow
             button.is-upvoted(ng-if="!vm.isOwner(vm.question) && vm.isUpVoted(vm.question)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
-            button.voteup(ng-if="vm.isLoggedIn() && !vm.isOwner(vm.question) && !vm.isUpVoted(vm.question)", type='button', ng-click="vm.voteUp('')")
+            //- Not Owner, already Downvoted for this Question => Non-Clickable Lightgrey Arrow
+            button.voteup-cannot(ng-if="!vm.isOwner(vm.question) && vm.isDownVoted(vm.question)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
+            //- Logged In and Not Owner, no Upvote and no Downvote => Can vote : Clickable Dark Grey Arrow
+            button.voteup(ng-if="vm.isLoggedIn() && !vm.isOwner(vm.question) && !vm.isUpVoted(vm.question) && !vm.isDownVoted(vm.question)", type='button', ng-click="vm.voteUp('')")
+              i.fa.fa-chevron-circle-up
+            //- Not Logged In and Not Owner, didn't Upvote => Need to login : Dark Grey Arrow for Redirect
             button.voteup(ng-if="!vm.isLoggedIn() && !vm.isOwner(vm.question) && !vm.isUpVoted(vm.question)", type='button', uib-tooltip='You need to login to vote', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
 
@@ -39,12 +47,20 @@ br
             div {{vm.question.votecount}}
 
             //- Question Down
-            button.votedown-author(ng-if="vm.isOwner(vm.question)", type='button', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
+
+            //- Owner cannot vote for his own Question => Non-Clickable Lightgrey Arrow
+            button.votedown-cannot(ng-if="vm.isOwner(vm.question)", type='button', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
+            //- Not Owner, already Downvoted for this Question => Non-Clickable Red Arrow
             button.is-downvoted(ng-if="!vm.isOwner(vm.question) && vm.isDownVoted(vm.question)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
-            button.votedown(ng-if="vm.isLoggedIn() && !vm.isOwner(vm.question) && !vm.isDownVoted(vm.question)", type='button', ng-click="vm.voteDown('')")
+            //- Not Owner, already Upvoted for this Question => Non-Clickable Lightgrey Arrow
+            button.votedown-cannot(ng-if="!vm.isOwner(vm.question) && vm.isUpVoted(vm.question)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
+            //- Logged In and Not Owner, no Upvote and no Downvote => Can vote : Clickable Dark Grey Arrow
+            button.votedown(ng-if="vm.isLoggedIn() && !vm.isOwner(vm.question) && !vm.isDownVoted(vm.question) && !vm.isUpVoted(vm.question)", type='button', ng-click="vm.voteDown('')")
+              i.fa.fa-chevron-circle-down
+            //- Not Logged In and Not Owner, didn't Downvote => Need to login : Dark Grey Arrow for Redirect
             button.votedown(ng-if="!vm.isLoggedIn() && !vm.isOwner(vm.question) && !vm.isDownVoted(vm.question)", type='button', uib-tooltip='You need to login to vote', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
 
@@ -119,12 +135,20 @@ br
           .well.answer-content-triggers.text-center
 
             //- Answer VoteUp
-            button.voteup-author(ng-if="vm.isOwner(answer)", type='button', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
+
+            //- Owner cannot vote for his own Answer => Non-Clickable Lightgrey Arrow
+            button.voteup-cannot(ng-if="vm.isOwner(answer)", type='button', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
+            //- Not Owner, already Upvoted for this Answer => Non-Clickable Green Arrow
             button.is-upvoted(ng-if="!vm.isOwner(answer) && vm.isUpVoted(answer)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
-            button.voteup(ng-if="vm.isLoggedIn() && !vm.isOwner(answer) && !vm.isUpVoted(answer)", type='button', ng-click="vm.voteUp('/answers/' + answer._id)")
+            //- Not Owner, already Downvoted for this Answer => Non-Clickable Lightgrey Arrow
+            button.voteup-cannot(ng-if="!vm.isOwner(answer) && vm.isDownVoted(answer)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
+            //- Logged In and Not Owner, no Upvote and no Downvote => Can vote : Clickable Dark Grey Arrow
+            button.voteup(ng-if="vm.isLoggedIn() && !vm.isOwner(answer) && !vm.isUpVoted(answer) && !vm.isDownVoted(answer)", type='button', ng-click="vm.voteUp('/answers/' + answer._id)")
+              i.fa.fa-chevron-circle-up
+            //- Not Logged In and Not Owner, didn't Upvote => Need to login : Dark Grey Arrow for Redirect
             button.voteup(ng-if="!vm.isLoggedIn() && !vm.isOwner(answer) && !vm.isUpVoted(answer)", type='button', uib-tooltip='You need to login to vote', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
 
@@ -132,12 +156,20 @@ br
             div {{answer.votecount}}
 
             //- Answer VoteDown
-            button.votedown-author(ng-if="vm.isOwner(answer)", type='button', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
+
+            //- Owner cannot vote for his own Answer => Non-Clickable Lightgrey Arrow
+            button.votedown-cannot(ng-if="vm.isOwner(answer)", type='button', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
-            button.is-downvoted(ng-if="!vm.isOwner(answer) && vm.isDownVoted(answer)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
+            //- Not Owner, already Downvoted for this Answer => Non-Clickable Red Arrow
+            button.is-downvoted(ng-if="!vm.isOwner(answer) && vm.isDownVoted(answer)", type='button', uib-tooltip='You already voted for this Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
-            button.votedown(ng-if="vm.isLoggedIn() && !vm.isOwner(answer) && !vm.isDownVoted(answer)", type='button', ng-click="vm.voteDown('/answers/' + answer._id)")
+            //- Not Owner, already Upvoted for this Answer => Non-Clickable Lightgrey Arrow
+            button.votedown-cannot(ng-if="!vm.isOwner(answer) && vm.isUpVoted(answer)", type='button', uib-tooltip='You already voted for this Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
+            //- Logged In and Not Owner, no Upvote and no Downvote => Can vote : Clickable Dark Grey Arrow
+            button.votedown(ng-if="vm.isLoggedIn() && !vm.isOwner(answer) && !vm.isDownVoted(answer) && !vm.isUpVoted(answer)", type='button', ng-click="vm.voteDown('/answers/' + answer._id)")
+              i.fa.fa-chevron-circle-down
+            //- Not Logged In and Not Owner, didn't Downvote => Need to login : Dark Grey Arrow for Redirect
             button.votedown(ng-if="!vm.isLoggedIn() && !vm.isOwner(answer) && !vm.isDownVoted(answer)", type='button', uib-tooltip='You need to login to vote', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
 
