@@ -23,21 +23,29 @@ br
 
       .row
         .col-md-1
-          .well.question-content-triggers
+          .well.question-content-triggers.text-center
 
             //- Question VoteUp
             button.voteup-author(ng-if="vm.isOwner(vm.question)", type='button', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
-            button.voteup(ng-if="!vm.isOwner(vm.question)", type='button', ng-click="vm.voteUp('')")
+            button.is-upvoted(ng-if="!vm.isOwner(vm.question) && vm.isUpVoted(vm.question)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
+              i.fa.fa-chevron-circle-up
+            button.voteup(ng-if="vm.isLoggedIn() && !vm.isOwner(vm.question) && !vm.isUpVoted(vm.question)", type='button', ng-click="vm.voteUp('')")
+              i.fa.fa-chevron-circle-up
+            button.voteup(ng-if="!vm.isLoggedIn() && !vm.isOwner(vm.question) && !vm.isUpVoted(vm.question)", type='button', uib-tooltip='You need to login to vote', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
 
             //- Question Votes Count
-            div {{vm.question.votes}}
+            div {{vm.question.votecount}}
 
             //- Question Down
-            button.votedown-author(ng-if="vm.isOwner(vm.question)", type='button', style='background: transparent; border: 0; opacity: 0.1;', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
+            button.votedown-author(ng-if="vm.isOwner(vm.question)", type='button', uib-tooltip='You cannot vote for your question', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
-            button.votedown(ng-if="!vm.isOwner(vm.question)", type='button', ng-click="vm.voteDown('')")
+            button.is-downvoted(ng-if="!vm.isOwner(vm.question) && vm.isDownVoted(vm.question)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
+              i.fa.fa-chevron-circle-down
+            button.votedown(ng-if="vm.isLoggedIn() && !vm.isOwner(vm.question) && !vm.isDownVoted(vm.question)", type='button', ng-click="vm.voteDown('')")
+              i.fa.fa-chevron-circle-down
+            button.votedown(ng-if="!vm.isLoggedIn() && !vm.isOwner(vm.question) && !vm.isDownVoted(vm.question)", type='button', uib-tooltip='You need to login to vote', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
 
             //- Question Unstar
@@ -72,7 +80,7 @@ br
               button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteComment(comment)', uib-tooltip='Delete')
                 i.fa.fa-trash-o
 
-              .question-comment-count
+              .question-comment-count.text-center
                 //- Previously Question.Comment stars count
                 span 0 &nbsp;
 
@@ -105,24 +113,32 @@ br
           hr
 
       //- Display Answers by Best first, Votes second
-      .row(ng-repeat='answer in vm.question.answers|orderBy:["-best", "-votes"]')
+      .row(ng-repeat='answer in vm.question.answers|orderBy:["-best", "-votecount"]')
 
         .col-md-1
-          .well.answer-content-triggers
+          .well.answer-content-triggers.text-center
 
             //- Answer VoteUp
             button.voteup-author(ng-if="vm.isOwner(answer)", type='button', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
-            button.voteup(ng-if="!vm.isOwner(answer)", type='button', ng-click="vm.voteUp('/answers/' + answer._id)")
+            button.is-upvoted(ng-if="!vm.isOwner(answer) && vm.isUpVoted(answer)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
+              i.fa.fa-chevron-circle-up
+            button.voteup(ng-if="vm.isLoggedIn() && !vm.isOwner(answer) && !vm.isUpVoted(answer)", type='button', ng-click="vm.voteUp('/answers/' + answer._id)")
+              i.fa.fa-chevron-circle-up
+            button.voteup(ng-if="!vm.isLoggedIn() && !vm.isOwner(answer) && !vm.isUpVoted(answer)", type='button', uib-tooltip='You need to login to vote', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
 
             //- Answer Votes Count
-            div {{answer.votes}}
+            div {{answer.votecount}}
 
             //- Answer VoteDown
             button.votedown-author(ng-if="vm.isOwner(answer)", type='button', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
-            button.votedown(ng-if="!vm.isOwner(answer)", type='button', ng-click="vm.voteDown('/answers/' + answer._id)")
+            button.is-downvoted(ng-if="!vm.isOwner(answer) && vm.isDownVoted(answer)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
+              i.fa.fa-chevron-circle-down
+            button.votedown(ng-if="vm.isLoggedIn() && !vm.isOwner(answer) && !vm.isDownVoted(answer)", type='button', ng-click="vm.voteDown('/answers/' + answer._id)")
+              i.fa.fa-chevron-circle-down
+            button.votedown(ng-if="!vm.isLoggedIn() && !vm.isOwner(answer) && !vm.isDownVoted(answer)", type='button', uib-tooltip='You need to login to vote', tooltip-placement='left')
               i.fa.fa-chevron-circle-down
 
             //- Answer Best
@@ -160,7 +176,7 @@ br
               button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteAnswerComment(answer, comment)', uib-tooltip='Delete')
                 i.fa.fa-trash-o
 
-              .answer-comment-count
+              .answer-comment-count.text-center
                 //- Previously Answer.Comment stars count
                 span 0 &nbsp;
 

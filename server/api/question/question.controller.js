@@ -339,7 +339,7 @@ export function updateAnswerComment(req, res) {
 
 /* Star/Unstar Question */
 export function star(req, res) {
-  Question.update({_id: req.params.id}, {$push: {stars: req.user.id}}, function(err, num) {
+  Question.update({_id: req.params.id}, {$push: {'stars': req.user.id}}, function(err, num) {
     if(err) {
       return handleError(res)(err);
     }
@@ -351,7 +351,7 @@ export function star(req, res) {
 }
 
 export function unstar(req, res) {
-  Question.update({_id: req.params.id}, {$pull: {stars: req.user.id}}, function(err, num) {
+  Question.update({_id: req.params.id}, {$pull: {'stars': req.user.id}}, function(err, num) {
     if(err) {
       return handleError(res, err);
     }
@@ -369,7 +369,7 @@ export function unstar(req, res) {
 // Gets User Questions
 export function showUserQuestions(req, res) {
   var userId = req.params.userId;
-  return Question.find({user: userId}).sort({createdAt: -1}).limit(5).exec()
+  return Question.find({user: userId}).sort({createdAt: -1}).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -377,7 +377,7 @@ export function showUserQuestions(req, res) {
 // Gets User Favorites Questions
 export function showUserFavoritesQuestions(req, res) {
   var userId = req.params.userId;
-  return Question.find({'stars': userId}).sort({createdAt: -1}).limit(5).exec()
+  return Question.find({'stars': userId}).sort({createdAt: -1}).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -421,7 +421,7 @@ export function showAllTags(req, res) {
 
 /* Vote Up/Down Question */
 export function voteUp(req, res) {
-  Question.update({_id: req.params.id}, {$inc: {'votes': 1}}, function(err, num) {
+  Question.update({_id: req.params.id}, {$push: {'upvotes': req.user.id}, $inc: {'votecount': 1}}, function(err, num) {
     if(err) {
       return handleError(res)(err);
     }
@@ -433,7 +433,7 @@ export function voteUp(req, res) {
 }
 
 export function voteDown(req, res) {
-  Question.update({_id: req.params.id}, {$inc: {'votes': -1}}, function(err, num) {
+  Question.update({_id: req.params.id}, {$push: {'downvotes': req.user.id}, $inc: {'votecount': -1}}, function(err, num) {
     if(err) {
       return handleError(res, err);
     }
@@ -446,7 +446,7 @@ export function voteDown(req, res) {
 
 /* Vote Up/Down Answer */
 export function voteUpAnswer(req, res) {
-  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$inc: {'answers.$.votes': 1}}, function(err, num) {
+  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$push: {'answers.$.upvotes': req.user.id}, $inc: {'answers.$.votecount': 1}}, function(err, num) {
     if(err) {
       return handleError(res)(err);
     }
@@ -458,7 +458,57 @@ export function voteUpAnswer(req, res) {
 }
 
 export function voteDownAnswer(req, res) {
-  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$inc: {'answers.$.votes': -1}}, function(err, num) {
+  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$push: {'answers.$.downvotes': req.user.id}, $inc: {'answers.$.votecount': -1}}, function(err, num) {
+    if(err) {
+      return handleError(res)(err);
+    }
+    if(num === 0) {
+      return res.send(404).end();
+    }
+    exports.show(req, res);
+  });
+}
+
+/* Unvote Up/Down Question */
+export function unvoteUp(req, res) {
+  Question.update({_id: req.params.id}, {$pull: {'upvotes': req.user.id}}, function(err, num) {
+    if(err) {
+      return handleError(res)(err);
+    }
+    if(num === 0) {
+      return res.send(404).end();
+    }
+    exports.show(req, res);
+  });
+}
+
+export function unvoteDown(req, res) {
+  Question.update({_id: req.params.id}, {$pull: {'downvotes': req.user.id}}, function(err, num) {
+    if(err) {
+      return handleError(res, err);
+    }
+    if(num === 0) {
+      return res.send(404).end();
+    }
+    exports.show(req, res);
+  });
+}
+
+/* Unvote Up/Down Answer */
+export function unvoteUpAnswer(req, res) {
+  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$pull: {'answers.$.upvotes': req.user.id}}, function(err, num) {
+    if(err) {
+      return handleError(res)(err);
+    }
+    if(num === 0) {
+      return res.send(404).end();
+    }
+    exports.show(req, res);
+  });
+}
+
+export function unvoteDownAnswer(req, res) {
+  Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$pull: {'answers.$.downvotes': req.user.id}}, function(err, num) {
     if(err) {
       return handleError(res)(err);
     }

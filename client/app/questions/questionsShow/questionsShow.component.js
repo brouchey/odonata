@@ -139,6 +139,14 @@ export class QuestionsShowComponent {
     });
   }
 
+  isUpVoted(obj) {
+    return this.isLoggedIn() && obj && obj.upvotes && obj.upvotes.indexOf(this.getCurrentUser()._id)!==-1;
+  }
+
+  isDownVoted(obj) {
+    return this.isLoggedIn() && obj && obj.upvotes && obj.downvotes.indexOf(this.getCurrentUser()._id)!==-1;
+  }
+
   voteUp(subpath) {
     this.$http.put('/api/questions/' + this.question._id + subpath + '/voteUp')
     .then(response => {
@@ -146,8 +154,22 @@ export class QuestionsShowComponent {
     });
   }
 
+  unvoteUp(subpath) {
+    this.$http.delete('/api/questions/' + this.question._id + subpath + '/voteUp')
+    .then(response => {
+      this.question = response.data;
+    });
+  }
+
   voteDown(subpath) {
     this.$http.put('/api/questions/' + this.question._id + subpath + '/voteDown')
+    .then(response => {
+      this.question = response.data;
+    });
+  }
+
+  unvoteDown(subpath) {
+    this.$http.delete('/api/questions/' + this.question._id + subpath + '/voteDown')
     .then(response => {
       this.question = response.data;
     });

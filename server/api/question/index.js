@@ -38,9 +38,13 @@ router.get('/next/:lastId', controller.scrollNextQuestions);
 router.get('/tags/all', controller.showAllTags);
 
 router.put('/:id/voteUp', auth.isAuthenticated(), controller.voteUp);
+router.delete('/:id/voteUp', auth.isAuthenticated(), controller.unvoteUp);
 router.put('/:id/voteDown', auth.isAuthenticated(), controller.voteDown);
+router.delete('/:id/voteDown', auth.isAuthenticated(), controller.unvoteDown);
 router.put('/:id/answers/:answerId/voteUp', auth.isAuthenticated(), controller.voteUpAnswer);
+router.delete('/:id/answers/:answerId/voteUp', auth.isAuthenticated(), controller.unvoteUpAnswer);
 router.put('/:id/answers/:answerId/voteDown', auth.isAuthenticated(), controller.voteDownAnswer);
+router.delete('/:id/answers/:answerId/voteDown', auth.isAuthenticated(), controller.unvoteDownAnswer);
 
 router.put('/:id/answers/:answerId/bestAnswer', auth.isAuthenticated(), controller.bestAnswer);
 

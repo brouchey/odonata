@@ -1,46 +1,46 @@
 /* navbar */
 .navbar-default {
-    // background-color: #F8F8F8;
-    // background-color: rgba(255, 255, 255, 0.9);
-    background: #24C6DC; /* fallback for old browsers */
-		background: -webkit-linear-gradient(to left, #24C6DC , #514A9D); /* Chrome 10-25, Safari 5.1-6 */
-		background: linear-gradient(to left, #24C6DC , #514A9D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    border-color: #E7E7E7;
+  // background-color: #F8F8F8;
+  // background-color: rgba(255, 255, 255, 0.9);
+  background: #24C6DC; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #24C6DC , #514A9D); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #24C6DC , #514A9D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-color: #E7E7E7;
 }
 /* title */
 .navbar-default .navbar-brand {
-    // color: #777;
-    color: #FFF;
+  // color: #777;
+  color: #FFF;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-    // color: #5E5E5E;
-    color: rgba(255, 255, 255, 0.7);
+  // color: #5E5E5E;
+  color: rgba(255, 255, 255, 0.7);
 }
 /* link */
 .navbar-default .navbar-nav > li > a {
-    // color: #777;
-    color: #FFF;
+  // color: #777;
+  color: #FFF;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-    // color: #333;
-    color: rgba(255, 255, 255, 0.7);
+  // color: #333;
+  color: rgba(255, 255, 255, 0.7);
 }
 .navbar-default .navbar-nav > .active > a, 
 .navbar-default .navbar-nav > .active > a:hover, 
 .navbar-default .navbar-nav > .active > a:focus {
-    color: #555;
-    background-color: #E7E7E7;
+  color: #555;
+  background-color: #E7E7E7;
 }
 .navbar-default .navbar-nav > .open > a, 
 .navbar-default .navbar-nav > .open > a:hover, 
 .navbar-default .navbar-nav > .open > a:focus {
-    color: #555;
-    background-color: #D5D5D5;
+  color: #555;
+  background-color: #D5D5D5;
 }
 /* caret */
 .navbar-default .navbar-nav > .dropdown > a .caret {
-    border-top-color: #777;
-    border-bottom-color: #777;
+  border-top-color: #777;
+  border-bottom-color: #777;
 }

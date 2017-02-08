@@ -11,7 +11,6 @@
 	.answer-content-triggers {
 		font-size: large;
 		padding: 0;
-		text-align: center;
 
 		.voteup-author,
 		.votedown-author {
@@ -26,11 +25,25 @@
 			border: 0;
 			opacity: 0.5;
 		}
+		.is-upvoted {
+			background: transparent;
+			border: 0;
+			i.fa.fa-chevron-circle-up {
+				color: #00BB00;
+			}
+		}
+		.is-downvoted {
+			background: transparent;
+			border: 0;
+			i.fa.fa-chevron-circle-down {
+				color: #BB0000;
+			}
+		}
 		.add-star,
 		.remove-star {
 			background: transparent;
 			border: 0;
-			opacity: 0.8;
+			opacity: 0.6;
 		}
 		.remove-star i.fa {
 			color: #CF7C00;
@@ -67,7 +80,6 @@
 			float: left;
 			font-size: small;
 			padding: 0;
-			text-align: center;
 		}
 		.question-comment-content,
 		.answer-comment-content {

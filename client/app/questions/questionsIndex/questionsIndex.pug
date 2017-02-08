@@ -1,15 +1,14 @@
 header#banner.hero-unit
-  .container
+  .container-fluid
     h1.lead Exchange
 br
 #question-index-container.container
   .row
     .col-md-12
-      .question-ask
+      .well.text-center
         p.lead Something to Ask ?
         p
           a.btn.btn-success(type='button', href='/questions/create') Ask a Question
-      hr
   //- .btn-group.btn-group-justified(role='group', aria-label="Question Types")
   //-   .btn-group(role='group')
   //-     button.btn.btn-default(type='button', ng-click='vm.loadQuestions()') All
@@ -81,7 +80,7 @@ br
   //-   hr
   .row
     .col-md-9
-      .question-search
+      .question-search.text-center
         p.lead All Questions
         form.navbar-form(role='search', ng-submit='vm.search(keyword)')
           .input-group
@@ -91,9 +90,9 @@ br
                 i.fa.fa-search
               button.btn.btn-info(type='reset', ng-click='vm.loadQuestions()') Reset
 
-      .alert.alert-warning(ng-if='vm.questions.length==0', role="alert") No Result Found !
+      .alert.alert-warning.text-center(ng-if='vm.questions.length==0', role="alert") No Result Found !
 
-      table.table.table-striped.questions-table(ng-if='vm.questions.length!=0')
+      table.table.questions-table(ng-if='vm.questions.length!=0')
         thead
           tr
             th(width='20') Votes
@@ -102,12 +101,12 @@ br
             th Question
         tbody(infinite-scroll='vm.nextPage()', infinite-scroll-disabled='busy || noMoreData')
           tr(ng-repeat='question in vm.questions track by $index')
-            td.question-votes
-              div {{question.votes}} 
-            td.question-answers
+            td.question-votes.text-center
+              div {{question.votecount}} 
+            td.question-answers.text-center
               .no-best(ng-if='!question.hasBest') {{question.answers.length}}
-              .has-best(ng-if='question.hasBest') {{question.answers.length}}
-            td.question-views
+              .has-best.bg-success(ng-if='question.hasBest') {{question.answers.length}}
+            td.question-views.text-center
               div {{question.views}}
             td.question-info
               .star
@@ -128,7 +127,7 @@ br
 
     .col-md-3
       .panel.panel-default
-        .panel-body.questions-count(style='')
+        .panel-body.questions-count.text-center
           p.lead 
             strong {{vm.questions.length}}
           p.lead Questions
@@ -136,14 +135,15 @@ br
         .panel-heading
           h3.panel-title Hot Trends
         .panel-body  Some Content
-      .panel.panel-warning
+      .panel.panel-primary
         .panel-heading
           h3.panel-title Featured
         .panel-body  Some Content
-      .panel.panel-success
+      .panel.panel-info
         .panel-heading
           h3.panel-title All Tags ({{vm.allTags.length}})
-        .panel-body
+        .panel-body(ng-if='vm.allTags.length!=0')
           ul.tags-list
             li(ng-repeat='tag in vm.allTags')
               span.label.label-info {{tag}}
+        .panel-body.alert.alert-warning.text-center(ng-if='vm.allTags.length==0', role="alert") No Tags Found

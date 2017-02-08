@@ -11,10 +11,6 @@ var QuestionSchema = new mongoose.Schema({
   },
   answers: [{
     content: String,
-    votes: {
-      type: Number,
-      default: 0,
-    },
     best: {
       type: Boolean,
       default: false,
@@ -38,15 +34,23 @@ var QuestionSchema = new mongoose.Schema({
         default: Date.now,
       }
     }],
+    upvotes: [{
+      type: mongoose.Schema.ObjectId,
+      ref: 'User'
+    }],
+    downvotes: [{
+      type: mongoose.Schema.ObjectId,
+      ref: 'User'
+    }],
+    votecount: {
+      type: Number,
+      default: 0,
+    },
   }],
   tags: [{
     text: String,
   }],
   views: {
-    type: Number,
-    default: 0,
-  },
-  votes: {
     type: Number,
     default: 0,
   },
@@ -73,6 +77,18 @@ var QuestionSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'User'
   }],
+  upvotes: [{
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  }],
+  downvotes: [{
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  }],
+  votecount: {
+    type: Number,
+    default: 0,
+  },
 });
 
 QuestionSchema.pre('find', function(next) {
