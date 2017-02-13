@@ -48,4 +48,6 @@ router.delete('/:id/answers/:answerId/voteDown', auth.isAuthenticated(), control
 
 router.put('/:id/answers/:answerId/bestAnswer', auth.isAuthenticated(), controller.bestAnswer);
 
+router.put('/:id/incViews', controller.incViews);
+
 module.exports = router;

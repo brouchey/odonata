@@ -48,6 +48,9 @@
  *
  * Best Answer :
  * PUT     /api/questions/:id/answers/:answerId/bestAnswer   -> bestAnswer
+  *
+ * View Counter :
+ * PUT     /api/questions/:id/incViews                      -> incViews
  */
 
 'use strict';
@@ -525,6 +528,22 @@ export function unvoteDownAnswer(req, res) {
 
 export function bestAnswer(req, res) {
   Question.update({_id: req.params.id, 'answers._id': req.params.answerId}, {$set: {'hasBest': true, 'answers.$.best': true}}, function(err, num) {
+    if(err) {
+      return handleError(res)(err);
+    }
+    if(num === 0) {
+      return res.send(404).end();
+    }
+    exports.show(req, res);
+  });
+}
+
+/*************************/
+/* View Counter API */
+/*************************/
+
+export function incViews(req, res) {
+  Question.update({_id: req.params.id}, {$inc: {'views': 1}}, function(err, num) {
     if(err) {
       return handleError(res)(err);
     }

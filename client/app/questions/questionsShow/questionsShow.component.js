@@ -8,9 +8,10 @@ import routes from './questionsShow.routes';
 export class QuestionsShowComponent {
   $http;
   $routeParams;
-  $location;
   isLoggedIn: Function;
   getCurrentUser: Function;
+  $location;
+  $timeout;
   question = {};
   answer = {};
   newAnswer = {};
@@ -18,24 +19,32 @@ export class QuestionsShowComponent {
   newComment = {};
 
   /*@ngInject*/
-  constructor($scope, $http, $routeParams, Auth, $location) {
+  constructor($scope, $http, $routeParams, Auth, $location, $timeout) {
     this.$scope = $scope;
     this.$http = $http;
     this.$routeParams = $routeParams;
     this.$location = $location;
     this.isLoggedIn = Auth.isLoggedInSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
+    this.$timeout = $timeout;
   }
 
   $onInit() {
     this.loadQuestion();
+    this.viewTimeout();
   }
 
   loadQuestion() {
     this.$http.get('/api/questions/' + this.$routeParams.id)
-      .then(response => {
-        this.question = response.data;
-      });
+    .then(response => {
+      this.question = response.data;
+    });
+  }
+
+  viewTimeout() {
+    this.$timeout(function() {
+      this.$http.put('/api/questions/' + this.question._id + '/incViews');
+    }.bind(this), 60000); // 60s - 1min
   }
 
   submitAnswer() {

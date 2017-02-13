@@ -140,10 +140,10 @@ br
             button.voteup-cannot(ng-if="vm.isOwner(answer)", type='button', uib-tooltip='You cannot vote for your Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
             //- Not Owner, already Upvoted for this Answer => Non-Clickable Green Arrow
-            button.is-upvoted(ng-if="!vm.isOwner(answer) && vm.isUpVoted(answer)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
+            button.is-upvoted(ng-if="!vm.isOwner(answer) && vm.isUpVoted(answer)", type='button', uib-tooltip='You already voted for this Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
             //- Not Owner, already Downvoted for this Answer => Non-Clickable Lightgrey Arrow
-            button.voteup-cannot(ng-if="!vm.isOwner(answer) && vm.isDownVoted(answer)", type='button', uib-tooltip='You already voted for this question', tooltip-placement='left')
+            button.voteup-cannot(ng-if="!vm.isOwner(answer) && vm.isDownVoted(answer)", type='button', uib-tooltip='You already voted for this Answer', tooltip-placement='left')
               i.fa.fa-chevron-circle-up
             //- Logged In and Not Owner, no Upvote and no Downvote => Can vote : Clickable Dark Grey Arrow
             button.voteup(ng-if="vm.isLoggedIn() && !vm.isOwner(answer) && !vm.isUpVoted(answer) && !vm.isDownVoted(answer)", type='button', ng-click="vm.voteUp('/answers/' + answer._id)")
