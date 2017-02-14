@@ -14,8 +14,8 @@ export class QuestionsIndexComponent {
   allTags = [];
   myQuestions = [];
   favQuestions = [];
-  busy = true;
-  noMoreData = false;
+  // busy = true;
+  // noMoreData = false;
 
   /*@ngInject*/
   constructor($scope, $http, $routeParams, Auth) {
@@ -37,10 +37,10 @@ export class QuestionsIndexComponent {
     this.$http.get('/api/questions/')
       .then(response => {
         this.questions = response.data;
-        if(this.questions.length < 5) {
-          this.noMoreData = true;
-        }
-        this.busy = false;
+        // if(this.questions.length < 5) {
+        //   this.noMoreData = true;
+        // }
+        // this.busy = false;
       });
   }
 
@@ -78,19 +78,34 @@ export class QuestionsIndexComponent {
     }
   }
 
+  // scrollPage() {
+  //   if(this.busy) { 
+  //     return;
+  //   }
+  //   this.busy = true;
+  //   var lastId = this.questions[this.questions.length-1]._id;
+  //   this.$http.get('/api/questions/scroll/' + lastId)
+  //   .then(response => {
+  //     this.questions = this.questions.concat(response.data);
+  //     this.busy = false;
+  //     if(this.questions.length === 0) {
+  //       this.noMoreData = true;
+  //     }
+  //   });
+  // };
+
   nextPage() {
-    if(this.busy) { 
-      return;
-    }
-    this.busy = true;
     var lastId = this.questions[this.questions.length-1]._id;
     this.$http.get('/api/questions/next/' + lastId)
     .then(response => {
-      this.questions = this.questions.concat(response.data);
-      this.busy = false;
-      if(this.questions.length === 0) {
-        this.noMoreData = true;
-      }
+      this.questions = response.data;
+    });
+  };
+  prevPage() {
+    var firstId = this.questions[0]._id;
+    this.$http.get('/api/questions/prev/' + firstId)
+    .then(response => {
+      this.questions = response.data;
     });
   };
 

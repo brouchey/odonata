@@ -99,7 +99,8 @@ br
             th(width='20') Answers
             th(width='20') Views
             th Question
-        tbody(infinite-scroll='vm.nextPage()', infinite-scroll-disabled='busy || noMoreData')
+        //- tbody(infinite-scroll='vm.scrollPage()', infinite-scroll-disabled='busy || noMoreData')
+        tbody
           tr(ng-repeat='question in vm.questions track by $index')
             td.question-votes.text-center
               div {{question.votecount}} 
@@ -123,7 +124,7 @@ br
                   span.label.label-info {{tag.text}}
                   span &nbsp;
               .clearfix
-        div(ng-show='busy') Loading Questions...
+        //- div(ng-show='busy') Loading Questions...
 
     .col-md-3
       .panel.panel-default

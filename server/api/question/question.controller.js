@@ -32,10 +32,12 @@
  * GET     /api/questions/users/:userId/favorites   ->  showUserFavoritesQuestions
  * 
  * Search Questions :
- * GET     /api/questions/:keyword   ->  searchQuestions
+ * GET     /api/questions/search/:keyword   ->  searchQuestions
  * 
- * Scroll Questions :
- * GET     /api/questions/scroll   ->  scrollNextQuestions
+ * Scroll/Next/Previous Questions :
+ * GET     /api/questions/scroll/:lastId    ->  scrollNextQuestions
+ * GET     /api/questions/next/:lastId      ->  nextQuestions
+ * GET     /api/questions/prev/:firstId      ->  prevQuestions
  *
  * Tags :
  * GET     /api/questions/tags/all   ->  showAllTags
@@ -47,10 +49,10 @@
  * PUT     /api/questions/:id/answers/:answerId/voteDown  -> voteDownAnswer
  *
  * Best Answer :
- * PUT     /api/questions/:id/answers/:answerId/bestAnswer   -> bestAnswer
+ * PUT     /api/questions/:id/answers/:answerId/bestAnswer  -> bestAnswer
   *
  * View Counter :
- * PUT     /api/questions/:id/incViews                      -> incViews
+ * PUT     /api/questions/:id/incViews    -> incViews
  */
 
 'use strict';
@@ -397,12 +399,29 @@ export function searchQuestions(req, res) {
 }
 
 /*************************/
-/* Scroll Next Questions API */
+/* Scroll/Next/Pevious Questions API */
 /*************************/
 
+/* Scroll */
 export function scrollNextQuestions(req, res) {
   var lastId = req.params.lastId;
-  return Question.find({_id: {$lt: lastId}}).sort({createdAt: -1}).limit(5).exec()
+  return Question.find({_id: {$lt: lastId}}).sort({createdAt: -1}).limit(10).exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+/* Next Questions */
+export function nextQuestions(req, res) {
+  var lastId = req.params.lastId;
+  return Question.find({_id: {$lt: lastId}}).sort({createdAt: -1}).limit(10).exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+/* Previous Questions */
+export function prevQuestions(req, res) {
+  var firstId = req.params.firstId;
+  return Question.find({_id: {$gt: firstId}}).sort({createdAt: -1}).limit(10).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

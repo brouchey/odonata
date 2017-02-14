@@ -33,7 +33,10 @@ router.get('/users/:userId', auth.isAuthenticated(), controller.showUserQuestion
 router.get('/users/:userId/favorites', auth.isAuthenticated(), controller.showUserFavoritesQuestions);
 
 router.get('/search/:keyword', auth.isAuthenticated(), controller.searchQuestions);
-router.get('/next/:lastId', controller.scrollNextQuestions);
+
+router.get('/scroll/:lastId', controller.scrollNextQuestions);
+router.get('/next/:lastId', controller.nextQuestions);
+router.get('/prev/:firstId', controller.prevQuestions);
 
 router.get('/tags/all', controller.showAllTags);
 

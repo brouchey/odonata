@@ -11,7 +11,7 @@ import 'angular-socket-io';
 const ngRoute = require('angular-route');
 import uiBootstrap from 'angular-ui-bootstrap';
 import 'ng-tags-input';
-import 'ng-infinite-scroll';
+// import 'ng-infinite-scroll';
 
 import {
   routeConfig
@@ -48,7 +48,7 @@ angular.module('odonataApp', [
   ngRoute,
   uiBootstrap,
   'ngTagsInput',
-  'infinite-scroll',
+  // 'infinite-scroll',
   _Auth,
   account,
   admin,
