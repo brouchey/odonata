@@ -41,6 +41,7 @@ export class QuestionsIndexComponent {
     this.$http.get('/api/questions/')
       .then(response => {
         this.questions = response.data;
+        this.currentPage = 1;
         this.filteredQuestions = this.questions.slice((this.currentPage - 1), this.itemsPerPage);
         // if(this.questions.length < 5) {
         //   this.noMoreData = true;

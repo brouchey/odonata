@@ -106,11 +106,13 @@ br
           //- tbody(infinite-scroll='vm.scrollPage()', infinite-scroll-disabled='busy || noMoreData')
           tbody
             tr(ng-repeat='question in vm.filteredQuestions track by $index')
-              td.question-votes.text-center {{question.votecount}} 
+              td.question-votes.text-center
+                div {{question.votecount}} 
               td.question-answers.text-center
                 .no-best(ng-if='!question.hasBest') {{question.answers.length}}
                 .has-best.bg-success(ng-if='question.hasBest') {{question.answers.length}}
-              td.question-views.text-center {{question.views}}
+              td.question-views.text-center
+                div {{question.views}}
               td.question-info
                 .star
                   i.fa.fa-star(ng-if='vm.isStar(question)')
