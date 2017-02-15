@@ -17,10 +17,6 @@
 }
 
 #question-index-container {
-
-  .question-search {
-    padding-bottom: 20px;
-  }
   
   .questions-table tbody {
     
@@ -49,12 +45,16 @@
         }
       }
       a.question-link {
-        font-size: large;
+        font-size: medium;
       }
       .question-author {
         float: right;
       }
     }
+  }
+
+  .question-search-buttons {
+    margin-top: 10px;
   }
 
   .tags-list {

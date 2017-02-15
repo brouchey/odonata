@@ -35,8 +35,6 @@ router.get('/users/:userId/favorites', auth.isAuthenticated(), controller.showUs
 router.get('/search/:keyword', auth.isAuthenticated(), controller.searchQuestions);
 
 router.get('/scroll/:lastId', controller.scrollNextQuestions);
-router.get('/next/:lastId', controller.nextQuestions);
-router.get('/prev/:firstId', controller.prevQuestions);
 
 router.get('/tags/all', controller.showAllTags);
 

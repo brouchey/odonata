@@ -1,6 +1,7 @@
 header#banner.hero-unit
   .container-fluid
     h1.lead Exchange
+    h2.lead {{vm.questions.length}} Questions
 br
 #question-index-container.container
   .row
@@ -80,7 +81,7 @@ br
   //-   hr
   .row
     .col-md-9
-      .question-search.text-center
+      //- .question-search.text-center
         p.lead All Questions
         form.navbar-form(role='search', ng-submit='vm.search(keyword)')
           .input-group
@@ -92,51 +93,61 @@ br
 
       .alert.alert-warning.text-center(ng-if='vm.questions.length==0', role="alert") No Result Found !
 
-      table.table.questions-table(ng-if='vm.questions.length!=0')
-        thead
-          tr
-            th(width='20') Votes
-            th(width='20') Answers
-            th(width='20') Views
-            th Question
-        //- tbody(infinite-scroll='vm.scrollPage()', infinite-scroll-disabled='busy || noMoreData')
-        tbody
-          tr(ng-repeat='question in vm.questions track by $index')
-            td.question-votes.text-center
-              div {{question.votecount}} 
-            td.question-answers.text-center
-              .no-best(ng-if='!question.hasBest') {{question.answers.length}}
-              .has-best.bg-success(ng-if='question.hasBest') {{question.answers.length}}
-            td.question-views.text-center
-              div {{question.views}}
-            td.question-info
-              .star
-                i.fa.fa-star(ng-if='vm.isStar(question)')
-                //- i.fa.fa-star-o(ng-if='!vm.isStar(question)')
-              a.question-link(ng-href='/questions/show/{{question._id}}', style='font-size: large') {{question.title}}
-              .clearfix
-              .question-author
-                | by 
-                a(ng-href='/users/{{question.user._id}}') {{question.user.name}}
-                |  &middot; {{question.createdAt|date:'medium'}}
-              .question-tags
-                span(ng-repeat='tag in question.tags')
-                  span.label.label-info {{tag.text}}
-                  span &nbsp;
-              .clearfix
-        //- div(ng-show='busy') Loading Questions...
+      div(ng-if='vm.questions.length!=0')
+        ul(uib-pagination, total-items='vm.questions.length', ng-model='vm.currentPage', max-size='vm.maxSize', items-per-page='vm.itemsPerPage', ng-change='vm.pageChanged()')
+
+        table.table.questions-table
+          thead
+            tr
+              th(width='20') Votes
+              th(width='20') Answers
+              th(width='20') Views
+              th Question
+          //- tbody(infinite-scroll='vm.scrollPage()', infinite-scroll-disabled='busy || noMoreData')
+          tbody
+            tr(ng-repeat='question in vm.filteredQuestions track by $index')
+              td.question-votes.text-center
+                div {{question.votecount}} 
+              td.question-answers.text-center
+                .no-best(ng-if='!question.hasBest') {{question.answers.length}}
+                .has-best.bg-success(ng-if='question.hasBest') {{question.answers.length}}
+              td.question-views.text-center
+                div {{question.views}}
+              td.question-info
+                .star
+                  i.fa.fa-star(ng-if='vm.isStar(question)')
+                  //- i.fa.fa-star-o(ng-if='!vm.isStar(question)')
+                a.question-link(ng-href='/questions/show/{{question._id}}', style='font-size: large') {{question.title}}
+                .clearfix
+                .question-author
+                  | by 
+                  a(ng-href='/users/{{question.user._id}}') {{question.user.name}}
+                  |  &middot; {{question.createdAt|date:'medium'}}
+                .question-tags
+                  span(ng-repeat='tag in question.tags')
+                    span.label.label-info {{tag.text}}
+                    span &nbsp;
+                .clearfix
+
+          //- div(ng-show='busy') Loading Questions...
+        ul(uib-pagination, total-items='vm.questions.length', ng-model='vm.currentPage', max-size='vm.maxSize', items-per-page='vm.itemsPerPage', ng-change='vm.pageChanged()')
 
     .col-md-3
       .panel.panel-default
-        .panel-body.questions-count.text-center
-          p.lead 
-            strong {{vm.questions.length}}
-          p.lead Questions
+        .panel-heading
+          h3.panel-title Live Search
+        .panel-body.text-center
+          form.navbar-form(role='search', ng-submit='vm.search(keyword)')
+            input.form-control(type='text', placeholder='Search', ng-model='keyword')
+            .btn-group.question-search-buttons
+              button.btn.btn-default(type='submit') Go
+                //- i.fa.fa-search
+              button.btn.btn-info(type='reset', ng-click='vm.loadQuestions()') Reset
       .panel.panel-danger
         .panel-heading
           h3.panel-title Hot Trends
         .panel-body  Some Content
-      .panel.panel-primary
+      .panel.panel-warning
         .panel-heading
           h3.panel-title Featured
         .panel-body  Some Content

@@ -11,11 +11,15 @@ export class QuestionsIndexComponent {
   isLoggedIn: Function;
   getCurrentUser: Function;
   questions = [];
+  filteredQuestions = [];
   allTags = [];
-  myQuestions = [];
-  favQuestions = [];
+  // myQuestions = [];
+  // favQuestions = [];
   // busy = true;
   // noMoreData = false;
+  currentPage = 1;
+  itemsPerPage = 10;
+  maxSize = 7;
 
   /*@ngInject*/
   constructor($scope, $http, $routeParams, Auth) {
@@ -37,6 +41,7 @@ export class QuestionsIndexComponent {
     this.$http.get('/api/questions/')
       .then(response => {
         this.questions = response.data;
+        this.filteredQuestions = this.questions.slice((this.currentPage - 1), this.itemsPerPage);
         // if(this.questions.length < 5) {
         //   this.noMoreData = true;
         // }
@@ -51,19 +56,19 @@ export class QuestionsIndexComponent {
       });
   }
 
-  loadMyQuestions() {
-    this.$http.get('/api/questions/users/' + this.getCurrentUser()._id)
-      .then(response => {
-        this.myQuestions = response.data;
-      });
-  }
+  // loadMyQuestions() {
+  //   this.$http.get('/api/questions/users/' + this.getCurrentUser()._id)
+  //     .then(response => {
+  //       this.myQuestions = response.data;
+  //     });
+  // }
 
-  loadFavoritesQuestions() {
-    this.$http.get('/api/questions/users/' + this.getCurrentUser()._id + '/favorites')
-      .then(response => {
-        this.favQuestions = response.data;
-      });
-  }
+  // loadFavoritesQuestions() {
+  //   this.$http.get('/api/questions/users/' + this.getCurrentUser()._id + '/favorites')
+  //     .then(response => {
+  //       this.favQuestions = response.data;
+  //     });
+  // }
 
   isStar(obj) {
     return this.isLoggedIn() && obj && obj.stars && obj.stars.indexOf(this.getCurrentUser()._id)!==-1;
@@ -74,6 +79,7 @@ export class QuestionsIndexComponent {
       this.$http.get('/api/questions/search/' + keyword)
       .then(response => {
         this.questions = response.data;
+        this.filteredQuestions = this.questions.slice((this.currentPage - 1), this.itemsPerPage);
       });
     }
   }
@@ -94,20 +100,15 @@ export class QuestionsIndexComponent {
   //   });
   // };
 
-  nextPage() {
-    var lastId = this.questions[this.questions.length-1]._id;
-    this.$http.get('/api/questions/next/' + lastId)
-    .then(response => {
-      this.questions = response.data;
-    });
-  };
-  prevPage() {
-    var firstId = this.questions[0]._id;
-    this.$http.get('/api/questions/prev/' + firstId)
-    .then(response => {
-      this.questions = response.data;
-    });
-  };
+  questionsToDisplay() {
+    var begin = ((this.currentPage - 1) * this.itemsPerPage);
+    var end = begin + this.itemsPerPage;
+    this.filteredQuestions = this.questions.slice(begin, end);
+  }
+
+  pageChanged() {
+    this.questionsToDisplay();
+  }
 
 }
 

@@ -34,10 +34,8 @@
  * Search Questions :
  * GET     /api/questions/search/:keyword   ->  searchQuestions
  * 
- * Scroll/Next/Previous Questions :
+ * Scroll Questions :
  * GET     /api/questions/scroll/:lastId    ->  scrollNextQuestions
- * GET     /api/questions/next/:lastId      ->  nextQuestions
- * GET     /api/questions/prev/:firstId      ->  prevQuestions
  *
  * Tags :
  * GET     /api/questions/tags/all   ->  showAllTags
@@ -131,7 +129,8 @@ function handleUnauthorized(req, res) {
 // Gets a list of Questions
 export function index(req, res) {
   // return Question.find().exec()
-  return Question.find().sort({createdAt: -1}).limit(10).exec()
+  // return Question.find().sort({createdAt: -1}).limit(10).exec()
+  return Question.find().sort({createdAt: -1}).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -399,29 +398,12 @@ export function searchQuestions(req, res) {
 }
 
 /*************************/
-/* Scroll/Next/Pevious Questions API */
+/* Scroll Next Questions API */
 /*************************/
 
-/* Scroll */
 export function scrollNextQuestions(req, res) {
   var lastId = req.params.lastId;
   return Question.find({_id: {$lt: lastId}}).sort({createdAt: -1}).limit(10).exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
-
-/* Next Questions */
-export function nextQuestions(req, res) {
-  var lastId = req.params.lastId;
-  return Question.find({_id: {$lt: lastId}}).sort({createdAt: -1}).limit(10).exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
-
-/* Previous Questions */
-export function prevQuestions(req, res) {
-  var firstId = req.params.firstId;
-  return Question.find({_id: {$gt: firstId}}).sort({createdAt: -1}).limit(10).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
