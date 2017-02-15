@@ -94,7 +94,7 @@ br
       .alert.alert-warning.text-center(ng-if='vm.questions.length==0', role="alert") No Result Found !
 
       div(ng-if='vm.questions.length!=0')
-        ul(uib-pagination, total-items='vm.questions.length', ng-model='vm.currentPage', max-size='vm.maxSize', items-per-page='vm.itemsPerPage', ng-change='vm.pageChanged()')
+        ul(ng-if='vm.questions.length>vm.itemsPerPage', uib-pagination, total-items='vm.questions.length', ng-model='vm.currentPage', max-size='vm.maxSize', items-per-page='vm.itemsPerPage', ng-change='vm.pageChanged()')
 
         table.table.questions-table
           thead
@@ -130,7 +130,7 @@ br
                 .clearfix
 
           //- div(ng-show='busy') Loading Questions...
-        ul(uib-pagination, total-items='vm.questions.length', ng-model='vm.currentPage', max-size='vm.maxSize', items-per-page='vm.itemsPerPage', ng-change='vm.pageChanged()')
+        ul(ng-if='vm.questions.length>vm.itemsPerPage', uib-pagination, total-items='vm.questions.length', ng-model='vm.currentPage', max-size='vm.maxSize', items-per-page='vm.itemsPerPage', ng-change='vm.pageChanged()')
 
     .col-md-3
       .panel.panel-default
