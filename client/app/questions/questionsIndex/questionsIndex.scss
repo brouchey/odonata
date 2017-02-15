@@ -18,24 +18,24 @@
 
 #question-index-container {
   
+  .questions-table thead {
+    font-size: small;
+
+    .questions-table-head {
+      width: 20px;
+    }
+  }
+
   .questions-table tbody {
     
     .question-votes,
+    .question-answers,
     .question-views {
+      font-size: x-large;
       vertical-align: middle;
-      div {
-        font-size: x-large;
-      }
     }
-    .question-answers {
-      vertical-align: middle;
-      .no-best {
-        font-size: x-large;
-      }
-      .has-best {
-        font-size: x-large;
-        border: 1px solid #00FF00;
-      }
+    .question-answers .has-best {
+      border: 1px solid #00FF00;
     }
     .question-info {
       .star {

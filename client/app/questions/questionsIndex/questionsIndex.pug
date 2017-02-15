@@ -99,25 +99,23 @@ br
         table.table.questions-table
           thead
             tr
-              th(width='20') Votes
-              th(width='20') Answers
-              th(width='20') Views
+              th.questions-table-head Votes
+              th.questions-table-head Answers
+              th.questions-table-head Views
               th Question
           //- tbody(infinite-scroll='vm.scrollPage()', infinite-scroll-disabled='busy || noMoreData')
           tbody
             tr(ng-repeat='question in vm.filteredQuestions track by $index')
-              td.question-votes.text-center
-                div {{question.votecount}} 
+              td.question-votes.text-center {{question.votecount}} 
               td.question-answers.text-center
                 .no-best(ng-if='!question.hasBest') {{question.answers.length}}
                 .has-best.bg-success(ng-if='question.hasBest') {{question.answers.length}}
-              td.question-views.text-center
-                div {{question.views}}
+              td.question-views.text-center {{question.views}}
               td.question-info
                 .star
                   i.fa.fa-star(ng-if='vm.isStar(question)')
                   //- i.fa.fa-star-o(ng-if='!vm.isStar(question)')
-                a.question-link(ng-href='/questions/show/{{question._id}}', style='font-size: large') {{question.title}}
+                a.question-link(ng-href='/questions/show/{{question._id}}') {{question.title}}
                 .clearfix
                 .question-author
                   | by 
