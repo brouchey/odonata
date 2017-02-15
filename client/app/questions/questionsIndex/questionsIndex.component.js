@@ -79,7 +79,7 @@ export class QuestionsIndexComponent {
       this.$http.get('/api/questions/search/' + keyword)
       .then(response => {
         this.questions = response.data;
-        this.filteredQuestions = this.questions.slice((this.currentPage - 1), this.itemsPerPage);
+        this.filteredQuestions = response.data.slice((this.currentPage - 1), this.itemsPerPage);
       });
     }
   }
