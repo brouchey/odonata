@@ -30,6 +30,7 @@ body {
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'admin/admin';
+@import 'account/profile/profile';
 @import 'dashboard/dashboard';
 @import 'main/main';
 @import 'questions/questionsCreate/questionsCreate';
