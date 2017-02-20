@@ -2,137 +2,81 @@ header#banner.hero-unit
   .container-fluid
     h1.lead Exchange
     h2.lead {{vm.questions.length}} Questions
+    p
+      a.btn.btn-success(type='button', href='/questions/create') Ask New Question
 br
 #question-index-container.container
   .row
-    .col-md-12
-      .well.text-center
-        p.lead Something to Ask ?
-        p
-          a.btn.btn-success(type='button', href='/questions/create') Ask a Question
-  //- .btn-group.btn-group-justified(role='group', aria-label="Question Types")
-  //-   .btn-group(role='group')
-  //-     button.btn.btn-default(type='button', ng-click='vm.loadQuestions()') All
-  //-   .btn-group(role='group')
-  //-     button.btn.btn-default(type='button', ng-click='vm.loadMyQuestions()') Mine
-  //-   .btn-group(role='group')
-  //-     button.btn.btn-default(type='button', ng-click='vm.loadFavoritesQuestions()') Favorites
-  //- br
-  //- .container
-  //-   .row
-  //-     .col-xs-12.col-lg-6
-  //-       div.alert
-  //-         p.lead My Last 5 Questions
-  //-         table.table.table-striped
-  //-           thead
-  //-             tr
-  //-               th(width='20') Stars
-  //-               th(width='20') Answers
-  //-               th Question
-  //-           tbody
-  //-             tr(ng-repeat='myQuestion in vm.myQuestions')
-  //-               td(style='text-align: center; vertical-align:middle')
-  //-                 div(style='font-size: large;') {{myQuestion.stars.length}}
-  //-               td(style='text-align: center; vertical-align:middle')
-  //-                 div(style='font-size: large;') {{myQuestion.answers.length}}
-  //-               td
-  //-                 div(style='float: right;')
-  //-                   span.glyphicon.glyphicon-star(ng-if='vm.isStar(myQuestion)', style='color: #CF7C00;')
-  //-                   span.glyphicon.glyphicon-star-empty(ng-if='!vm.isStar(myQuestion)')
-  //-                 a(ng-href='/questions/show/{{myQuestion._id}}', style='font-size: large') {{myQuestion.title}}
-  //-                 .clearfix
-  //-                 div(style='float: right;')
-  //-                   | by 
-  //-                   a(ng-href='/users/{{myQuestion.user._id}}') {{myQuestion.user.name}}
-  //-                   |  &middot; {{myQuestion.createdAt|date:'mediumDate'}}
-  //-                 div
-  //-                   span(ng-repeat='tag in myQuestion.tags')
-  //-                     span.label.label-info {{tag.text}}
-  //-                 .clearfix
-  //-     .col-xs-12.col-lg-6
-  //-       div.alert
-  //-         p.lead Last 5 Favorites
-  //-         table.table.table-striped
-  //-           thead
-  //-             tr
-  //-               th(width='20') Stars
-  //-               th(width='20') Answers
-  //-               th Question
-  //-           tbody
-  //-             tr(ng-repeat='favQuestion in vm.favQuestions')
-  //-               td(style='text-align: center; vertical-align:middle')
-  //-                 div(style='font-size: large;') {{favQuestion.stars.length}}
-  //-               td(style='text-align: center; vertical-align:middle')
-  //-                 div(style='font-size: large;') {{favQuestion.answers.length}}
-  //-               td
-  //-                 div(style='float: right;')
-  //-                   span.glyphicon.glyphicon-star(ng-if='vm.isStar(favQuestion)', style='color: #CF7C00;')
-  //-                   span.glyphicon.glyphicon-star-empty(ng-if='!vm.isStar(favQuestion)')
-  //-                 a(ng-href='/questions/show/{{favQuestion._id}}', style='font-size: large') {{favQuestion.title}}
-  //-                 .clearfix
-  //-                 div(style='float: right;')
-  //-                   | by 
-  //-                   a(ng-href='/users/{{favQuestion.user._id}}') {{favQuestion.user.name}}
-  //-                   |  &middot; {{favQuestion.createdAt|date:'mediumDate'}}
-  //-                 div
-  //-                   span(ng-repeat='tag in favQuestion.tags')
-  //-                     span.label.label-info {{tag.text}}
-  //-                 .clearfix
-  //-   hr
-  .row
+    //- Left Side
     .col-md-9
-      //- .question-search.text-center
-        p.lead All Questions
-        form.navbar-form(role='search', ng-submit='vm.search(keyword)')
-          .input-group
-            input.form-control(type='text', placeholder='Search', ng-model='keyword')
-            span.input-group-btn
-              button.btn.btn-default(type='submit')
-                i.fa.fa-search
-              button.btn.btn-info(type='reset', ng-click='vm.loadQuestions()') Reset
 
-      .alert.alert-warning.text-center(ng-if='vm.questions.length==0', role="alert") No Result Found !
+      //- Action Buttons
+      .row.questions-action-buttons
+        .col-xs-4
+          .text-center
+            button.btn.btn-primary(type='button', ng-click='vm.loadQuestions()') Show All Questions
+        .col-xs-4
+          .text-center
+            button.btn.btn-info(type='button', ng-click='vm.loadMyQuestions()') Show My Questions
+        .col-xs-4
+          .text-center
+            button.btn.btn-warning(type='button', ng-click='vm.loadFavoritesQuestions()') Show Favorites
 
-      div(ng-if='vm.questions.length!=0')
-        ul(ng-if='vm.questions.length>vm.itemsPerPage', uib-pagination, total-items='vm.questions.length', ng-model='vm.currentPage', max-size='vm.maxSize', items-per-page='vm.itemsPerPage', ng-change='vm.pageChanged()')
+      //- Questions Display
+      .row
+        .col-md-12
+          //- if No Questions, show Alert
+          .alert.alert-warning.text-center(ng-if='vm.questions.length==0', role="alert") No Result Found !
 
-        table.table.questions-table
-          thead
-            tr
-              th.questions-table-head Votes
-              th.questions-table-head Answers
-              th.questions-table-head Views
-              th Question
-          //- tbody(infinite-scroll='vm.scrollPage()', infinite-scroll-disabled='busy || noMoreData')
-          tbody
-            tr(ng-repeat='question in vm.filteredQuestions track by $index')
-              td.question-votes.text-center
-                div {{question.votecount}} 
-              td.question-answers.text-center
-                .no-best(ng-if='!question.hasBest') {{question.answers.length}}
-                .has-best.bg-success(ng-if='question.hasBest') {{question.answers.length}}
-              td.question-views.text-center
-                div {{question.views}}
-              td.question-info
-                .star
-                  i.fa.fa-star(ng-if='vm.isStar(question)')
-                  //- i.fa.fa-star-o(ng-if='!vm.isStar(question)')
-                a.question-link(ng-href='/questions/show/{{question._id}}') {{question.title}}
-                .clearfix
-                .question-author
-                  | by 
-                  a(ng-href='/users/{{question.user._id}}') {{question.user.name}}
-                  |  &middot; {{question.createdAt|date:'medium'}}
-                .question-tags
-                  span(ng-repeat='tag in question.tags')
-                    span.label.label-info {{tag.text}}
-                    span &nbsp;
-                .clearfix
+          //- if Questions, show Questions
+          div(ng-if='vm.questions.length!=0')
 
-          //- div(ng-show='busy') Loading Questions...
-        ul(ng-if='vm.questions.length>vm.itemsPerPage', uib-pagination, total-items='vm.questions.length', ng-model='vm.currentPage', max-size='vm.maxSize', items-per-page='vm.itemsPerPage', ng-change='vm.pageChanged()')
+            //- Pagination Top
+            ul(ng-if='vm.questions.length>vm.itemsPerPage', uib-pagination, total-items='vm.questions.length', ng-model='vm.currentPage', max-size='vm.maxSize', items-per-page='vm.itemsPerPage', ng-change='vm.pageChanged()')
 
+            //- Questions Table
+            table.table.questions-table
+              thead
+                tr
+                  th.questions-table-head Votes
+                  th.questions-table-head Answers
+                  th.questions-table-head Views
+                  th Question
+              //- tbody(infinite-scroll='vm.scrollPage()', infinite-scroll-disabled='busy || noMoreData')
+              tbody
+                tr(ng-repeat='question in vm.filteredQuestions track by $index')
+                  td.question-votes.text-center
+                    div {{question.votecount}} 
+                  td.question-answers.text-center
+                    .no-best(ng-if='!question.hasBest') {{question.answers.length}}
+                    .has-best.bg-success(ng-if='question.hasBest') {{question.answers.length}}
+                  td.question-views.text-center
+                    div {{question.views}}
+                  td.question-info
+                    .star
+                      i.fa.fa-star(ng-if='vm.isStar(question)')
+                      //- i.fa.fa-star-o(ng-if='!vm.isStar(question)')
+                    a.question-link(ng-href='/questions/show/{{question._id}}') {{question.title}}
+                    .clearfix
+                    .question-author
+                      | by 
+                      a(ng-href='/users/{{question.user._id}}') {{question.user.name}}
+                      |  &middot; {{question.createdAt|date:'medium'}}
+                    .question-tags
+                      span(ng-repeat='tag in question.tags')
+                        span.label.label-info {{tag.text}}
+                        span &nbsp;
+                    .clearfix
+
+              //- div(ng-show='busy') Loading Questions...
+
+            //- Pagination Bottom
+            ul(ng-if='vm.questions.length>vm.itemsPerPage', uib-pagination, total-items='vm.questions.length', ng-model='vm.currentPage', max-size='vm.maxSize', items-per-page='vm.itemsPerPage', ng-change='vm.pageChanged()')
+
+    //- Right Side
     .col-md-3
+
+      //- Live Search
       .panel.panel-default
         .panel-heading
           h3.panel-title Live Search
@@ -143,14 +87,20 @@ br
               button.btn.btn-default(type='submit') Go
                 //- i.fa.fa-search
               button.btn.btn-info(type='reset', ng-click='vm.loadQuestions()') Reset
+
+      //- Hot Trends
       .panel.panel-danger
         .panel-heading
           h3.panel-title Hot Trends
         .panel-body  Some Content
+
+      //- Featured
       .panel.panel-warning
         .panel-heading
           h3.panel-title Featured
         .panel-body  Some Content
+
+      //- All Tags
       .panel.panel-info
         .panel-heading
           h3.panel-title All Tags ({{vm.allTags.length}})

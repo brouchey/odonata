@@ -13,8 +13,6 @@ export class QuestionsIndexComponent {
   questions = [];
   filteredQuestions = [];
   allTags = [];
-  // myQuestions = [];
-  // favQuestions = [];
   // busy = true;
   // noMoreData = false;
   currentPage = 1;
@@ -33,8 +31,6 @@ export class QuestionsIndexComponent {
   $onInit() {
     this.loadQuestions();
     this.loadAllTags();
-    // this.loadMyQuestions();
-    // this.loadFavoritesQuestions();
   }
 
   loadQuestions() {
@@ -57,19 +53,21 @@ export class QuestionsIndexComponent {
       });
   }
 
-  // loadMyQuestions() {
-  //   this.$http.get('/api/questions/users/' + this.getCurrentUser()._id)
-  //     .then(response => {
-  //       this.myQuestions = response.data;
-  //     });
-  // }
+  loadMyQuestions() {
+    this.$http.get('/api/questions/users/' + this.getCurrentUser()._id)
+      .then(response => {
+        this.questions = response.data;
+        this.filteredQuestions = response.data.slice((this.currentPage - 1), this.itemsPerPage);
+      });
+  }
 
-  // loadFavoritesQuestions() {
-  //   this.$http.get('/api/questions/users/' + this.getCurrentUser()._id + '/favorites')
-  //     .then(response => {
-  //       this.favQuestions = response.data;
-  //     });
-  // }
+  loadFavoritesQuestions() {
+    this.$http.get('/api/questions/users/' + this.getCurrentUser()._id + '/favorites')
+      .then(response => {
+        this.questions = response.data;
+        this.filteredQuestions = response.data.slice((this.currentPage - 1), this.itemsPerPage);
+      });
+  }
 
   isStar(obj) {
     return this.isLoggedIn() && obj && obj.stars && obj.stars.indexOf(this.getCurrentUser()._id)!==-1;
