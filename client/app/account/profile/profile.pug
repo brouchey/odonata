@@ -14,10 +14,7 @@ br
 					p {{vm.getCurrentUser().email}}
 				a.list-group-item(href='#')
 					i.fa.fa-user-o.fa-lg(aria-hidden='true')
-					|  &nbsp; Public Profile
-				a.list-group-item(href='#')
-					i.fa.fa-user.fa-lg(aria-hidden='true')
-					|  &nbsp; Profile
+					|  &nbsp;  Profile
 				a.list-group-item(href='#')
 					i.fa.fa-user-circle.fa-lg(aria-hidden='true')
 					|  &nbsp; Photo
@@ -50,15 +47,46 @@ br
 				.col-md-12
 					pre {{vm.getCurrentUser()|json}}
 					.well
-						p getCurrentUser.name : {{vm.getCurrentUser().name}}
 						p isAdmin : {{vm.isAdmin()}}
 						p isLoggedIn : {{vm.isLoggedIn()}}
-					.well
-						p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id nibh sed mauris hendrerit lobortis sit amet et tellus. Fusce et nisl non turpis consectetur maximus. Suspendisse quis porta nisi. Mauris malesuada eget metus ac convallis. In pharetra velit id consequat ultricies. Cras faucibus faucibus elit eu efficitur. Nulla tempor gravida malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc suscipit feugiat sem, non ultrices nibh. Quisque elementum in enim sed pulvinar. Pellentesque lectus magna, consequat nec est ac, mollis volutpat ex. Morbi imperdiet vulputate consequat.
-					.well
-						p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id nibh sed mauris hendrerit lobortis sit amet et tellus. Fusce et nisl non turpis consectetur maximus. Suspendisse quis porta nisi. Mauris malesuada eget metus ac convallis. In pharetra velit id consequat ultricies. Cras faucibus faucibus elit eu efficitur. Nulla tempor gravida malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc suscipit feugiat sem, non ultrices nibh. Quisque elementum in enim sed pulvinar. Pellentesque lectus magna, consequat nec est ac, mollis volutpat ex. Morbi imperdiet vulputate consequat.
-					.well
-						p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id nibh sed mauris hendrerit lobortis sit amet et tellus. Fusce et nisl non turpis consectetur maximus. Suspendisse quis porta nisi. Mauris malesuada eget metus ac convallis. In pharetra velit id consequat ultricies. Cras faucibus faucibus elit eu efficitur. Nulla tempor gravida malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc suscipit feugiat sem, non ultrices nibh. Quisque elementum in enim sed pulvinar. Pellentesque lectus magna, consequat nec est ac, mollis volutpat ex. Morbi imperdiet vulputate consequat.
-					.well
-						p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id nibh sed mauris hendrerit lobortis sit amet et tellus. Fusce et nisl non turpis consectetur maximus. Suspendisse quis porta nisi. Mauris malesuada eget metus ac convallis. In pharetra velit id consequat ultricies. Cras faucibus faucibus elit eu efficitur. Nulla tempor gravida malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc suscipit feugiat sem, non ultrices nibh. Quisque elementum in enim sed pulvinar. Pellentesque lectus magna, consequat nec est ac, mollis volutpat ex. Morbi imperdiet vulputate consequat.
 
+					.row
+						.col-md-6
+							.panel.panel-default
+								.panel-heading Profile Info
+								ul.list-group
+									li.list-group-item First Name: &nbsp; {{vm.getCurrentUser().name}}
+									li.list-group-item Last Name: &nbsp; {{vm.getCurrentUser().name}}
+									li.list-group-item Email Address: &nbsp; {{vm.getCurrentUser().email}}
+									li.list-group-item Password: &nbsp; XXXXXXXXX
+									li.list-group-item odonata Profile URL: &nbsp; localhost:3000/user
+									li.list-group-item Address: &nbsp; 29 Rue Jean Bart
+									li.list-group-item Country: &nbsp; France
+									li.list-group-item City: &nbsp; Bordeaux
+									li.list-group-item Looking for work? &nbsp; No
+									li.list-group-item Spoken Languages: &nbsp; English - French
+								.panel-footer.text-center
+									.btn-group(role='group', aria-label='Change Profile')
+										button.btn.btn-primary(type='button') Edit 
+										a.btn.btn-success(type='button', ng-href='/settings') Change Password 
+
+						.col-md-6
+							.panel.panel-default
+								.panel-heading Education
+								ul.list-group
+									li.list-group-item School Name: &nbsp; Gustave Eiffel
+									li.list-group-item City: &nbsp; Bordeaux
+									li.list-group-item Country: &nbsp; France
+									li.list-group-item Degree: &nbsp; BTS
+									li.list-group-item Specialization: &nbsp; Computer Sciences
+								.panel-footer.text-center
+									button.btn.btn-primary(type='button') Edit
+
+					.row
+						.col-md-12
+							.well
+								p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id nibh sed mauris hendrerit lobortis sit amet et tellus. Fusce et nisl non turpis consectetur maximus. Suspendisse quis porta nisi. Mauris malesuada eget metus ac convallis. In pharetra velit id consequat ultricies. Cras faucibus faucibus elit eu efficitur. Nulla tempor gravida malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc suscipit feugiat sem, non ultrices nibh. Quisque elementum in enim sed pulvinar. Pellentesque lectus magna, consequat nec est ac, mollis volutpat ex. Morbi imperdiet vulputate consequat.
+							.well
+								p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id nibh sed mauris hendrerit lobortis sit amet et tellus. Fusce et nisl non turpis consectetur maximus. Suspendisse quis porta nisi. Mauris malesuada eget metus ac convallis. In pharetra velit id consequat ultricies. Cras faucibus faucibus elit eu efficitur. Nulla tempor gravida malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc suscipit feugiat sem, non ultrices nibh. Quisque elementum in enim sed pulvinar. Pellentesque lectus magna, consequat nec est ac, mollis volutpat ex. Morbi imperdiet vulputate consequat.
+							.well
+								p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id nibh sed mauris hendrerit lobortis sit amet et tellus. Fusce et nisl non turpis consectetur maximus. Suspendisse quis porta nisi. Mauris malesuada eget metus ac convallis. In pharetra velit id consequat ultricies. Cras faucibus faucibus elit eu efficitur. Nulla tempor gravida malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc suscipit feugiat sem, non ultrices nibh. Quisque elementum in enim sed pulvinar. Pellentesque lectus magna, consequat nec est ac, mollis volutpat ex. Morbi imperdiet vulputate consequat.

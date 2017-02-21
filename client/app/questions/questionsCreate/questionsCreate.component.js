@@ -24,6 +24,10 @@ export class QuestionsCreateComponent {
       });
   }
 
+  loadTags(query) {
+    return this.$http.get('/api/questions/tags/all')
+  }
+
 }
 
 export default angular.module('odonataApp.questionsCreate', [ngRoute])

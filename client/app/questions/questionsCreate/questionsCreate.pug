@@ -4,24 +4,29 @@ header#banner.hero-unit
 br
 .container
   .well
+
     form(name='form', ng-submit='vm.submitQuestion()')
+
       h2.lead Title
       span.text-danger(ng-messages='form.question_title.$error')
         span(ng-message='required') (Required)
       span.text-success(ng-show='form.question_title.$valid') OK
       input.form-control(type='text', ng-model='question.title', name='question_title', required)
       br
+
       h2.lead Question
       span.text-danger(ng-messages='form.question_content.$error')
         span(ng-message='required') (Required)
       span.text-success(ng-show='form.question_content.$valid') OK
       br
+
       textarea.form-control(rows='4', ng-model='question.content', name='question_content', required)
       br
+
       h2.lead Tags
-      span.text-danger(ng-messages='form.question_tags.$error')
-        span(ng-message='required') (Required)
-      span.text-success(ng-show='form.question_tags.$valid') OK
-      tags-input(ng-model='question.tags', name='question_tags', required)
+      tags-input(ng-model='question.tags', name='question_tags', add-on-paste='true', required)
+        auto-complete(source='vm.loadTags($query)')
       br
-      input.btn.btn-primary(type='submit', ng-disabled='form.$invalid', value='Post your Question')
+
+      .text-center
+        input.btn.btn-success(type='submit', ng-disabled='form.$invalid', value='Ask your Question')
