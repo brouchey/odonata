@@ -48,6 +48,7 @@ var QuestionSchema = new mongoose.Schema({
     },
   }],
   tags: [{
+    _id: false,
     text: String,
   }],
   views: {

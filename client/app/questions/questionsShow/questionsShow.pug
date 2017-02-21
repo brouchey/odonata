@@ -1,21 +1,21 @@
 header#banner.hero-unit
   .container
-    h1.lead {{vm.question.title}}
+    h1.lead Question
 br
 #question-show-container.container
   .row
     .col-md-12
-      button.close(ng-if="vm.isOwner(vm.question)", type='button', ng-click='vm.deleteQuestion()', uib-tooltip='Delete')
-        i.fa.fa-trash-o.fa-lg
 
-      div
-        h1
-          div(ng-if='!editingQ') {{vm.question.title}}
-          input(type='text', ng-model='vm.question.title', ng-if='editingQ')
+      //- Question
+      h2
+        div(ng-if='!editingQ') {{vm.question.title}}
+        input.form-control(type='text', ng-model='vm.question.title', ng-if='editingQ')
 
-        span(ng-repeat='tag in vm.question.tags')
-          span.label.label-info {{tag.text}}
-          span &nbsp;
+      //- Question Tags
+      span(ng-if='!editingQ', ng-repeat='tag in vm.question.tags')
+        span.label.label-info {{tag.text}}
+        span &nbsp;
+      tags-input(ng-if='editingQ', ng-model='vm.question.tags', name='question_tags', add-on-paste='true', required)
       hr
 
   .row
@@ -76,13 +76,15 @@ br
             div.star-count {{vm.question.stars.length}}
 
         .col-md-11
-          .well.question-content
-            div.question-content-title(ng-if='!editingQ') {{vm.question.content}}
-            input(type='text', ng-model='vm.question.content', ng-if='editingQ')
+          .well
 
-            button.btn.btn-success(type='submit', ng-click='editingQ=false; vm.updateQuestion()', ng-show='editingQ') Save
-            a(ng-click='editingQ=!editingQ;', ng-show='vm.isOwner(vm.question) && !editingQ', uib-tooltip='Edit', tooltip-placement='right')
-              i.fa.fa-pencil-square-o.fa-lg
+            //- Question Content
+            .question-content(ng-if='!editingQ') {{vm.question.content}}
+
+            //- Question Edition
+            textarea.form-control(rows='7', ng-model='vm.question.content', ng-if='editingQ')
+            br
+            button.btn.btn-success(type='submit', ng-click='editingQ=false; vm.updateQuestion()', ng-show='editingQ') Save Changes
 
             //- Question Author
             .text-right
@@ -90,23 +92,25 @@ br
               a(ng-href='/users/{{vm.question.user._id}}') {{vm.question.user.name}}
               |  &middot; {{vm.question.createdAt|date:'medium'}}
 
+            //- Question Author buttons
+            button.btn.btn-info(ng-click='editingQ=!editingQ;', ng-show='vm.isOwner(vm.question) && !editingQ', uib-tooltip='Edit', tooltip-placement='left')
+              i.fa.fa-pencil-square-o
+            button.btn.btn-danger(ng-if='vm.isOwner(vm.question) && !editingQ', type='button', ng-click='vm.deleteQuestion()', uib-tooltip='Delete Question', tooltip-placement='right')
+              i.fa.fa-trash-o
+
           .comment
             .well.well-sm(ng-repeat='comment in vm.question.comments')
 
-              button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteComment(comment)', uib-tooltip='Delete')
-                i.fa.fa-trash-o
-
-              .question-comment-count.text-center
+              //- Question.Comment Content
+              .question-comment-count
                 //- Previously Question.Comment stars count
                 span 0 &nbsp;
-
               .question-comment-content(ng-if='!editingC') {{comment.content}}
 
-              input(ng-if='editingC', type='text', ng-model='comment.content') 
+              //- Question.Comment Edition
+              input.form-control(ng-if='editingC', type='text', ng-model='comment.content')
+              br
               button.btn.btn-success(ng-show='editingC', type='submit', ng-click='editingC=false; vm.updateComment(comment)') Save 
-
-              a(ng-show='vm.isOwner(comment) && !editingC', ng-click='editingC=!editingC;', uib-tooltip='Edit', tooltip-placement='right')
-                i.fa.fa-pencil-square-o
 
               //- Question.Comment Author
               .text-right
@@ -115,10 +119,16 @@ br
                 |  &middot; {{comment.createdAt|date:'medium'}}
               .clearfix
 
+              //- Question.Comment Author buttons
+              button.btn.btn-info.btn-sm(ng-click='editingC=!editingC;', ng-show='vm.isOwner(comment) && !editingC', uib-tooltip='Edit', tooltip-placement='left')
+                i.fa.fa-pencil-square-o
+              button.btn.btn-danger.btn-sm(ng-if='vm.isOwner(comment) && !editingC', type='button', ng-click='vm.deleteComment(comment)', uib-tooltip='Delete', tooltip-placement='right')
+                i.fa.fa-trash-o
+
             //- Submit New Question.Comment
             a(ng-click='editNewComment=!editNewComment;') Add a comment
             form(ng-if='editNewComment', name='commentForm', ng-submit='vm.submitComment()')
-              textarea.form-control(rows='3', ng-model='vm.newComment.content', name='commentEditor', required)
+              textarea.form-control(rows='2', ng-model='vm.newComment.content', name='commentEditor', required)
               br
               input.btn.btn-primary(type='submit', ng-disabled='commentForm.$invalid', value='Submit Comment')
 
@@ -182,44 +192,41 @@ br
               i.fa.fa-check.fa-lg
 
         .col-md-11
-          .well        
-            .answer-content
-              button.close(ng-if="vm.isOwner(answer)", type='button', ng-click='vm.deleteAnswer(answer)', uib-tooltip='Delete')
-                i.fa.fa-trash-o
+          .well
+            //- Answer Content
+            .answer-content(ng-if='!editingA') {{answer.content}}
 
-              .answer-content-title(ng-if='!editingA') {{answer.content}}
+            //- Answer Edition
+            textarea.form-control(ng-if='editingA', rows='3', ng-model='answer.content')
+            br
+            button.btn.btn-success(ng-show='editingA', type='submit', ng-click='editingA=false; vm.updateAnswer(answer)') Save
 
-              a(ng-show='vm.isOwner(answer) && !editingA', ng-click='editingA=!editingA;', uib-tooltip='Edit', tooltip-placement='right')
-                i.fa.fa-pencil-square-o
+            //- Answer Author
+            .text-right
+              | by 
+              a(ng-href='/users/{{answer.user._id}}') {{answer.user.name}}
+              |  &middot; {{answer.createdAt|date:'medium'}}
+            .clearfix
 
-              input(ng-if='editingA', type='text', ng-model='answer.content')
-              button.btn.btn-success(ng-show='editingA', type='submit', ng-click='editingA=false; vm.updateAnswer(answer)') Save
-
-              //- Answer Author
-              .text-right
-                | by 
-                a(ng-href='/users/{{answer.user._id}}') {{answer.user.name}}
-                |  &middot; {{answer.createdAt|date:'medium'}}
-              .clearfix
+            //- Answer Author buttons
+            button.btn.btn-info(ng-click='editingA=!editingA;', ng-show='vm.isOwner(answer) && !editingA', uib-tooltip='Edit', tooltip-placement='left')
+              i.fa.fa-pencil-square-o
+            button.btn.btn-danger(ng-if='vm.isOwner(answer) && !editingA', type='button', ng-click='vm.deleteAnswer(answer)', uib-tooltip='Delete Answer', tooltip-placement='right')
+              i.fa.fa-trash-o
 
           .comment
             .well.well-sm(ng-repeat='comment in answer.comments')
 
-              button.close(ng-if='vm.isOwner(comment)', type='button', ng-click='vm.deleteAnswerComment(answer, comment)', uib-tooltip='Delete')
-                i.fa.fa-trash-o
-
-              .answer-comment-count.text-center
+              //- Answer.Comment Content
+              .answer-comment-count
                 //- Previously Answer.Comment stars count
                 span 0 &nbsp;
-
               .answer-comment-content(ng-if='!editingAC') {{comment.content}}
 
-              input(ng-if='editingAC', type='text', ng-model='comment.content') 
-     
+              //- Answer.Comment Edition
+              input.form-control(ng-if='editingAC', type='text', ng-model='comment.content')
+              br
               button.btn.btn-success(ng-show='editingAC', type='submit', ng-click='editingAC=false; vm.updateAnswerComment(answer, comment)') Save
-     
-              a(ng-show='vm.isOwner(comment) && !editingAC', ng-click='editingAC=!editingAC;',  uib-tooltip='Edit', tooltip-placement='right')
-                i.fa.fa-pencil-square-o
 
               //- Answer.Comment Author
               .text-right
@@ -227,12 +234,18 @@ br
                 a(ng-href='/users/{{comment.user._id}}') {{comment.user.name}}
                 |  &middot; {{comment.createdAt|date:'medium'}}
               .clearfix
+
+              //- Answer.Comment Author buttons
+              button.btn.btn-info.btn-sm(ng-click='editingAC=!editingAC;', ng-show='vm.isOwner(comment) && !editingAC', uib-tooltip='Edit', tooltip-placement='left')
+                i.fa.fa-pencil-square-o
+              button.btn.btn-danger.btn-sm(ng-if='vm.isOwner(comment) && !editingAC', type='button', ng-click='vm.deleteAnswerComment(answer, comment)', uib-tooltip='Delete', tooltip-placement='right')
+                i.fa.fa-trash-o
       
             //- Submit New Answer.Comment
             a(ng-click='editNewAnswerComment=!editNewAnswerComment; answer.newAnswerComment={}') Add a comment
 
             form(ng-if='editNewAnswerComment', name='answer_{{answer.id}}_comment')
-              input(type='text', ng-model='answer.newAnswerComment.content', required)
+              textarea.form-control(rows='2', ng-model='answer.newAnswerComment.content', required)
               button.btn.btn-primary(type='submit', ng-click='vm.submitAnswerComment(answer)', ng-disabled='answer_{{answer.id}}_comment.$invalid') Add Comment
           hr
 
@@ -244,7 +257,7 @@ br
           form(name='answerForm', ng-submit='vm.submitAnswer()')
             textarea.form-control(rows='3', ng-model='newAnswer.content', name='answerEditor', required)
             br
-            input.btn.btn-primary(type='submit', ng-disabled='answerForm.$invalid', value='Submit Answer')
+            input.btn.btn-success(type='submit', ng-disabled='answerForm.$invalid', value='Submit Answer')
 
     .col-md-3
 
@@ -262,6 +275,7 @@ br
         .panel-heading
           h3.panel-title Related
         .panel-body  Some Content
+
 
 
 
