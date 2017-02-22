@@ -36,8 +36,13 @@ br
 
 		//- Middle 
 		.col-lg-6
-			.well
-				p.text-center Number of Users : {{admin.users.length}}
+
+			.panel.panel-default
+				.panel-heading Users ({{admin.users.length}})
+				ul.list-group
+					li.list-group-item(ng-repeat='user in admin.users')
+						span {{user.name}} ({{user._id}})
+						span.text-muted.pull-right {{user.email}}
 			pre {{admin.users|json}}
 
 		//- Right Side
