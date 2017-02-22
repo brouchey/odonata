@@ -4,8 +4,8 @@ export default function routes($routeProvider) {
   'ngInject';
 
   $routeProvider.when('/admin', {
-    template: require('./portal/admin.pug'),
-    controller: 'AdminController',
+    template: require('./portal/portal.pug'),
+    controller: 'AdminPortalController',
     controllerAs: 'admin',
     authenticate: 'admin'
   })

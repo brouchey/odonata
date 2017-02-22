@@ -1,6 +1,6 @@
 'use strict';
 
-export default class AdminController {
+export default class AdminPortalController {
   users: Object[];
 
   /*@ngInject*/
@@ -14,8 +14,5 @@ export default class AdminController {
     this.getCurrentUser = Auth.getCurrentUserSync;
   }
 
-  delete(user) {
-    user.$remove();
-    this.users.splice(this.users.indexOf(user), 1);
-  }
+
 }
