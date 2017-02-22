@@ -12,13 +12,13 @@ br
 					p
 						strong {{admin.getCurrentUser().name}}
 					span.text-muted {{admin.getCurrentUser().email}}
-				a.list-group-item(href='#')
+				a.list-group-item.active(href='#')
 					i.fa.fa-tachometer.fa-lg(aria-hidden='true')
 					|  &nbsp; Overview
-				a.list-group-item(href='#')
+				a.list-group-item(href='/admin/feed')
 					i.fa.fa-feed.fa-lg(aria-hidden='true')
 					|  &nbsp; Activity
-				a.list-group-item(href='#')
+				a.list-group-item(href='/admin/users')
 					i.fa.fa-users.fa-lg(aria-hidden='true')
 					|  &nbsp; Users
 				a.list-group-item(href='#')
@@ -30,26 +30,25 @@ br
 				a.list-group-item(href='#')
 					i.fa.fa-area-chart.fa-lg(aria-hidden='true')
 					|  &nbsp; Stats
-				a.list-group-item(href='#')
+				a.list-group-item(href='/admin/logs')
 					i.fa.fa-database.fa-lg(aria-hidden='true')
 					|  &nbsp; Logs
 
 		//- Middle 
 		.col-lg-6
-			.well
-				pre {{admin.users|json}}
+			pre {{admin.users|json}}
 
 		//- Right Side
 		.col-lg-4
 
-			.panel.panel-default
-				.panel-heading Users Management
-				.panel-body
-					p The delete user and user index api routes are restricted to users with the 'admin' role.
-				ul.list-group
-					li.list-group-item(ng-repeat='user in admin.users')
-						strong {{user.name}}
-						br
-						span.text-muted {{user.email}}
-						a.trash(ng-click='admin.delete(user)')
-							span.glyphicon.glyphicon-trash.pull-right
+			.panel.panel-primary
+				.panel-heading Some Management
+				.panel-body Some Content
+
+			.panel.panel-info
+				.panel-heading Some Management
+				.panel-body Some Content
+
+			.panel.panel-warning
+				.panel-heading Some Management
+				.panel-body Some Content

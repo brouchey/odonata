@@ -7,8 +7,9 @@ import routing from './admin.routes';
 import portal from './portal';
 import feed from './feed';
 import logs from './logs';
+import users from './users';
 
-export default angular.module('odonataApp.admin', ['odonataApp.auth', ngRoute, portal, feed, logs])
+export default angular.module('odonataApp.admin', ['odonataApp.auth', ngRoute, portal, feed, logs, users])
   .config(routing)
   .run(function($rootScope) {
     'ngInject';

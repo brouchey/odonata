@@ -20,5 +20,11 @@ export default function routes($routeProvider) {
     controller: 'AdminLogsController',
     controllerAs: 'admin',
     authenticate: 'admin'
+  })
+  .when('/admin/users', {
+    template: require('./users/users.pug'),
+    controller: 'AdminUsersController',
+    controllerAs: 'admin',
+    authenticate: 'admin'
   });
 }
