@@ -1,10 +1,22 @@
 'use strict';
 
 import angular from 'angular';
-import routes from './admin.routes';
-import AdminController from './admin.controller';
+const ngRoute = require('angular-route');
 
-export default angular.module('odonataApp.admin', ['odonataApp.auth', 'ngRoute'])
-  .config(routes)
-  .controller('AdminController', AdminController)
+import routing from './admin.routes';
+import portal from './portal';
+import feed from './feed';
+import logs from './logs';
+
+export default angular.module('odonataApp.admin', ['odonataApp.auth', ngRoute, portal, feed, logs])
+  .config(routing)
+  .run(function($rootScope) {
+    'ngInject';
+
+    $rootScope.$on('$routeChangeStart', function(event, next, current) {
+      if(next.name === 'logout' && current && current.originalPath && !current.authenticate) {
+        next.referrer = current.originalPath;
+      }
+    });
+  })
   .name;

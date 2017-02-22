@@ -4,9 +4,14 @@ export default class AdminController {
   users: Object[];
 
   /*@ngInject*/
-  constructor(User) {
+  constructor(User, $location, Auth) {
     // Use the User $resource to fetch all users
     this.users = User.query();
+
+    this.$location = $location;
+    this.isLoggedIn = Auth.isLoggedInSync;
+    this.isAdmin = Auth.isAdminSync;
+    this.getCurrentUser = Auth.getCurrentUserSync;
   }
 
   delete(user) {
