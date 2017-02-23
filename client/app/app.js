@@ -11,6 +11,7 @@ import 'angular-socket-io';
 const ngRoute = require('angular-route');
 import uiBootstrap from 'angular-ui-bootstrap';
 import 'ng-tags-input';
+import 'angular-file-upload';
 // import 'ng-infinite-scroll';
 
 import {
@@ -47,6 +48,7 @@ angular.module('odonataApp', [
   'btford.socket-io',
   ngRoute,
   uiBootstrap,
+  'angularFileUpload',
   'ngTagsInput',
   // 'infinite-scroll',
   _Auth,

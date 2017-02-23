@@ -49,22 +49,28 @@
         //-     span {{$ctrl.getCurrentUser().name}} &nbsp;
         //-     i.fa.fa-user-circle.fa-lg
 
-        li(ng-show='$ctrl.isLoggedIn()', uib-dropdown='', is-open='status.isopen', ng-class='{active: $ctrl.isActive("/profile")}')
-            a(href='', uib-dropdown-toggle='', ng-disabled='disabled')
+        li(ng-show='$ctrl.isLoggedIn()', uib-dropdown, ng-class='{active: $ctrl.isActive("/profile")}')
+            a#user_options(href, uib-dropdown-toggle)
               span {{$ctrl.getCurrentUser().name}} &nbsp;
               i.fa.fa-user-circle.fa-lg
-            ul.dropdown-menu(uib-dropdown-menu='', role='menu', aria-labelledby='User Options')
-              li(role='menuitem')
+            ul.dropdown-menu(uib-dropdown-menu, aria-labelledby='user_options')
+              li
                 a(href='/profile')
                   span Profile
-              li(role='menuitem')
+              li
                 a(href='/settings')
                   span Account Settings
-              li(role='menuitem')
+              li
                 a(href='/logout')
                   span Logout &nbsp;
                   i.fa.fa-sign-out
 
+        li(ng-show='$ctrl.isLoggedIn()', uib-dropdown)
+            a#messenger(href, uib-dropdown-toggle)
+              i.fa.fa-comments-o.fa-lg
+            ul.dropdown-menu(uib-dropdown-menu, aria-labelledby='messenger')
+              p You have a new message !
+        
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/#")}')
           a(href='#')
             i.fa.fa-bell-o.fa-lg
