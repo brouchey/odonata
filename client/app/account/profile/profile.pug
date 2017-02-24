@@ -13,8 +13,8 @@ br
 					p
 						button.btn.btn-info.btn-xs(type='button') Change Photo
 					p 
-						strong {{vm.getCurrentUser().name}}
-					p.text-muted {{vm.getCurrentUser().email}}
+						strong {{ vm.getCurrentUser().name }}
+					p.text-muted {{ vm.getCurrentUser().email }}
 				a.list-group-item(href='#')
 					i.fa.fa-user-o.fa-lg(aria-hidden='true')
 					|  &nbsp;  Profile
@@ -50,85 +50,87 @@ br
 				.col-md-12
 
 					.well
-						p isAdmin : {{vm.isAdmin()}}
-						p isLoggedIn : {{vm.isLoggedIn()}}
+						p isAdmin : {{ vm.isAdmin() }}
+						p isLoggedIn : {{ vm.isLoggedIn() }}
 
-					//- angular-file-upload
-					.panel.panel-info
-						.panel-heading File Upload
-						.panel-body
-								input(type='file', nv-file-select, uploader='vm.uploader')
+					//- //- angular-file-upload
+					//- .panel.panel-info
+					//- 	.panel-heading File Upload
+					//- 	.panel-body
+					//- 			input(type='file', nv-file-select, uploader='vm.uploader')
 								
-								div(ng-show='vm.uploader.isHTML5')
-									.well.my-drop-zone(nv-file-over, nv-file-drop, uploader='vm.uploader')  File Drop Zone
+					//- 			div(ng-show='vm.uploader.isHTML5')
+					//- 				.well.my-drop-zone(nv-file-over, nv-file-drop, uploader='vm.uploader')  File Drop Zone
 
-								pre 
-									p name: {{vm.uploader.queue[0].file.name}}
-									p type: {{vm.uploader.queue[0].file.type}}
-									p size: {{vm.uploader.queue[0].file.size}}
-									p lastModifiedDate: {{vm.uploader.queue[0].file.lastModifiedDate}}
+					//- 			pre(ng-if='vm.uploader.queue.length!=0')
+					//- 				p
+					//- 					strong File Details :
+					//- 				p Name: {{ vm.uploader.queue[0].file.name }}
+					//- 				p Type: {{ vm.uploader.queue[0].file.type }}
+					//- 				p Size: {{ vm.uploader.queue[0].file.size/1024/1024|number:2 }} MB
+					//- 				p Last Modified Date: {{ vm.uploader.queue[0].file.lastModifiedDate }}
 
-					//- angular-file-upload Queue
-					.panel.panel-info
-						.panel-heading Upload Queue
-						.panel-body
-							table.table
-								thead
-									tr
-										th(width='50%') Name
-										th(ng-show='vm.uploader.isHTML5') Size
-										th(ng-show='vm.uploader.isHTML5') Progress
-										th Status
-										th Actions
-								tbody
-									tr(ng-repeat='item in vm.uploader.queue')
-										td
-											strong {{ item.file.name }}
-											div(ng-show='vm.uploader.isHTML5', ng-thumb='{ file: item._file, height: 100 }')
-										td(ng-show='vm.uploader.isHTML5', nowrap) {{ item.file.size/1024/1024|number:2 }} MB
-										td(ng-show='vm.uploader.isHTML5')
-											.progress(style='margin-bottom: 0;')
-												.progress-bar(role='progressbar', ng-style="{ 'width': item.progress + '%' }")
-										td.text-center
-											span(ng-show='item.isSuccess')
-												i.glyphicon.glyphicon-ok
-											span(ng-show='item.isCancel')
-												i.glyphicon.glyphicon-ban-circle
-											span(ng-show='item.isError')
-												i.glyphicon.glyphicon-remove
-										td(nowrap='')
-											button.btn.btn-success.btn-xs(type='button', ng-click='item.upload()', ng-disabled='item.isReady || item.isUploading || item.isSuccess')
-												span.glyphicon.glyphicon-upload
-												|  Upload
-											|  
-											button.btn.btn-warning.btn-xs(type='button', ng-click='item.cancel()', ng-disabled='!item.isUploading')
-												span.glyphicon.glyphicon-ban-circle
-												|  Cancel
-											|  
-											button.btn.btn-danger.btn-xs(type='button', ng-click='item.remove()')
-												span.glyphicon.glyphicon-trash
-												|  Remove
-							div
-								button.btn.btn-success.btn-s(type='button', ng-click='vm.uploader.uploadAll()', ng-disabled='!vm.uploader.getNotUploadedItems().length')
-									span.glyphicon.glyphicon-upload
-									|  Upload all
-								|  
-								button.btn.btn-warning.btn-s(type='button', ng-click='vm.uploader.cancelAll()', ng-disabled='!vm.uploader.isUploading')
-									span.glyphicon.glyphicon-ban-circle
-									|  Cancel all
-								|  
-								button.btn.btn-danger.btn-s(type='button', ng-click='vm.uploader.clearQueue()', ng-disabled='!vm.uploader.queue.length')
-									span.glyphicon.glyphicon-trash
-									|  Remove all
+					//- //- angular-file-upload Queue
+					//- .panel.panel-info
+					//- 	.panel-heading Upload Queue
+					//- 	.panel-body
+					//- 		table.table
+					//- 			thead
+					//- 				tr
+					//- 					th(width='50%') Name
+					//- 					th(ng-show='vm.uploader.isHTML5') Size
+					//- 					th(ng-show='vm.uploader.isHTML5') Progress
+					//- 					th Status
+					//- 					th Actions
+					//- 			tbody
+					//- 				tr(ng-repeat='item in vm.uploader.queue')
+					//- 					td
+					//- 						strong {{ item.file.name }}
+					//- 						div(ng-show='vm.uploader.isHTML5', ng-thumb='{ file: item._file, height: 100 }')
+					//- 					td(ng-show='vm.uploader.isHTML5', nowrap) {{ item.file.size/1024/1024|number:2 }} MB
+					//- 					td(ng-show='vm.uploader.isHTML5')
+					//- 						.progress(style='margin-bottom: 0;')
+					//- 							.progress-bar(role='progressbar', ng-style="{ 'width': item.progress + '%' }")
+					//- 					td.text-center
+					//- 						span(ng-show='item.isSuccess')
+					//- 							i.glyphicon.glyphicon-ok
+					//- 						span(ng-show='item.isCancel')
+					//- 							i.glyphicon.glyphicon-ban-circle
+					//- 						span(ng-show='item.isError')
+					//- 							i.glyphicon.glyphicon-remove
+					//- 					td(nowrap='')
+					//- 						button.btn.btn-success.btn-xs(type='button', ng-click='item.upload()', ng-disabled='item.isReady || item.isUploading || item.isSuccess')
+					//- 							span.glyphicon.glyphicon-upload
+					//- 							|  Upload
+					//- 						|  
+					//- 						button.btn.btn-warning.btn-xs(type='button', ng-click='item.cancel()', ng-disabled='!item.isUploading')
+					//- 							span.glyphicon.glyphicon-ban-circle
+					//- 							|  Cancel
+					//- 						|  
+					//- 						button.btn.btn-danger.btn-xs(type='button', ng-click='item.remove()')
+					//- 							span.glyphicon.glyphicon-trash
+					//- 							|  Remove
+					//- 		div
+					//- 			button.btn.btn-success.btn-s(type='button', ng-click='vm.uploader.uploadAll()', ng-disabled='!vm.uploader.getNotUploadedItems().length')
+					//- 				span.glyphicon.glyphicon-upload
+					//- 				|  Upload all
+					//- 			|  
+					//- 			button.btn.btn-warning.btn-s(type='button', ng-click='vm.uploader.cancelAll()', ng-disabled='!vm.uploader.isUploading')
+					//- 				span.glyphicon.glyphicon-ban-circle
+					//- 				|  Cancel all
+					//- 			|  
+					//- 			button.btn.btn-danger.btn-s(type='button', ng-click='vm.uploader.clearQueue()', ng-disabled='!vm.uploader.queue.length')
+					//- 				span.glyphicon.glyphicon-trash
+					//- 				|  Remove all
 
 					.row
 						.col-md-6
 							.panel.panel-default
 								.panel-heading Profile Info
 								ul.list-group
-									li.list-group-item First Name: &nbsp; {{vm.getCurrentUser().name}}
-									li.list-group-item Last Name: &nbsp; {{vm.getCurrentUser().name}}
-									li.list-group-item Email Address: &nbsp; {{vm.getCurrentUser().email}}
+									li.list-group-item First Name: &nbsp; {{ vm.getCurrentUser().name }}
+									li.list-group-item Last Name: &nbsp; {{ vm.getCurrentUser().name }}
+									li.list-group-item Email Address: &nbsp; {{ vm.getCurrentUser().email }}
 									li.list-group-item Password: &nbsp; XXXXXXXXX
 									li.list-group-item odonata Profile URL: &nbsp; localhost:3000/user
 									li.list-group-item Address: &nbsp; 29 Rue Jean Bart
@@ -167,8 +169,8 @@ br
 
 			.row
 				.col-md-12
-					div(ng-repeat='item in vm.uploader.queue')
-						div(ng-show='vm.uploader.isHTML5', ng-thumb='{ file: item._file, height: 200 }')
+					//- div(ng-repeat='item in vm.uploader.queue')
+					//- 	div(ng-show='vm.uploader.isHTML5', ng-thumb='{ file: item._file, height: 200 }')
 
 
 
