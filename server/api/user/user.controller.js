@@ -4,6 +4,10 @@ import User from './user.model';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 
+// var multer  = require('multer');
+// var upload = multer({ dest: './client/assets/uploads/' });
+
+
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
   return function(err) {
@@ -120,3 +124,22 @@ export function me(req, res, next) {
 export function authCallback(req, res) {
   res.redirect('/');
 }
+
+
+/**
+ * Upload user picture
+ */
+// export function uploadPic(req, res, next) {
+//   console.log(req.file);
+//   console.log(req.body);
+//   var file = req.file;
+//   console.log('Server: request received !');
+
+//   upload.single(file), function(req, res, next) {
+//     console.log('Server: got the file !');
+//   }
+// }
+
+
+
+
