@@ -53,19 +53,6 @@ br
 						p isAdmin : {{ vm.isAdmin() }}
 						p isLoggedIn : {{ vm.isLoggedIn() }}
 
-					.well
-						p Upload your Picture :
-						form(name='picture-upload')
-							.well
-								p
-									.btn.btn-primary(ngf-select, ng-model='vm.picFile', name='file', accept='image/*', ngf-max-size='2MB', ngf-min-height='150', ngf-resize='{width: 150, height: 150}') Choose Image
-								p
-									img(ngf-thumbnail='vm.picFile')
-								p
-									button.btn.btn-danger(ng-click='vm.picFile = null', ng-show="vm.picFile") Remove
-
-							button.btn.btn-success(type='submit', ng-click='vm.uploadPic(vm.picFile)') Submit
-
 					.row
 						.col-md-6
 							.panel.panel-default
@@ -110,10 +97,16 @@ br
 				.col-md-12
 					
 					.well
-						p
-							img(ngf-thumbnail='vm.picFile')
-						p
-							button.btn.btn-danger(ng-click='vm.picFile = null', ng-show="vm.picFile") Remove
+						form(name='avatar-upload')
+							.text-center
+								p
+									.btn.btn-primary(ngf-select, ng-model='vm.userAvatar', name='userAvatar', ngf-pattern="'image/*'", ngf-accept="'image/*'", ngf-max-size='2MB', ngf-min-height='150', ngf-resize='{width: 150, height: 150}', ngf-capture="'camera'") Edit Avatar
+								p
+									img(ngf-thumbnail='vm.userAvatar')
+								p
+									button.btn.btn-danger.btn-sm(ng-click='vm.userAvatar = null', ng-show="vm.userAvatar") Remove
+
+								button.btn.btn-success(type='submit', ng-if='vm.userAvatar != null', ng-click='vm.uploadAvatar(vm.userAvatar)') Send
 
 
 

@@ -4,9 +4,6 @@ import User from './user.model';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 
-// var multer  = require('multer');
-// var upload = multer({ dest: './client/assets/uploads/' });
-
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -125,21 +122,27 @@ export function authCallback(req, res) {
   res.redirect('/');
 }
 
-
 /**
- * Upload user picture
+ * User Avatar Upload
  */
-// export function uploadPic(req, res, next) {
-//   console.log(req.file);
-//   console.log(req.body);
-//   var file = req.file;
-//   console.log('Server: request received !');
+export function uploadAvatar(req, res, next) {
+  res.send(req.file.path);
 
-//   upload.single(file), function(req, res, next) {
-//     console.log('Server: got the file !');
-//   }
-// }
+  // req.file = file received from multer
+  // req.body = other infos, if there were any
+  var avatar = req.file.filename;
+  var userId = req.body.username;
 
+  User.update({_id: userId}, {$set: {'avatar': avatar}}, function(err, num) {
+    if(err) {
+      return handleError(res)(err);
+    }
+    if(num === 0) {
+      return res.send(404).end();
+    }
+    exports.show(req, res);
+  });
+}
 
 
 
