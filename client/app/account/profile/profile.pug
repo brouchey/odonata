@@ -9,9 +9,10 @@ br
 		.col-md-2
 			.list-group
 				.list-group-item.text-center.profile-photo
-					i.fa.fa-user-circle-o.fa-lg
-					p
-						button.btn.btn-info.btn-xs(type='button') Change Photo
+					i.fa.fa-user-circle(ng-if='!vm.hasAvatar()')
+					img.img-circle(ng-if='vm.hasAvatar()', ng-src='assets/uploads/avatars/{{vm.getCurrentUser().avatar}}', alt='Avatar')
+					//- p
+					//- 	button.btn.btn-info.btn-xs(type='button') Change Photo
 					p 
 						strong {{ vm.getCurrentUser().name }}
 					p.text-muted {{ vm.getCurrentUser().email }}
@@ -100,9 +101,9 @@ br
 						form(name='avatar-upload')
 							.text-center
 								p
-									.btn.btn-primary(ngf-select, ng-model='vm.userAvatar', name='userAvatar', ngf-pattern="'image/*'", ngf-accept="'image/*'", ngf-max-size='2MB', ngf-min-height='150', ngf-resize='{width: 150, height: 150}', ngf-capture="'camera'") Edit Avatar
+									.btn.btn-primary(ngf-select, ng-model='vm.userAvatar', name='userAvatar', ngf-pattern="'image/*'", ngf-accept="'image/*'", ngf-max-size='2MB', ngf-min-height='150', ngf-resize='{width: 200, height: 200}', ngf-capture="'camera'") Edit Avatar
 								p
-									img(ngf-thumbnail='vm.userAvatar')
+									img.img-circle(ngf-thumbnail='vm.userAvatar')
 								p
 									button.btn.btn-danger.btn-sm(ng-click='vm.userAvatar = null', ng-show="vm.userAvatar") Remove
 

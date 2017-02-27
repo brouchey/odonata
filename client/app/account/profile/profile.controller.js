@@ -16,6 +16,14 @@ export default class ProfileController {
     this.$timeout = $timeout;
   }
 
+  hasAvatar() {
+    if (this.getCurrentUser().avatar != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   // ng-file-upload
   uploadAvatar(file) {
     file.upload = this.Upload.upload({

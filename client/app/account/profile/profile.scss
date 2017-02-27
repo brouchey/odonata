@@ -1,5 +1,16 @@
-.profile-photo i {
-	padding: 30px 0;
-	font-size: 100px;
+.profile-photo {
+
+	i.fa-user-circle {
+		padding: 10px 0;
+		font-size: 100px;
+	}
+	img {
+		margin-bottom: 10px;
+		border: 3px solid #E7E7E7;
+	}
+	.img-circle {
+		width: 120px;
+		height: 120px;
+	}
 }
 
