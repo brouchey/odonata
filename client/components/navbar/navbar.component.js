@@ -27,6 +27,15 @@ export class NavbarComponent {
   isActive(route) {
     return route === this.$location.path();
   }
+
+  hasAvatar() {
+    if (this.getCurrentUser().avatar != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }
 
 export default angular.module('odonataApp.navbar', [])

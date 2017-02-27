@@ -52,7 +52,8 @@
         li(ng-show='$ctrl.isLoggedIn()', uib-dropdown, ng-class='{active: $ctrl.isActive("/profile")}')
             a#user_options(href, uib-dropdown-toggle)
               span {{$ctrl.getCurrentUser().name}} &nbsp;
-              i.fa.fa-user-circle.fa-lg
+              i.fa.fa-user-circle.fa-lg(ng-hide='$ctrl.hasAvatar()')
+              img.img-circle(ng-show='$ctrl.hasAvatar()', ng-src='assets/uploads/avatars/{{$ctrl.getCurrentUser().avatar}}', alt='Avatar')
             ul.dropdown-menu(uib-dropdown-menu, aria-labelledby='user_options')
               li
                 a(href='/profile')
