@@ -12,6 +12,7 @@ export class QuestionsShowComponent {
   getCurrentUser: Function;
   $location;
   $timeout;
+  incView;
   question = {};
   answer = {};
   newAnswer = {};
@@ -31,7 +32,11 @@ export class QuestionsShowComponent {
 
   $onInit() {
     this.loadQuestion();
-    this.viewTimeout();
+    this.increaseViews();
+  }
+
+  $onDestroy() {
+    this.$timeout.cancel(this.incView);
   }
 
   loadQuestion() {
@@ -41,10 +46,10 @@ export class QuestionsShowComponent {
     });
   }
 
-  viewTimeout() {
-    this.$timeout(function() {
+  increaseViews() {
+    this.incView = this.$timeout(() => {
       this.$http.put('/api/questions/' + this.question._id + '/incViews');
-    }.bind(this), 60000); // 60s - 1min
+    }, 60000); // 60s - 1min
   }
 
   submitAnswer() {
