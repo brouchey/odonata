@@ -25,7 +25,8 @@ export class NavbarComponent {
   }
 
   isActive(route) {
-    return route === this.$location.path();
+    // return route === this.$location.path();
+    return this.$location.path().indexOf(route) == 0;
   }
 
   // also in account/profile/profile.controller.js and admin/portal/portal.controller.js
