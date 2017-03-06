@@ -18,4 +18,14 @@ export default class AdminUsersController {
     user.$remove();
     this.users.splice(this.users.indexOf(user), 1);
   }
+
+  // also in admin/portal/portal.controller.js
+  userHasAvatar(user) {
+    if (user.avatar != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }

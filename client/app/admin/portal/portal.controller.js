@@ -14,5 +14,22 @@ export default class AdminPortalController {
     this.getCurrentUser = Auth.getCurrentUserSync;
   }
 
+  // also in components/navbar/navbar.component.js and account/profile/profile.controller.js
+  hasAvatar() {
+    if (this.getCurrentUser().avatar != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // also in admin/users/users.controller.js
+  userHasAvatar(user) {
+    if (user.avatar != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 }

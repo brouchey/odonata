@@ -9,7 +9,7 @@ br
 		.col-md-2
 			.list-group
 				.list-group-item.text-center.profile-photo
-					i.fa.fa-user-circle(ng-hide='vm.hasAvatar()')
+					i.fa.fa-user-circle-o.text-muted(ng-hide='vm.hasAvatar()')
 					img.img-circle(ng-show='vm.hasAvatar()', ng-src='assets/uploads/avatars/{{vm.getCurrentUser().avatar}}', alt='Avatar')
 					//- p
 					//- 	button.btn.btn-info.btn-xs(type='button') Change Photo

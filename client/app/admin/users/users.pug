@@ -9,15 +9,28 @@ br
 			ol.breadcrumb
 				li
 					a(href='/admin') Admin
-				li.active Users
+				li.active Users List
 
-			p The delete user and user index api routes are restricted to users with the 'admin' role.
+			.alert.alert-info
+				p.text-right
+					strong {{admin.users.length}} Users
+
 			ul.list-group
 				li.list-group-item(ng-repeat='user in admin.users')
-					strong {{user.name}}
-					br
-					span.text-muted {{user.email}}
-					br
-					span.text-muted Role: {{user.role}}
-					a.trash(ng-click='admin.delete(user)')
-						span.glyphicon.glyphicon-trash.pull-right
+					.row
+
+						.col-sm-1.text-center
+							i.fa.fa-user-circle-o.fa-3x.text-muted(aria-hidden='true', ng-hide='admin.userHasAvatar(user)')
+							img.img-circle.user-list-avatar(ng-show='admin.userHasAvatar(user)', ng-src='assets/uploads/avatars/{{user.avatar}}', alt='Avatar')
+
+						.col-sm-8
+							strong {{user.name}}
+							br
+							span.text-muted {{user.email}}
+							
+						.col-sm-2
+							span.text-muted {{user.role}}
+
+						.col-sm-1
+							a.trash(ng-click='admin.delete(user)').pull-right
+								i.fa.fa-trash-o.fa-lg

@@ -1,16 +1,16 @@
+// also in admin/portal/portal.scss
 .profile-photo {
 
-	i.fa-user-circle {
+	i {
 		padding: 10px 0;
 		font-size: 100px;
 	}
 	img {
+		width: 120px;
+		height: 120px;
 		margin-bottom: 10px;
 		border: 3px solid #E7E7E7;
 	}
-	.img-circle {
-		width: 120px;
-		height: 120px;
-	}
+
 }
 

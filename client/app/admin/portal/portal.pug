@@ -8,7 +8,11 @@ br
 		//- Left Side
 		.col-lg-2
 			.list-group
-				.list-group-item.text-center
+				.list-group-item.text-center.profile-photo
+					i.fa.fa-user-circle-o.text-muted(ng-hide='admin.hasAvatar()')
+					img.img-circle(ng-show='admin.hasAvatar()', ng-src='assets/uploads/avatars/{{admin.getCurrentUser().avatar}}', alt='Avatar')
+					//- p
+					//- 	button.btn.btn-info.btn-xs(type='button') Change Photo
 					p
 						strong {{admin.getCurrentUser().name}}
 					span.text-muted {{admin.getCurrentUser().email}}
@@ -17,7 +21,7 @@ br
 					|  &nbsp; Overview
 				a.list-group-item(href='/admin/feed')
 					i.fa.fa-feed.fa-lg(aria-hidden='true')
-					|  &nbsp; Activity
+					|  &nbsp; Feed
 				a.list-group-item(href='/admin/users')
 					i.fa.fa-users.fa-lg(aria-hidden='true')
 					|  &nbsp; Users
@@ -41,14 +45,22 @@ br
 				.panel-heading Users ({{admin.users.length}})
 				ul.list-group
 					li.list-group-item(ng-repeat='user in admin.users')
-						span {{user.name}} ({{user._id}})
+						i.fa.fa-user-circle-o.fa-lg.text-muted(ng-hide='admin.userHasAvatar(user)')
+						img.img-circle.user-avatar(ng-show='admin.userHasAvatar(user)', ng-src='assets/uploads/avatars/{{user.avatar}}', alt='Avatar')
+						span &nbsp; {{user.name}} ({{user._id}})
 						span.text-muted.pull-right {{user.email}}
-			pre {{admin.users|json}}
+
+			//- pre {{admin.users|json}}
+
+			.panel.panel-default
+				.panel-body
+					p.text-primary Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin convallis ipsum nec pharetra molestie. Maecenas eget laoreet sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis consequat metus sed nisi porta auctor. Suspendisse potenti. Vivamus tristique sapien et turpis gravida, a vehicula massa bibendum. Nam nisl dolor, venenatis eu feugiat ut, bibendum quis ligula.
+					p.text-success Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin convallis ipsum nec pharetra molestie. Maecenas eget laoreet sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis consequat metus sed nisi porta auctor. Suspendisse potenti. Vivamus tristique sapien et turpis gravida, a vehicula massa bibendum. Nam nisl dolor, venenatis eu feugiat ut, bibendum quis ligula.
 
 		//- Right Side
 		.col-lg-4
 
-			.panel.panel-primary
+			.panel.panel-danger
 				.panel-heading Some Management
 				.panel-body Some Content
 
