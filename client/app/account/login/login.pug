@@ -5,18 +5,23 @@ br
 .container
   .row
     .col-sm-12
-      p
-        | Accounts are reset on server restart from
-        code server/config/seed.js
-        | . Default account is
-        code test@example.com
-        | /
-        code test
-      p
-        | Admin account is
-        code admin@example.com
-        | /
-        code admin
+      .panel.panel-default.text-center
+        .panel-body
+          p
+            | Default User account is
+            code test@example.com
+            | /
+            code test
+          p
+            | Second User account is
+            code test2@example.com
+            | /
+            code test2
+          p
+            | Admin account is
+            code admin@example.com
+            | /
+            code admin
 
     .col-sm-12
       form.form(name='form', ng-submit='vm.login(form)', novalidate='')

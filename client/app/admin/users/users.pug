@@ -12,11 +12,8 @@ br
 		//- Right Side
 		.col-lg-10
 
-			.alert.alert-info
-				p.text-center
-					strong {{admin.users.length}} Users
-
 			ul.list-group
+				li.list-group-item.lead.text-center All Users ({{admin.users.length}})
 				li.list-group-item(ng-repeat='user in admin.users')
 					.row
 

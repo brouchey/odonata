@@ -50,25 +50,23 @@ br
 			.row
 				.col-md-12
 
-					.well
-						p isAdmin : {{ vm.isAdmin() }}
-						p isLoggedIn : {{ vm.isLoggedIn() }}
+					.panel.panel-default
+						.panel-body
+							p isAdmin : {{ vm.isAdmin() }}
+							p isLoggedIn : {{ vm.isLoggedIn() }}
 
 					.row
 						.col-md-6
 							.panel.panel-default
-								.panel-heading Profile Info
 								ul.list-group
 									li.list-group-item First Name: &nbsp; {{ vm.getCurrentUser().name }}
 									li.list-group-item Last Name: &nbsp; {{ vm.getCurrentUser().name }}
 									li.list-group-item Email Address: &nbsp; {{ vm.getCurrentUser().email }}
 									li.list-group-item Password: &nbsp; XXXXXXXXX
-									li.list-group-item odonata Profile URL: &nbsp; localhost:3000/user
+									li.list-group-item Public Profile URL: &nbsp; localhost:3000/user
 									li.list-group-item Address: &nbsp; 29 Rue Jean Bart
 									li.list-group-item Country: &nbsp; France
 									li.list-group-item City: &nbsp; Bordeaux
-									li.list-group-item Looking for work? &nbsp; No
-									li.list-group-item Spoken Languages: &nbsp; English - French
 								.panel-footer.text-center
 									.btn-group(role='group', aria-label='Change Profile')
 										button.btn.btn-primary(type='button') Edit 
@@ -76,20 +74,21 @@ br
 
 						.col-md-6
 							.panel.panel-default
-								.panel-heading Education
 								ul.list-group
 									li.list-group-item School Name: &nbsp; Gustave Eiffel
-									li.list-group-item City: &nbsp; Bordeaux
-									li.list-group-item Country: &nbsp; France
 									li.list-group-item Degree: &nbsp; BTS
 									li.list-group-item Specialization: &nbsp; Computer Sciences
+									li.list-group-item City: &nbsp; Bordeaux
+									li.list-group-item Country: &nbsp; France
 								.panel-footer.text-center
 									button.btn.btn-primary(type='button') Edit
 
 					.row
 						.col-md-12
-							.well
-								p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id nibh sed mauris hendrerit lobortis sit amet et tellus. Fusce et nisl non turpis consectetur maximus. Suspendisse quis porta nisi. Mauris malesuada eget metus ac convallis. In pharetra velit id consequat ultricies. Cras faucibus faucibus elit eu efficitur. Nulla tempor gravida malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc suscipit feugiat sem, non ultrices nibh. Quisque elementum in enim sed pulvinar. Pellentesque lectus magna, consequat nec est ac, mollis volutpat ex. Morbi imperdiet vulputate consequat.
+							.panel.panel-default
+								.panel-body
+									p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin convallis ipsum nec pharetra molestie. Maecenas eget laoreet sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis consequat metus sed nisi porta auctor. Suspendisse potenti. Vivamus tristique sapien et turpis gravida, a vehicula massa bibendum. Nam nisl dolor, venenatis eu feugiat ut, bibendum quis ligula.
+									p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin convallis ipsum nec pharetra molestie. Maecenas eget laoreet sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis consequat metus sed nisi porta auctor. Suspendisse potenti. Vivamus tristique sapien et turpis gravida, a vehicula massa bibendum. Nam nisl dolor, venenatis eu feugiat ut, bibendum quis ligula.
 
 		//- Right Side
 		.col-md-2
@@ -97,17 +96,18 @@ br
 			.row
 				.col-md-12
 					
-					.well
-						form(name='avatar-upload')
-							.text-center
-								p
-									.btn.btn-primary(ngf-select, ng-model='vm.userAvatar', name='userAvatar', ngf-pattern="'image/*'", ngf-accept="'image/*'", ngf-max-size='2MB', ngf-min-height='150', ngf-resize='{width: 150, height: 150}', ngf-capture="'camera'") Edit Avatar
-								p
-									img.img-circle(ngf-thumbnail='vm.userAvatar')
-								p
-									button.btn.btn-danger.btn-sm(ng-click='vm.userAvatar = null', ng-show="vm.userAvatar") Cancel
+					.panel.panel-default
+						.panel-body
+							form(name='avatar-upload')
+								.text-center
+									p
+										.btn.btn-primary(ngf-select, ng-model='vm.userAvatar', name='userAvatar', ngf-pattern="'image/*'", ngf-accept="'image/*'", ngf-max-size='2MB', ngf-min-height='150', ngf-resize='{width: 150, height: 150}', ngf-capture="'camera'") Edit Avatar
+									p
+										img.img-circle(ngf-thumbnail='vm.userAvatar')
+									p
+										button.btn.btn-danger.btn-sm(ng-click='vm.userAvatar = null', ng-show="vm.userAvatar") Cancel
 
-								button.btn.btn-success(type='submit', ng-if='vm.userAvatar != null', ng-click='vm.uploadAvatar(vm.userAvatar)') Send
+									button.btn.btn-success(type='submit', ng-if='vm.userAvatar != null', ng-click='vm.uploadAvatar(vm.userAvatar)') Send
 
 
 
