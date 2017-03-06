@@ -29,7 +29,6 @@ export class NavbarComponent {
     return this.$location.path().indexOf(route) == 0;
   }
 
-  // also in account/profile/profile.controller.js and admin/portal/portal.controller.js
   hasAvatar() {
     if (this.getCurrentUser().avatar != null) {
       return true;

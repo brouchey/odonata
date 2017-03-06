@@ -2,17 +2,18 @@ header#banner.hero-unit
 	.container
 		h1.lead Users Management
 br
-.container
+.container-fluid
 	.row
-		.col-md-12
 
-			ol.breadcrumb
-				li
-					a(href='/admin') Admin
-				li.active Users List
+		//- Left Side
+		.col-lg-2
+			admin-sidebar
+
+		//- Right Side
+		.col-lg-10
 
 			.alert.alert-info
-				p.text-right
+				p.text-center
 					strong {{admin.users.length}} Users
 
 			ul.list-group

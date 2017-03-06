@@ -7,36 +7,7 @@ br
 
 		//- Left Side
 		.col-lg-2
-			.list-group
-				.list-group-item.text-center.profile-photo
-					i.fa.fa-user-circle-o.text-muted(ng-hide='admin.hasAvatar()')
-					img.img-circle(ng-show='admin.hasAvatar()', ng-src='assets/uploads/avatars/{{admin.getCurrentUser().avatar}}', alt='Avatar')
-					//- p
-					//- 	button.btn.btn-info.btn-xs(type='button') Change Photo
-					p
-						strong {{admin.getCurrentUser().name}}
-					span.text-muted {{admin.getCurrentUser().email}}
-				a.list-group-item.active(href='#')
-					i.fa.fa-tachometer.fa-lg(aria-hidden='true')
-					|  &nbsp; Overview
-				a.list-group-item(href='/admin/feed')
-					i.fa.fa-feed.fa-lg(aria-hidden='true')
-					|  &nbsp; Feed
-				a.list-group-item(href='/admin/users')
-					i.fa.fa-users.fa-lg(aria-hidden='true')
-					|  &nbsp; Users
-				a.list-group-item(href='#')
-					i.fa.fa-line-chart.fa-lg(aria-hidden='true')
-					|  &nbsp; Traffic
-				a.list-group-item(href='#')
-					i.fa.fa-money.fa-lg(aria-hidden='true')
-					|  &nbsp; Revenue
-				a.list-group-item(href='#')
-					i.fa.fa-area-chart.fa-lg(aria-hidden='true')
-					|  &nbsp; Stats
-				a.list-group-item(href='/admin/logs')
-					i.fa.fa-database.fa-lg(aria-hidden='true')
-					|  &nbsp; Logs
+			admin-sidebar
 
 		//- Middle 
 		.col-lg-6

@@ -2,14 +2,15 @@ header#banner.hero-unit
 	.container
 		h1.lead Logs
 br
-.container
+.container-fluid
 	.row
-		.col-md-12
+		
+		//- Left Side
+		.col-lg-2
+			admin-sidebar
 
-			ol.breadcrumb
-				li
-					a(href='/admin') Admin
-				li.active Logs
+		//- Right Side
+		.col-lg-10
 
 			.panel.panel-default
 				.panel-body
