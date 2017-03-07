@@ -10,45 +10,38 @@
         i.fa.fa-ravelry.fa-lg
 
     #navbar-main.navbar-collapse.collapse(uib-collapse='$ctrl.isCollapsed')
+
+      //- Left Side
       ul.nav.navbar-nav
+
+        //- Not Logged In
         li(ng-hide='$ctrl.isLoggedIn()', ng-repeat='item in $ctrl.menu', ng-class='{active: $ctrl.isActive(item.link)}')
           a(ng-href='{{item.link}}') {{item.title}}
 
-        //- li(ng-show='$ctrl.isLoggedIn()')
-        //-   a(href='#', ng-click='isCollapsedHorizontal = !isCollapsedHorizontal')
-        //-     span.glyphicon.glyphicon-align-justify
-
+        //- Logged In
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/dashboard")}')
           a(href='/dashboard') Dashboard
 
-        li(ng-class='{active: $ctrl.isActive("/questions")}')
+        li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/questions")}')
           a(href='/questions') Exchange
 
-        li(ng-class='{active: $ctrl.isActive("/quiz")}')
+        li(ng-show='$ctrl.isLoggedIn()' ng-class='{active: $ctrl.isActive("/quiz")}')
           a(href='/quiz') Quizbox
 
-        //- form.navbar-form.navbar-left(role='search', ng-submit='$ctrl.search(keyword)')
-        //-   .input-group
-        //-     input.form-control(type='text', placeholder='Search', ng-model='keyword') 
-        //-     span.input-group-btn
-        //-       button.btn.btn-default(type='submit')
-        //-         span.glyphicon.glyphicon-search
-
-        li(ng-show='$ctrl.isAdmin()', ng-class='{active: $ctrl.isActive("/admin")}')
+        li.admin-zone(ng-show='$ctrl.isAdmin()', ng-class='{active: $ctrl.isActive("/admin")}')
           a(href='/admin') Admin
 
+      //- Right Side
       ul.nav.navbar-nav.navbar-right
+
+        //- Not Logged In
         li(ng-hide='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/signup")}')
           a(href='/signup') Sign up
 
         li(ng-hide='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/login")}')
           a(href='/login') Login
 
-        //- li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/profile")}')
-        //-   a(href='/profile')
-        //-     span {{$ctrl.getCurrentUser().name}} &nbsp;
-        //-     i.fa.fa-user-circle.fa-lg
-
+        //- Logged In
         li(ng-show='$ctrl.isLoggedIn()', uib-dropdown, ng-class='{active: $ctrl.isActive("/profile")}')
           a#user_options(href, uib-dropdown-toggle)
             span {{$ctrl.getCurrentUser().name}} &nbsp;
@@ -87,10 +80,6 @@
             li.text-center
               a(href='/#')
                 strong See All
-
-        //- li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/settings")}')
-        //-   a(href='/settings')
-        //-     i.fa.fa-cog.fa-lg
 
         li(ng-show='$ctrl.isLoggedIn()')
           a(href='/logout')
