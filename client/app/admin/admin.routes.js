@@ -6,25 +6,25 @@ export default function routes($routeProvider) {
   $routeProvider.when('/admin', {
     template: require('./portal/portal.pug'),
     controller: 'AdminPortalController',
-    controllerAs: 'admin',
+    controllerAs: 'vm',
     authenticate: 'admin'
   })
   .when('/admin/feed', {
     template: require('./feed/feed.pug'),
     controller: 'AdminFeedController',
-    controllerAs: 'admin',
+    controllerAs: 'vm',
     authenticate: 'admin'
   })
   .when('/admin/logs', {
     template: require('./logs/logs.pug'),
     controller: 'AdminLogsController',
-    controllerAs: 'admin',
+    controllerAs: 'vm',
     authenticate: 'admin'
   })
   .when('/admin/users', {
     template: require('./users/users.pug'),
     controller: 'AdminUsersController',
-    controllerAs: 'admin',
+    controllerAs: 'vm',
     authenticate: 'admin'
   });
 }

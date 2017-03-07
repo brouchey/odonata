@@ -60,7 +60,7 @@
                 span Profile
             li
               a(href='/settings')
-                span Account Settings
+                span Settings
             li
               a(href='/logout')
                 span Logout &nbsp;
@@ -71,17 +71,22 @@
             i.fa.fa-comments-o.fa-lg
           ul.dropdown-menu.messenger-popup(uib-dropdown-menu, aria-labelledby='messenger')
             li
-              p You have a new message !
+              span You have 2 new messages !
             li.divider(role="separator")
-            li 
-              p You have a new message !
+            li.text-center
+              a(href='/#')
+                strong See All
         
         li(ng-show='$ctrl.isLoggedIn()', uib-dropdown)
           a#notifications(href, uib-dropdown-toggle)
             i.fa.fa-bell-o.fa-lg
           ul.dropdown-menu.notifications-popup(uib-dropdown-menu, aria-labelledby='notifications')
             li
-              p No new notifications.
+              span.text-muted No new notifications.
+            li.divider(role="separator")
+            li.text-center
+              a(href='/#')
+                strong See All
 
         //- li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/settings")}')
         //-   a(href='/settings')

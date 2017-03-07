@@ -13,15 +13,15 @@ br
 		.col-lg-6
 
 			.panel.panel-default
-				.panel-heading Users ({{admin.users.length}})
+				.panel-heading Users ({{vm.users.length}})
 				ul.list-group
-					li.list-group-item(ng-repeat='user in admin.users')
-						i.fa.fa-user-circle-o.fa-lg.text-muted(ng-hide='admin.userHasAvatar(user)')
-						img.img-circle.user-avatar(ng-show='admin.userHasAvatar(user)', ng-src='assets/uploads/avatars/{{user.avatar}}', alt='Avatar')
+					li.list-group-item(ng-repeat='user in vm.users')
+						i.fa.fa-user-circle-o.fa-lg.text-muted(ng-hide='vm.userHasAvatar(user)')
+						img.img-circle.user-avatar(ng-show='vm.userHasAvatar(user)', ng-src='assets/uploads/avatars/{{user.avatar}}', alt='Avatar')
 						span &nbsp; {{user.name}} ({{user._id}})
 						span.text-muted.pull-right {{user.email}}
 
-			//- pre {{admin.users|json}}
+			//- pre {{vm.users|json}}
 
 			.panel.panel-default
 				.panel-body

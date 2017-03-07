@@ -24,6 +24,7 @@ import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
 // import sidebar from '../components/sidebar/sidebar.component';
 import adminSidebar from '../components/admin-sidebar/admin-sidebar.component';
+import profileSidebar from '../components/profile-sidebar/profile-sidebar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import dashboard from './dashboard/dashboard.component';
@@ -58,6 +59,7 @@ angular.module('odonataApp', [
   navbar,
   // sidebar,
   adminSidebar,
+  profileSidebar,
   footer,
   main,
   dashboard,

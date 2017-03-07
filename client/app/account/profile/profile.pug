@@ -7,42 +7,7 @@ br
 
 		//- Left Side
 		.col-md-2
-			.list-group
-				.list-group-item.text-center.profile-photo
-					i.fa.fa-user-circle-o.text-muted(ng-hide='vm.hasAvatar()')
-					img.img-circle(ng-show='vm.hasAvatar()', ng-src='assets/uploads/avatars/{{vm.getCurrentUser().avatar}}', alt='Avatar')
-					//- p
-					//- 	button.btn.btn-info.btn-xs(type='button') Change Photo
-					p 
-						strong {{ vm.getCurrentUser().name }}
-					p.text-muted {{ vm.getCurrentUser().email }}
-				a.list-group-item(href='#')
-					i.fa.fa-user-o.fa-lg(aria-hidden='true')
-					|  &nbsp;  Profile
-				a.list-group-item(href='#')
-					i.fa.fa-user-circle.fa-lg(aria-hidden='true')
-					|  &nbsp; Photo
-				a.list-group-item(href='/settings')
-					i.fa.fa-cog.fa-lg(aria-hidden='true')
-					|  &nbsp; Account
-				a.list-group-item(href='#')
-					i.fa.fa-credit-card.fa-lg(aria-hidden='true')
-					|  &nbsp; Credit Cards
-				a.list-group-item(href='#')
-					i.fa.fa-user-secret.fa-lg(aria-hidden='true')
-					|  &nbsp; Privacy
-				a.list-group-item(href='#')
-					i.fa.fa-bell-o.fa-lg(aria-hidden='true')
-					|  &nbsp; Notifications
-				a.list-group-item(href='#')
-					i.fa.fa-cog.fa-lg(aria-hidden='true')
-					|  &nbsp; Preferences
-				a.list-group-item(href='#')
-					i.fa.fa-exchange.fa-lg(aria-hidden='true')
-					|  &nbsp; API
-				a.list-group-item.list-group-item-danger(href='#')
-					i.fa.fa-ban.fa-lg(aria-hidden='true')
-					|  &nbsp; Danger Zone
+			profile-sidebar
 
 		//- Middle Side
 		.col-md-8

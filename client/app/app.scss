@@ -31,26 +31,27 @@ body {
 
 // Component styles are injected through gulp
 /* inject:scss */
-@import 'main/main';
 @import 'account/login/login';
 @import 'account/profile/profile';
 @import 'account/settings/settings';
 @import 'account/signup/signup';
-@import 'admin/portal/portal';
 @import 'admin/feed/feed';
-@import 'admin/users/users';
 @import 'admin/logs/logs';
+@import 'admin/portal/portal';
+@import 'admin/users/users';
 @import 'dashboard/dashboard';
+@import 'main/main';
 @import 'questions/questionsCreate/questionsCreate';
 @import 'questions/questionsIndex/questionsIndex';
 @import 'questions/questionsShow/questionsShow';
 @import 'quizzes/quizCreate/quizCreate';
 @import 'quizzes/quizIndex/quizIndex';
 @import 'quizzes/quizShow/quizShow';
+@import '../components/admin-sidebar/admin-sidebar';
+@import '../components/profile-sidebar/profile-sidebar';
 @import '../components/footer/footer';
 @import '../components/modal/modal';
 @import '../components/navbar/navbar';
 @import '../components/oauth-buttons/oauth-buttons';
-// @import '../components/sidebar/sidebar';
-@import '../components/admin-sidebar/admin-sidebar';
+@import '../components/sidebar/sidebar';
 /* endinject */

@@ -13,13 +13,13 @@ br
 		.col-lg-10
 
 			ul.list-group
-				li.list-group-item.lead.text-center All Users ({{admin.users.length}})
-				li.list-group-item(ng-repeat='user in admin.users')
+				li.list-group-item.lead.text-center All Users ({{vm.users.length}})
+				li.list-group-item(ng-repeat='user in vm.users')
 					.row
 
 						.col-sm-1.text-center
-							i.fa.fa-user-circle-o.fa-3x.text-muted(aria-hidden='true', ng-hide='admin.userHasAvatar(user)')
-							img.img-circle.user-list-avatar(ng-show='admin.userHasAvatar(user)', ng-src='assets/uploads/avatars/{{user.avatar}}', alt='Avatar')
+							i.fa.fa-user-circle-o.fa-3x.text-muted(aria-hidden='true', ng-hide='vm.userHasAvatar(user)')
+							img.img-circle.user-list-avatar(ng-show='vm.userHasAvatar(user)', ng-src='assets/uploads/avatars/{{user.avatar}}', alt='Avatar')
 
 						.col-sm-8
 							strong {{user.name}}
@@ -30,5 +30,5 @@ br
 							span.text-muted {{user.role}}
 
 						.col-sm-1
-							a.trash(ng-click='admin.delete(user)').pull-right
+							a.trash(ng-click='vm.delete(user)').pull-right
 								i.fa.fa-trash-o.fa-lg

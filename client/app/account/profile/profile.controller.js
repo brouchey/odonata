@@ -4,7 +4,7 @@ export default class ProfileController {
 	userAvatar;
 
   /*@ngInject*/
-  constructor($location, $http, Auth, Upload, $timeout) {
+  constructor($location, $http, Auth, Upload) {
     'ngInject';
 
     this.$location = $location;
@@ -13,16 +13,6 @@ export default class ProfileController {
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.Upload = Upload;
-    this.$timeout = $timeout;
-  }
-
-  // also in components/navbar/navbar.component.js and admin/portal/portal.controller.js
-  hasAvatar() {
-    if (this.getCurrentUser().avatar != null) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   // ng-file-upload
