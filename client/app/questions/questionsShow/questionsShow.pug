@@ -23,7 +23,7 @@ br
 
       .row
         .col-md-1
-          .well.question-content-triggers.text-center
+          .question-content-triggers.text-center
 
             //- Question VoteUp
 
@@ -76,27 +76,28 @@ br
             div.star-count {{vm.question.stars.length}}
 
         .col-md-11
-          .well
+          .panel.panel-default
+            .panel-body
 
-            //- Question Content
-            .question-content(ng-if='!editingQ') {{vm.question.content}}
+              //- Question Content
+              .question-content(ng-if='!editingQ') {{vm.question.content}}
 
-            //- Question Edition
-            textarea.form-control(rows='7', ng-model='vm.question.content', ng-if='editingQ')
-            br
-            button.btn.btn-success(type='submit', ng-click='editingQ=false; vm.updateQuestion()', ng-show='editingQ') Save Changes
+              //- Question Edition
+              textarea.form-control(rows='7', ng-model='vm.question.content', ng-if='editingQ')
+              br
+              button.btn.btn-success(type='submit', ng-click='editingQ=false; vm.updateQuestion()', ng-show='editingQ') Save Changes
 
-            //- Question Author
-            .text-right
-              | by 
-              a(ng-href='/users/{{vm.question.user._id}}') {{vm.question.user.name}}
-              |  &middot; {{vm.question.createdAt|date:'medium'}}
+              //- Question Author
+              .text-right
+                | by 
+                a(ng-href='/users/{{vm.question.user._id}}') {{vm.question.user.name}}
+                |  &middot; {{vm.question.createdAt|date:'medium'}}
 
-            //- Question Author buttons
-            button.btn.btn-info(ng-click='editingQ=!editingQ;', ng-show='vm.isOwner(vm.question) && !editingQ', uib-tooltip='Edit', tooltip-placement='left')
-              i.fa.fa-pencil-square-o
-            button.btn.btn-danger(ng-if='vm.isOwner(vm.question) && !editingQ', type='button', ng-click='vm.deleteQuestion()', uib-tooltip='Delete Question', tooltip-placement='right')
-              i.fa.fa-trash-o
+              //- Question Author buttons
+              button.btn.btn-info(ng-click='editingQ=!editingQ;', ng-show='vm.isOwner(vm.question) && !editingQ', uib-tooltip='Edit', tooltip-placement='left')
+                i.fa.fa-pencil-square-o
+              button.btn.btn-danger(ng-if='vm.isOwner(vm.question) && !editingQ', type='button', ng-click='vm.deleteQuestion()', uib-tooltip='Delete Question', tooltip-placement='right')
+                i.fa.fa-trash-o
 
           .comment
             .well.well-sm(ng-repeat='comment in vm.question.comments')
@@ -142,7 +143,7 @@ br
       .row(ng-repeat='answer in vm.question.answers|orderBy:["-best", "-votecount"]')
 
         .col-md-1
-          .well.answer-content-triggers.text-center
+          .answer-content-triggers.text-center
 
             //- Answer VoteUp
 
@@ -192,27 +193,28 @@ br
               i.fa.fa-check.fa-lg
 
         .col-md-11
-          .well
-            //- Answer Content
-            .answer-content(ng-if='!editingA') {{answer.content}}
+          .panel.panel-default
+            .panel-body
+              //- Answer Content
+              .answer-content(ng-if='!editingA') {{answer.content}}
 
-            //- Answer Edition
-            textarea.form-control(ng-if='editingA', rows='3', ng-model='answer.content')
-            br
-            button.btn.btn-success(ng-show='editingA', type='submit', ng-click='editingA=false; vm.updateAnswer(answer)') Save
+              //- Answer Edition
+              textarea.form-control(ng-if='editingA', rows='3', ng-model='answer.content')
+              br
+              button.btn.btn-success(ng-show='editingA', type='submit', ng-click='editingA=false; vm.updateAnswer(answer)') Save
 
-            //- Answer Author
-            .text-right
-              | by 
-              a(ng-href='/users/{{answer.user._id}}') {{answer.user.name}}
-              |  &middot; {{answer.createdAt|date:'medium'}}
-            .clearfix
+              //- Answer Author
+              .text-right
+                | by 
+                a(ng-href='/users/{{answer.user._id}}') {{answer.user.name}}
+                |  &middot; {{answer.createdAt|date:'medium'}}
+              .clearfix
 
-            //- Answer Author buttons
-            button.btn.btn-info(ng-click='editingA=!editingA;', ng-show='vm.isOwner(answer) && !editingA', uib-tooltip='Edit', tooltip-placement='left')
-              i.fa.fa-pencil-square-o
-            button.btn.btn-danger(ng-if='vm.isOwner(answer) && !editingA', type='button', ng-click='vm.deleteAnswer(answer)', uib-tooltip='Delete Answer', tooltip-placement='right')
-              i.fa.fa-trash-o
+              //- Answer Author buttons
+              button.btn.btn-info(ng-click='editingA=!editingA;', ng-show='vm.isOwner(answer) && !editingA', uib-tooltip='Edit', tooltip-placement='left')
+                i.fa.fa-pencil-square-o
+              button.btn.btn-danger(ng-if='vm.isOwner(answer) && !editingA', type='button', ng-click='vm.deleteAnswer(answer)', uib-tooltip='Delete Answer', tooltip-placement='right')
+                i.fa.fa-trash-o
 
           .comment
             .well.well-sm(ng-repeat='comment in answer.comments')
