@@ -4,8 +4,10 @@ header#banner.hero-unit
 br
 .container
   .row
+
     .col-sm-12
-      .panel.panel-default.text-center
+
+      .panel.panel-default
         .panel-body
           p
             | Default User account is
@@ -23,31 +25,39 @@ br
             | /
             code admin
 
-    .col-sm-12
-      form.form(name='form', ng-submit='vm.login(form)', novalidate='')
-        .form-group
-          label Email
-          input.form-control(type='email', name='email', ng-model='vm.user.email')
-        .form-group
-          label Password
-          input.form-control(type='password', name='password', ng-model='vm.user.password')
+    //- Left Side
+    .col-sm-12.col-md-8
 
-        .form-group.has-error
-          p.help-block(ng-show='form.email.$error.required && form.password.$error.required && vm.submitted')
-            | Please enter your email and password.
-          p.help-block {{ vm.errors.login }}
+      .panel.panel-default
+        .panel-body
+          form.form(name='form', ng-submit='vm.login(form)', novalidate='')
+            .form-group
+              label Email
+              input.form-control(type='email', name='email', ng-model='vm.user.email')
+            .form-group
+              label Password
+              input.form-control(type='password', name='password', ng-model='vm.user.password')
 
-        div
-          button.btn.btn-inverse.btn-login(type='submit')
-            | Login
-          = ' '
-          a.btn.btn-default.btn-register(href='/signup')
-            | Register
+            .form-group.has-error
+              p.help-block(ng-show='form.email.$error.required && form.password.$error.required && vm.submitted')
+                | Please enter your email and password.
+              p.help-block {{ vm.errors.login }}
 
-        hr
+            .text-center
+              button.btn.btn-inverse.btn-login(type='submit')
+                | Login
+              = ' '
+              a.btn.btn-default.btn-register(href='/signup')
+                | Register
 
-        .row
-          .col-sm-4.col-md-3
-            oauth-buttons(classes='btn-block')
+    //- Right Side
+    .col-sm-6.col-md-4
 
-  hr
+      .panel.panel-default.text-center
+        .panel-body
+          //- oAuth buttons
+          oauth-buttons(classes='btn-block')
+
+
+  
+

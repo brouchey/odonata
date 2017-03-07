@@ -5,7 +5,7 @@
 			img.img-circle(ng-show='vm.hasAvatar()', ng-src='assets/uploads/avatars/{{vm.getCurrentUser().avatar}}', alt='Avatar')
 			p
 				strong {{vm.getCurrentUser().name}}
-			span.text-muted {{vm.getCurrentUser().email}}
+			p.text-muted {{vm.getCurrentUser().email}}
 		a.list-group-item(href='/admin', ng-class='{active: vm.isActive("/admin")}')
 			i.fa.fa-tachometer.fa-lg(aria-hidden='true')
 			|  &nbsp; Overview
