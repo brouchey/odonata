@@ -1,16 +1,16 @@
 'use strict';
 
-import main from './main.component';
+import home from './home.component';
 import {
   MainController
-} from './main.component';
+} from './home.component';
 
-describe('Component: MainComponent', function() {
-  beforeEach(angular.mock.module(main));
+describe('Component: MainController', function() {
+  beforeEach(angular.mock.module(home));
   beforeEach(angular.mock.module('socketMock'));
 
   var scope;
-  var mainComponent;
+  var homeComponent;
   var $httpBackend;
 
   // Initialize the controller and a mock scope
@@ -20,7 +20,7 @@ describe('Component: MainComponent', function() {
       .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
 
     scope = $rootScope.$new();
-    mainComponent = $componentController('main', {
+    homeComponent = $componentController('home', {
       $http,
       $scope: scope,
       socket
@@ -28,9 +28,9 @@ describe('Component: MainComponent', function() {
   }));
 
   it('should attach a list of things to the controller', function() {
-    mainComponent.$onInit();
+    homeComponent.$onInit();
     $httpBackend.flush();
-    expect(mainComponent.awesomeThings.length)
+    expect(homeComponent.awesomeThings.length)
       .toBe(4);
   });
 });

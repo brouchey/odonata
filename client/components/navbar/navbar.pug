@@ -19,8 +19,8 @@
           a(ng-href='{{item.link}}') {{item.title}}
 
         //- Logged In
-        li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/dashboard")}')
-          a(href='/dashboard') Dashboard
+        li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/")}')
+          a(href='/') Home
 
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/questions")}')
           a(href='/questions') Exchange

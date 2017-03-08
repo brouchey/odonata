@@ -4,6 +4,6 @@ export default function routes($routeProvider) {
   'ngInject';
 
   $routeProvider.when('/', {
-    template: '<main></main>'
+    template: '<home></home>'
   });
 }

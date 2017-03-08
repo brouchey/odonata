@@ -40,7 +40,7 @@ body {
 @import 'admin/portal/portal';
 @import 'admin/users/users';
 @import 'dashboard/dashboard';
-@import 'main/main';
+@import 'home/home';
 @import 'questions/questionsCreate/questionsCreate';
 @import 'questions/questionsIndex/questionsIndex';
 @import 'questions/questionsShow/questionsShow';
@@ -48,10 +48,10 @@ body {
 @import 'quizzes/quizIndex/quizIndex';
 @import 'quizzes/quizShow/quizShow';
 @import '../components/admin-sidebar/admin-sidebar';
-@import '../components/profile-sidebar/profile-sidebar';
-@import '../components/sidebar/sidebar';
 @import '../components/footer/footer';
 @import '../components/modal/modal';
 @import '../components/navbar/navbar';
 @import '../components/oauth-buttons/oauth-buttons';
+@import '../components/profile-sidebar/profile-sidebar';
+@import '../components/sidebar/sidebar';
 /* endinject */

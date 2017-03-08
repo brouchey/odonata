@@ -22,12 +22,11 @@ import _Auth from '../components/auth/auth.module';
 import account from './account';
 import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
+import home from './home/home.component';
 // import sidebar from '../components/sidebar/sidebar.component';
 import adminSidebar from '../components/admin-sidebar/admin-sidebar.component';
 import profileSidebar from '../components/profile-sidebar/profile-sidebar.component';
 import footer from '../components/footer/footer.component';
-import main from './main/main.component';
-import dashboard from './dashboard/dashboard.component';
 import questionsIndex from './questions/questionsIndex/questionsIndex.component';
 import questionsCreate from './questions/questionsCreate/questionsCreate.component';
 import questionsShow from './questions/questionsShow/questionsShow.component';
@@ -57,12 +56,11 @@ angular.module('odonataApp', [
   account,
   admin,
   navbar,
+  home,
   // sidebar,
   adminSidebar,
   profileSidebar,
   footer,
-  main,
-  dashboard,
   questionsIndex,
   questionsCreate,
   questionsShow,
