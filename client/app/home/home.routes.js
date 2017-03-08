@@ -4,6 +4,8 @@ export default function routes($routeProvider) {
   'ngInject';
 
   $routeProvider.when('/', {
-    template: '<home></home>'
+    template: require('./home.pug'),
+    controller: 'HomeController',
+    controllerAs: 'vm'
   });
 }

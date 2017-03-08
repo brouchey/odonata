@@ -22,7 +22,9 @@ import _Auth from '../components/auth/auth.module';
 import account from './account';
 import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
-import home from './home/home.component';
+import home from './home/home.controller';
+import main from './home/main/main.component';
+import portal from './home/portal/portal.component';
 // import sidebar from '../components/sidebar/sidebar.component';
 import adminSidebar from '../components/admin-sidebar/admin-sidebar.component';
 import profileSidebar from '../components/profile-sidebar/profile-sidebar.component';
@@ -57,6 +59,8 @@ angular.module('odonataApp', [
   admin,
   navbar,
   home,
+  main,
+  portal,
   // sidebar,
   adminSidebar,
   profileSidebar,
