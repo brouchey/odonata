@@ -1,21 +1,30 @@
 .portal
-	.container 
+	header#banner.hero-unit
+		.container
+			h1.lead Portal
+	br
+	.container-fluid 
 		.row
-			.col-md-3
-				ul.list-group
-					li.list-group-item Cras justo odio
-						span.badge 3
-					li.list-group-item Dapibus ac facilisis in
-						span.badge 5
-					li.list-group-item Morbi leo risus
-						span.badge 26
-					li.list-group-item Porta ac consectetur ac
-						span.badge 9
-					li.list-group-item Vestibulum at eros
-						span.badge 14
-			.col-md-9
-				div.panel.panel-default.panel-primary
-					div.panel-heading
-						h3.panel-title Panel Title
-					div.panel-body Panel Content
-					div.panel-footer Panel Footer
+
+			//- Left Side
+			.col-md-2
+				.list-group
+					a.list-group-item.active(href='/')
+						i.fa.fa-home.fa-lg(aria-hidden='true')
+						|  &nbsp; Home
+					a.list-group-item(href='#')
+						i.fa.fa-pencil.fa-lg(aria-hidden='true')
+						|  &nbsp; Notes
+					a.list-group-item(href='#')
+						i.fa.fa-book.fa-lg(aria-hidden='true')
+						|  &nbsp; Library
+
+			//- Middle Side
+			.col-md-5
+				.panel.panel-default
+					.panel-body Some Content
+
+			//- Right Side
+			.col-md-5
+				.panel.panel-default
+					.panel-body Some Content
