@@ -1,0 +1,11 @@
+.portal-sidebar
+	.list-group
+		a.list-group-item(href='/', ng-class='{active: vm.isActive("/")}')
+			i.fa.fa-home.fa-lg(aria-hidden='true')
+			|  &nbsp; Home
+		a.list-group-item(href='#')
+			i.fa.fa-sticky-note-o.fa-lg(aria-hidden='true')
+			|  &nbsp; Notes
+		a.list-group-item(href='/quiz', ng-class='{active: vm.isActive("/quiz")}')
+			i.fa.fa-check-circle-o.fa-lg(aria-hidden='true')
+			|  &nbsp; Quizbox

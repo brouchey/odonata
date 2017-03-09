@@ -27,6 +27,7 @@ import main from './home/main/main.component';
 import portal from './home/portal/portal.component';
 // import sidebar from '../components/sidebar/sidebar.component';
 import adminSidebar from '../components/admin-sidebar/admin-sidebar.component';
+import portalSidebar from '../components/portal-sidebar/portal-sidebar.component';
 import profileSidebar from '../components/profile-sidebar/profile-sidebar.component';
 import footer from '../components/footer/footer.component';
 import questionsIndex from './exchange/questionsIndex/questionsIndex.component';
@@ -63,6 +64,7 @@ angular.module('odonataApp', [
   portal,
   // sidebar,
   adminSidebar,
+  portalSidebar,
   profileSidebar,
   footer,
   questionsIndex,
