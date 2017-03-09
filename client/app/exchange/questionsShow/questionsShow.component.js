@@ -78,7 +78,7 @@ export class QuestionsShowComponent {
   deleteQuestion() {
     this.$http.delete('/api/questions/' + this.question._id)
     .then(response => {
-      this.$location.path('/questions');
+      this.$location.path('/exchange');
     });
   }
 

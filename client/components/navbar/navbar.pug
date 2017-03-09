@@ -22,11 +22,14 @@
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/")}')
           a(href='/') Home
 
-        li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/questions")}')
-          a(href='/questions') Exchange
+        li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/library")}')
+          a(href='/library') Library
 
-        li(ng-show='$ctrl.isLoggedIn()' ng-class='{active: $ctrl.isActive("/quiz")}')
-          a(href='/quiz') Quizbox
+        li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/exchange")}')
+          a(href='/exchange') Exchange
+
+        //- li(ng-show='$ctrl.isLoggedIn()' ng-class='{active: $ctrl.isActive("/quiz")}')
+        //-   a(href='/quiz') Quizbox
 
         li.admin-zone(ng-show='$ctrl.isAdmin()', ng-class='{active: $ctrl.isActive("/admin")}')
           a(href='/admin') Admin

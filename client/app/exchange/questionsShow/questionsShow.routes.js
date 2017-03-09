@@ -3,7 +3,7 @@
 export default function($routeProvider) {
   'ngInject';
   $routeProvider
-    .when('/questions', {
-      template: '<questions-index></questions-index>'
+    .when('/exchange/show/:id', {
+      template: '<questions-show></questions-show>'
     });
 }

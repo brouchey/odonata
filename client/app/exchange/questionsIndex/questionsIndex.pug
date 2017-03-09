@@ -3,7 +3,7 @@ header#banner.hero-unit
     h1.lead Exchange
     h2.lead {{vm.questions.length}} Questions
     p
-      a.btn.btn-success(type='button', href='/questions/create') Ask New Question
+      a.btn.btn-success(type='button', href='/exchange/create') Ask New Question
 br
 #question-index-container.container
   .row
@@ -56,7 +56,7 @@ br
                     .star
                       i.fa.fa-star(ng-if='vm.isStar(question)')
                       //- i.fa.fa-star-o(ng-if='!vm.isStar(question)')
-                    a.question-link(ng-href='/questions/show/{{question._id}}') {{question.title}}
+                    a.question-link(ng-href='/exchange/show/{{question._id}}') {{question.title}}
                     .clearfix
                     .question-author
                       | by 

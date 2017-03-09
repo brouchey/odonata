@@ -3,7 +3,7 @@
 export default function($routeProvider) {
   'ngInject';
   $routeProvider
-    .when('/questions/create', {
+    .when('/exchange/create', {
       template: '<questions-create></questions-create>',
       authenticate: 'user'
     });

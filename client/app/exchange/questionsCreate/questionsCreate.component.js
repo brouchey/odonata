@@ -20,7 +20,7 @@ export class QuestionsCreateComponent {
   submitQuestion() {
     this.$http.post('/api/questions', this.$scope.question)
       .then(response => {
-        this.$location.path('/questions');
+        this.$location.path('/exchange');
       });
   }
 
