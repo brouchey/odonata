@@ -54,7 +54,7 @@ export class QuestionsIndexComponent {
   }
 
   loadMyQuestions() {
-    this.$http.get('/api/questions/users/' + this.getCurrentUser()._id)
+    this.$http.get('/api/questions/user/' + this.getCurrentUser()._id)
       .then(response => {
         this.questions = response.data;
         this.filteredQuestions = response.data.slice((this.currentPage - 1), this.itemsPerPage);
@@ -62,7 +62,7 @@ export class QuestionsIndexComponent {
   }
 
   loadFavoritesQuestions() {
-    this.$http.get('/api/questions/users/' + this.getCurrentUser()._id + '/favorites')
+    this.$http.get('/api/questions/user/' + this.getCurrentUser()._id + '/favorites')
       .then(response => {
         this.questions = response.data;
         this.filteredQuestions = response.data.slice((this.currentPage - 1), this.itemsPerPage);

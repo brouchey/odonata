@@ -29,8 +29,8 @@ router.delete('/:id/answers/:answerId/comments/:commentId', auth.isAuthenticated
 router.put('/:id/star', auth.isAuthenticated(), controller.star);
 router.delete('/:id/star', auth.isAuthenticated(), controller.unstar);
 
-router.get('/users/:userId', auth.isAuthenticated(), controller.showUserQuestions);
-router.get('/users/:userId/favorites', auth.isAuthenticated(), controller.showUserFavoritesQuestions);
+router.get('/user/:userId', auth.isAuthenticated(), controller.showUserQuestions);
+router.get('/user/:userId/favorites', auth.isAuthenticated(), controller.showUserFavoritesQuestions);
 
 router.get('/search/:keyword', auth.isAuthenticated(), controller.searchQuestions);
 

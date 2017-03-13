@@ -1,13 +1,6 @@
 'use strict';
 const angular = require('angular');
 
-//- from SignupController
-type User = {
-	name: string;
-	email: string;
-	password: string;
-};
-
 export class MainComponent {
 
 	//- from SignupController
@@ -38,10 +31,12 @@ export class MainComponent {
 				password: this.user.password
 			})
 				.then(() => {
+					console.log('Account created !');
 					// Account created, redirect to home
 					this.$location.path('/');
 				})
 				.catch(err => {
+					console.log('Error');
 					err = err.data;
 					this.errors = {};
 					// Update validity of form fields that match the mongoose errors

@@ -143,6 +143,3 @@ export function uploadAvatar(req, res, next) {
     exports.show(req, res);
   });
 }
-
-
-

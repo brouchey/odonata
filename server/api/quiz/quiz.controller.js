@@ -6,6 +6,9 @@
  * PUT     /api/quiz/:id          ->  upsert
  * PATCH   /api/quiz/:id          ->  patch
  * DELETE  /api/quiz/:id          ->  destroy
+ * 
+ * User Quizzes :
+ * GET     /api/quiz/user/:userId   ->  showUserQuizzes
  */
 
 'use strict';
@@ -118,5 +121,17 @@ export function destroy(req, res) {
   return Quiz.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
+    .catch(handleError(res));
+}
+
+/**********************************/
+/* User Quizzes API */
+/**********************************/
+
+// Gets User Quizzes
+export function showUserQuizzes(req, res) {
+  var userId = req.params.userId;
+  return Quiz.find({user: userId}).sort({createdAt: -1}).exec()
+    .then(respondWithResult(res))
     .catch(handleError(res));
 }

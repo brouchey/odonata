@@ -22,15 +22,17 @@ export class QuizIndexComponent {
   }
 
   $onInit() {
-    this.loadQuizzes();
+    this.loadMyQuizzes();
   }
 
-  loadQuizzes() {
-    this.$http.get('/api/quiz/')
-      .then(response => {
-        this.quizzes = response.data;
-      });
+  loadMyQuizzes() {
+    this.$http.get('/api/quiz/user/' + this.getCurrentUser()._id)
+    .then(response => {
+      this.quizzes = response.data;
+      console.log(this.quizzes);
+    })
   }
+
 }
 
 export default angular.module('odonataApp.quizIndex', [ngRoute])

@@ -28,8 +28,8 @@
  * DELETE  /api/questions/:id/star                                        -> unstar
  * 
  * User Questions and Starred :
- * GET     /api/questions/users/:userId             ->  showUserQuestions
- * GET     /api/questions/users/:userId/favorites   ->  showUserFavoritesQuestions
+ * GET     /api/questions/user/:userId             ->  showUserQuestions
+ * GET     /api/questions/user/:userId/favorites   ->  showUserFavoritesQuestions
  * 
  * Search Questions :
  * GET     /api/questions/search/:keyword   ->  searchQuestions

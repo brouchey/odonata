@@ -17,7 +17,10 @@
           .col-md-12
 
             //- if no Quizzes
-            .alert.alert-warning.text-center(ng-if='vm.quizzes.length==0', role='alert') No Quizzes Found !
+            .alert.alert-warning.text-center(ng-if='vm.quizzes.length==0', role='alert')
+              p No Quizzes Found !
+              p
+                a.btn.btn-success.btn-sm(type='button', href='/quiz/create') Create
 
             //- if Quizzes
             .panel.panel-default(ng-if='vm.quizzes.length!==0')
@@ -31,7 +34,7 @@
                           a(role='button', ng-href='/quiz/show/{{quiz._id}}', style='font-size: large') {{quiz.title}}
                         .panel-body
                           p {{quiz.description}}
-                          p.text-muted Created by {{quiz.user.name}}
+                          p.text-muted by {{quiz.user.name}}
                           p.text-muted {{quiz.createdAt|date:'mediumDate'}}
                         .panel-body.text-center
                           a.btn.btn-primary(role='button', ng-href='/quiz/show/{{quiz._id}}') Show
