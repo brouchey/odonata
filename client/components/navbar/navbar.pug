@@ -38,11 +38,23 @@
       ul.nav.navbar-nav.navbar-right
 
         //- Not Logged In
-        li(ng-hide='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/signup")}')
-          a(href='/signup') Sign up
+        
+        //- li(ng-hide='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/signup")}')
+        //-   a(href='/signup') Sign up
 
-        li(ng-hide='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/login")}')
-          a(href='/login') Login
+        //- li(ng-hide='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/login")}')
+        //-   a(href='/login') Login
+
+        form.form.navbar-form.navbar-right(ng-hide='$ctrl.isLoggedIn()', role='login', name='form', ng-submit='$ctrl.login(form)', novalidate)
+          .form-group
+            input.form-control(type='email', name='email', ng-model='$ctrl.user.email', placeholder='Email')
+          |  
+          .form-group
+            input.form-control(type='password', name='password', ng-model='$ctrl.user.password', placeholder='Password')
+          |  
+          button.btn.btn-success(type='submit') Login
+
+
 
         //- Logged In
         li(ng-show='$ctrl.isLoggedIn()', uib-dropdown, ng-class='{active: $ctrl.isActive("/profile")}')

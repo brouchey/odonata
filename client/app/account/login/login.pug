@@ -30,7 +30,7 @@ br
 
       .panel.panel-default
         .panel-body
-          form.form(name='form', ng-submit='vm.login(form)', novalidate='')
+          form.form(name='form', ng-submit='vm.login(form)', novalidate)
             .form-group
               label Email
               input.form-control(type='email', name='email', ng-model='vm.user.email')
@@ -44,10 +44,10 @@ br
               p.help-block {{ vm.errors.login }}
 
             .text-center
-              button.btn.btn-inverse.btn-login(type='submit')
+              button.btn.btn-inverse(type='submit')
                 | Login
               = ' '
-              a.btn.btn-default.btn-register(href='/signup')
+              a.btn.btn-default(href='/signup')
                 | Register
 
     //- Right Side
