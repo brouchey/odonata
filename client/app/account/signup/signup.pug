@@ -10,7 +10,7 @@ br
 
       .panel.panel-default
         .panel-body
-          form.form(name='form', ng-submit='vm.register(form)', novalidate='')
+          form.form(name='form', ng-submit='vm.register(form)', novalidate)
             .form-group(ng-class='{ "has-success": form.name.$valid && vm.submitted,\
             "has-error": form.name.$invalid && vm.submitted }')
               label Name
@@ -21,7 +21,7 @@ br
             .form-group(ng-class='{ "has-success": form.email.$valid && vm.submitted,\
             "has-error": form.email.$invalid && vm.submitted }')
               label Email
-              input.form-control(type='email', name='email', ng-model='vm.user.email', required, mongoose-error='')
+              input.form-control(type='email', name='email', ng-model='vm.user.email', required, mongoose-error)
               p.help-block(ng-show='form.email.$error.email && vm.submitted')
                 | Doesn't look like a valid email.
               p.help-block(ng-show='form.email.$error.required && vm.submitted')

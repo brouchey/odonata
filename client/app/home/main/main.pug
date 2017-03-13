@@ -30,13 +30,13 @@
 						h2.lead Register
 						p.lead It’s free and always will be.
 
-						form.form(name='form', ng-submit='vm.register(form)', novalidate='')
-						.form-group(ng-class='{ "has-success": form.name.$valid && vm.submitted,\
-						"has-error": form.name.$invalid && vm.submitted }')
-							label Name
-							input.form-control(type='text', name='name', ng-model='vm.user.name', required)
-							p.help-block(ng-show='form.name.$error.required && vm.submitted')
-								| A name is required
+						form.form(name='form', ng-submit='vm.register(form)', novalidate)
+							.form-group(ng-class='{ "has-success": form.name.$valid && vm.submitted,\
+							"has-error": form.name.$invalid && vm.submitted }')
+								label Name
+								input.form-control(type='text', name='name', ng-model='vm.user.name', required)
+								p.help-block(ng-show='form.name.$error.required && vm.submitted')
+									| A name is required
 
 							.form-group(ng-class='{ "has-success": form.email.$valid && vm.submitted,\
 							"has-error": form.email.$invalid && vm.submitted }')
@@ -75,7 +75,7 @@
 									| Passwords must match.
 
 							.text-center
-								button.btn.btn-success.btn-register(type='submit')
+								button.btn.btn-success.btn-register.form-control(type='submit')
 									| Register
 
 					.home-signup
