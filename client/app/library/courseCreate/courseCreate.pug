@@ -1,1 +1,60 @@
-div This is the courseCreate view.
+.courseCreate
+	header#banner.hero-unit
+		.container
+			h1.lead Library: Course Creation
+	br
+	.container-fluid 
+		.row
+
+			//- Left Side
+			.col-md-2
+				portal-sidebar
+
+			//- Right Side
+			.col-md-8
+
+				.row
+					.col-md-12
+
+						.panel.panel-default
+							.panel-body
+
+								form(name='form', ng-submit='vm.submitCourse()')
+
+									h2.lead Title
+									span.text-danger(ng-messages='form.course_title.$error')
+										span(ng-message='required') (Required)
+									span.text-success(ng-show='form.course_title.$valid') OK
+									input.form-control(type='text', ng-model='course.title', name='course_title', required)
+									br
+
+									h2.lead Description
+									span.text-danger(ng-messages='form.course_description.$error')
+										span(ng-message='required') (Required)
+									span.text-success(ng-show='form.course_description.$valid') OK
+									input.form-control(type='text', ng-model='course.description', name='course_description', required)
+									br
+
+									h2.lead Content
+									span.text-danger(ng-messages='form.course_content.$error')
+										span(ng-message='required') (Required)
+									span.text-success(ng-show='form.course_content.$valid') OK
+									br
+
+									textarea.form-control(rows='20', ng-model='course.content', name='course_content', required)
+									br
+
+									h2.lead Tags
+									tags-input(ng-model='course.tags', name='course_tags', add-on-paste='true', required)
+										auto-complete(source='vm.loadTags($query)')
+									br
+
+									.text-center
+										input.btn.btn-success(type='submit', ng-disabled='form.$invalid', value='Create Course')
+
+
+			//- Right Side
+			.col-md-2
+
+				.panel.panel-default.text-center
+					.panel-body Some Content

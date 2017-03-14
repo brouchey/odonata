@@ -9,6 +9,9 @@
  * 
  * User Courses :
  * GET     /api/courses/user/:userId   ->  showUserCourses
+ * 
+ * Tags :
+ * GET     /api/courses/tags/all   ->  showAllTags
  */
 
 'use strict';
@@ -83,6 +86,7 @@ export function show(req, res) {
 
 // Creates a new Course in the DB
 export function create(req, res) {
+  req.body.user = req.user;
   return Course.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
@@ -127,6 +131,17 @@ export function destroy(req, res) {
 export function showUserCourses(req, res) {
   var userId = req.params.userId;
   return Course.find({user: userId}).sort({createdAt: -1}).exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+/*************************/
+/* Tags API */
+/*************************/
+
+// Gets all Questions Tags
+export function showAllTags(req, res) {
+  return Course.distinct('tags.text').exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

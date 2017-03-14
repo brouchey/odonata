@@ -22,8 +22,8 @@
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/")}')
           a(href='/') Home
 
-        //- li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/library/courses/")}')
-        //-   a(href='/library/courses') Library
+        li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/library/courses")}')
+          a(href='/library/courses') Library
 
         li(ng-show='$ctrl.isLoggedIn()', ng-class='{active: $ctrl.isActive("/exchange")}')
           a(href='/exchange') Exchange

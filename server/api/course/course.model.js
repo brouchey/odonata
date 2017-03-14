@@ -20,4 +20,20 @@ var CourseSchema = new mongoose.Schema({
   },
 });
 
+CourseSchema.pre('find', function(next) {
+  this.populate('user', 'name');
+  next();
+});
+CourseSchema.pre('findOne', function(next) {
+  this.populate('user', 'name');
+  next();
+});
+
+CourseSchema.index({
+  'title': 'text',
+  'description': 'text',
+  'content': 'text',
+  'tags.text': 'text',
+}, {name: 'course_schema_index'});
+
 export default mongoose.model('Course', CourseSchema);

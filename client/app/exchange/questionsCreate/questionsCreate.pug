@@ -3,30 +3,46 @@ header#banner.hero-unit
     h1.lead New Question
 br
 .container
-  .well
+  .row
 
-    form(name='form', ng-submit='vm.submitQuestion()')
+      //- Left Side
+      .col-md-9
 
-      h2.lead Title
-      span.text-danger(ng-messages='form.question_title.$error')
-        span(ng-message='required') (Required)
-      span.text-success(ng-show='form.question_title.$valid') OK
-      input.form-control(type='text', ng-model='question.title', name='question_title', required)
-      br
+        .row
+          .col-md-12
 
-      h2.lead Question
-      span.text-danger(ng-messages='form.question_content.$error')
-        span(ng-message='required') (Required)
-      span.text-success(ng-show='form.question_content.$valid') OK
-      br
+            .panel.panel-default
+              .panel-body
 
-      textarea.form-control(rows='4', ng-model='question.content', name='question_content', required)
-      br
+                form(name='form', ng-submit='vm.submitQuestion()')
 
-      h2.lead Tags
-      tags-input(ng-model='question.tags', name='question_tags', add-on-paste='true', required)
-        auto-complete(source='vm.loadTags($query)')
-      br
+                  h2.lead Title
+                  span.text-danger(ng-messages='form.question_title.$error')
+                    span(ng-message='required') (Required)
+                  span.text-success(ng-show='form.question_title.$valid') OK
+                  input.form-control(type='text', ng-model='question.title', name='question_title', required)
+                  br
 
-      .text-center
-        input.btn.btn-success(type='submit', ng-disabled='form.$invalid', value='Ask your Question')
+                  h2.lead Question
+                  span.text-danger(ng-messages='form.question_content.$error')
+                    span(ng-message='required') (Required)
+                  span.text-success(ng-show='form.question_content.$valid') OK
+                  br
+
+                  textarea.form-control(rows='4', ng-model='question.content', name='question_content', required)
+                  br
+
+                  h2.lead Tags
+                  tags-input(ng-model='question.tags', name='question_tags', add-on-paste='true', required)
+                    auto-complete(source='vm.loadTags($query)')
+                  br
+
+                  .text-center
+                    input.btn.btn-success(type='submit', ng-disabled='form.$invalid', value='Ask your Question')
+
+
+      //- Right Side
+      .col-md-3
+
+        .panel.panel-default.text-center
+          .panel-body Some Content

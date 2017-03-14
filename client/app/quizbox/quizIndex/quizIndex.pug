@@ -20,7 +20,7 @@
             .alert.alert-warning.text-center(ng-if='vm.quizzes.length==0', role='alert')
               p No Quizzes Found !
               p
-                a.btn.btn-success.btn-sm(type='button', href='/quiz/create') Create
+                a.btn.btn-success.btn-sm(type='button', ng-href='/quiz/create') Create
 
             //- if Quizzes
             .panel.panel-default(ng-if='vm.quizzes.length!==0')
@@ -31,7 +31,7 @@
 
                       .panel.panel-default
                         .panel-body
-                          a(role='button', ng-href='/quiz/show/{{quiz._id}}', style='font-size: large') {{quiz.title}}
+                          a(role='button', ng-href='/quiz/show/{{quiz._id}}') {{quiz.title}}
                         .panel-body
                           p {{quiz.description}}
                           p.text-muted by {{quiz.user.name}}
@@ -45,4 +45,4 @@
         .panel.panel-default.text-center
           .panel-body
             p.lead New Quiz ?
-            a.btn.btn-success(type='button', href='/quiz/create') Create
+            a.btn.btn-success(type='button', ng-href='/quiz/create') Create

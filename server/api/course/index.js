@@ -16,4 +16,6 @@ router.delete('/:id', auth.isAuthenticated(), controller.destroy);
 
 router.get('/user/:userId', auth.isAuthenticated(), controller.showUserCourses);
 
+router.get('/tags/all', controller.showAllTags);
+
 module.exports = router;

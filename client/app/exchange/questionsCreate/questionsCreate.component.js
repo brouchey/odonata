@@ -7,14 +7,12 @@ import routes from './questionsCreate.routes';
 export class QuestionsCreateComponent {
   $http;
   $location;
-  // isLoggedIn: Function;
 
   /*@ngInject*/
-  constructor($scope, $http, $location, Auth) {
+  constructor($scope, $http, $location) {
     this.$scope = $scope;
     this.$http = $http;
     this.$location = $location;
-    // this.isLoggedIn = Auth.isLoggedInSync;
   }
 
   submitQuestion() {

@@ -6,10 +6,28 @@ const ngRoute = require('angular-route');
 import routes from './courseShow.routes';
 
 export class CourseShowComponent {
-  /*@ngInject*/
-  constructor() {
+  $http;
+  $routeParams;
+  course = {};
 
+  /*@ngInject*/
+  constructor($scope, $http, $routeParams) {
+    this.$scope = $scope;
+    this.$http = $http;
+    this.$routeParams = $routeParams;
   }
+
+  $onInit() {
+    this.loadCourse();
+  }
+
+  loadCourse() {
+    this.$http.get('/api/courses/' + this.$routeParams.id)
+    .then(response => {
+      this.course = response.data;
+    });
+  }
+
 }
 
 export default angular.module('odonataApp.courseShow', [ngRoute])

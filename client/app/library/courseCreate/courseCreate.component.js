@@ -6,10 +6,27 @@ const ngRoute = require('angular-route');
 import routes from './courseCreate.routes';
 
 export class CourseCreateComponent {
-  /*@ngInject*/
-  constructor() {
+  $http;
+  $location;
 
+  /*@ngInject*/
+  constructor($scope, $http, $location) {
+    this.$scope = $scope;
+    this.$http = $http;
+    this.$location = $location;
   }
+
+  submitCourse() {
+    this.$http.post('/api/courses', this.$scope.course)
+      .then(response => {
+        this.$location.path('/library/courses');
+      });
+  }
+
+  loadTags(query) {
+    return this.$http.get('/api/courses/tags/all')
+  }
+
 }
 
 export default angular.module('odonataApp.courseCreate', [ngRoute])
