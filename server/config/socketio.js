@@ -19,7 +19,6 @@ function onConnect(socket) {
   require('../api/course/course.socket').register(socket);
   require('../api/quiz/quiz.socket').register(socket);
   require('../api/question/question.socket').register(socket);
-  require('../api/thing/thing.socket').register(socket);
 }
 
 export default function(socketio) {
