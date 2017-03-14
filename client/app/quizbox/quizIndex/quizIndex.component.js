@@ -29,7 +29,6 @@ export class QuizIndexComponent {
     this.$http.get('/api/quiz/user/' + this.getCurrentUser()._id)
     .then(response => {
       this.quizzes = response.data;
-      console.log(this.quizzes);
     })
   }
 

@@ -30,6 +30,9 @@ import adminSidebar from '../components/admin-sidebar/admin-sidebar.component';
 import portalSidebar from '../components/portal-sidebar/portal-sidebar.component';
 import profileSidebar from '../components/profile-sidebar/profile-sidebar.component';
 import footer from '../components/footer/footer.component';
+import courseIndex from './library/courseIndex/courseIndex.component';
+import courseCreate from './library/courseCreate/courseCreate.component';
+import courseShow from './library/courseShow/courseShow.component';
 import questionsIndex from './exchange/questionsIndex/questionsIndex.component';
 import questionsCreate from './exchange/questionsCreate/questionsCreate.component';
 import questionsShow from './exchange/questionsShow/questionsShow.component';
@@ -67,6 +70,9 @@ angular.module('odonataApp', [
   portalSidebar,
   profileSidebar,
   footer,
+  courseIndex,
+  courseCreate,
+  courseShow,
   questionsIndex,
   questionsCreate,
   questionsShow,

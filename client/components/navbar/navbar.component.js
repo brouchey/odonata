@@ -32,8 +32,8 @@ export class NavbarComponent {
   }
 
   isActive(route) {
-    // return route === this.$location.path();
-    return this.$location.path().indexOf(route) == 0;
+    return route === this.$location.path();
+    // return this.$location.path().indexOf(route) == 0;
   }
 
   //- for Login
