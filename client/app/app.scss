@@ -39,14 +39,14 @@ body {
 @import 'admin/logs/logs';
 @import 'admin/portal/portal';
 @import 'admin/users/users';
-@import 'library/courseIndex/courseIndex';
-@import 'library/courseCreate/courseCreate';
-@import 'library/courseShow/courseShow';
 @import 'exchange/questionsCreate/questionsCreate';
 @import 'exchange/questionsIndex/questionsIndex';
 @import 'exchange/questionsShow/questionsShow';
 @import 'home/main/main';
 @import 'home/portal/portal';
+@import 'library/courseCreate/courseCreate';
+@import 'library/courseIndex/courseIndex';
+@import 'library/courseShow/courseShow';
 @import 'quizbox/quizCreate/quizCreate';
 @import 'quizbox/quizIndex/quizIndex';
 @import 'quizbox/quizShow/quizShow';

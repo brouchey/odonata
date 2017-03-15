@@ -1,6 +1,7 @@
 'use strict';
 
 import User from './user.model';
+import Score from '../score/score.model';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 
@@ -40,6 +41,7 @@ export function create(req, res) {
   newUser.role = 'user';
   newUser.save()
     .then(function(user) {
+      Score.create({user: user._id});
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {
         expiresIn: 60 * 60 * 5
       });

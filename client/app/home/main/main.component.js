@@ -31,7 +31,6 @@ export class MainComponent {
 				password: this.user.password
 			})
 				.then(() => {
-					console.log('Account created !');
 					// Account created, redirect to home
 					this.$location.path('/');
 				})
