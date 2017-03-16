@@ -4,7 +4,7 @@ const angular = require('angular');
 export class PortalComponent {
   $http;
   getCurrentUser: Function;
-  userScore = [];
+  userScore = {};
 
   /*@ngInject*/
   constructor($scope, $http, Auth) {

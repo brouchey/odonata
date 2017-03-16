@@ -73,7 +73,7 @@ export function index(req, res) {
 // Gets a single Score from the DB
 export function show(req, res) {
   var userId = req.params.id;
-  return Score.find({user: userId}).exec()
+  return Score.findOne({user: userId}, {_id: 0, user: 0}).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));

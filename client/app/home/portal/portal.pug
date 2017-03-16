@@ -11,13 +11,13 @@
 				portal-sidebar
 
 			//- Middle Side
-			.col-md-5
+			.col-md-8
 				.panel.panel-default
 					.panel-body Some Content
 
 			//- Right Side
-			.col-md-5
-				.panel.panel-default
-					.panel-heading Score
-					.panel-body
-						pre {{vm.userScore|json}}
+			.col-md-2
+				.panel.panel-default(ng-repeat='(name, points) in vm.userScore.points')
+					.panel-body.bg-info.text-center
+						p {{name}}
+						p {{points}}

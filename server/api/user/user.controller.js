@@ -5,7 +5,6 @@ import Score from '../score/score.model';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 
-
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
   return function(err) {
@@ -16,7 +15,7 @@ function validationError(res, statusCode) {
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
-    return res.status(statusCode).send(err);
+    res.status(statusCode).send(err);
   };
 }
 
@@ -41,6 +40,7 @@ export function create(req, res) {
   newUser.role = 'user';
   newUser.save()
     .then(function(user) {
+      // Create User Score
       Score.create({user: user._id});
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {
         expiresIn: 60 * 60 * 5
@@ -55,7 +55,6 @@ export function create(req, res) {
  */
 export function show(req, res, next) {
   var userId = req.params.id;
-
   return User.findById(userId).exec()
     .then(user => {
       if(!user) {
@@ -71,9 +70,12 @@ export function show(req, res, next) {
  * restriction: 'admin'
  */
 export function destroy(req, res) {
-  return User.findByIdAndRemove(req.params.id).exec()
+  var userId = req.params.id;
+  //Remove User Score
+  Score.remove({user: userId}).exec();
+  return User.findByIdAndRemove(userId).exec()
     .then(function() {
-      res.status(204).end();
+      return res.status(204).end();
     })
     .catch(handleError(res));
 }
@@ -142,6 +144,5 @@ export function uploadAvatar(req, res, next) {
     if(num === 0) {
       return res.send(404).end();
     }
-    exports.show(req, res);
   });
 }
